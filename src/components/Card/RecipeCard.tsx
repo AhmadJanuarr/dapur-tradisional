@@ -1,21 +1,21 @@
 import { Button } from "../ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+import { ChevronRight } from "lucide-react"
 
 export default function RecipeCard() {
   return (
-    <Card className="w-[300px]">
+    <Card className="flex flex-col items-center  border-none text-center shadow-none">
       <CardHeader>
-        <div className="w-full">
-          <img src="/img/resep/getuk.png" className="w-full rounded-md" alt="getuk" />
+        <div className="h-[400px] w-[300px]">
+          <img src="/img/resep/Getuk.png" className="h-full w-full object-cover" alt="getuk" />
         </div>
         <CardTitle>Card Title</CardTitle>
         <CardDescription>Card Description</CardDescription>
       </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-      </CardContent>
       <CardFooter>
-        <Button>Lihat Resep</Button>
+        <Button variant="link">
+          Lihat Resep <ChevronRight />
+        </Button>
       </CardFooter>
     </Card>
   )
