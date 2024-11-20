@@ -43,15 +43,15 @@ const items = [
 
 const menuItems: MenuItem[] = [
   {
-    title: "Account",
+    title: "Profile",
     icon: <CircleUser />,
   },
   {
-    title: "Forgot Password",
+    title: "Lupa Password",
     icon: <Lock />,
   },
   {
-    title: "Sign out",
+    title: "Keluar",
     icon: <LogOut />,
   },
 ]
@@ -111,8 +111,8 @@ export default function AppSideBar() {
 
   return (
     <Sidebar>
-      <SidebarHeader>Recipe App</SidebarHeader>
-      <SidebarGroupLabel>Application</SidebarGroupLabel>
+      <SidebarHeader>Resep Manajemen</SidebarHeader>
+      <SidebarGroupLabel>Utama</SidebarGroupLabel>
       <SidebarContent>
         {items.map((item) => (
           <NavList
