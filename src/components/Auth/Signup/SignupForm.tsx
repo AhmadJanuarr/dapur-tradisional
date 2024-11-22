@@ -3,10 +3,10 @@ import React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Button } from "../../ui/button"
+import { Button } from "@/components/ui/button"
 import { formSchemaSignup } from "@/schemas/FormSchema"
-import { Form } from "../../ui/form"
-import { FormFieldWrapper } from "../FormField/FormFieldWrapper"
+import { Form } from "@/components/ui/form"
+import { FormFieldWrapper } from "@/components/FormField/FormFieldWrapper"
 import { AuthOption } from "../AuthOption"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
@@ -27,14 +27,14 @@ export default function SignupForm({
   async function onSubmit(values: z.infer<typeof formSchemaSignup>) {
     setIsLoading(true)
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/signup`, values)
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, values)
       const data = await response.data
       if (data.success === true) {
         toast.success("Pendaftaran berhasil")
         console.log("Navigating to login...")
         setTimeout(() => {
           setIsLoading(false)
-          navigate("/login")
+          navigate("/auth/login")
         }, 3000)
       }
     } catch (error) {
@@ -59,7 +59,7 @@ export default function SignupForm({
         <FormFieldWrapper
           name="name"
           label="Masukan Nama"
-          placeholder="Ahmad Januar Amri"
+          placeholder="John Doe"
           inputType="text"
           formControl={methods.control}
         />

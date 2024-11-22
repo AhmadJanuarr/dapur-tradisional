@@ -1,21 +1,14 @@
-import RecipeCard from "../components/Card/RecipeCard"
+import CategorySection from "../components/Views/Recipes/CategorySection"
+import HeroSection from "../components/Views/Recipes/HeroSection"
+import RecipesSection from "../components/Views/Recipes/RecipeSection"
 
 export default function Recipes() {
   return (
-    <div className="min-h-screen w-full">
-      <div className="w-full">
-        <div className="py-10">
-          <div className="w-1/2">
-            <h1 className="text-3xl font-bold">Resep Makanan Ringan Khas Daerah</h1>
-            <p className="mt-2">
-              Jelajahi kekayaan kuliner Indonesia melalui berbagai makanan ringan khas daerah yang penuh cita rasa dan
-              keunikan.
-            </p>
-          </div>
-        </div>
-        <div className="w-full">
-          <RecipeCard />
-        </div>
+    <div className="flex min-h-screen w-full flex-col">
+      <HeroSection />
+      <div className="mx-auto w-4/5 py-10">
+        <CategorySection />
+        <RecipesSection />
       </div>
     </div>
   )
