@@ -9,7 +9,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const availablePaths = ["/", "/about", "/contact", "/recipes"]
   const pathname = availablePaths.includes(location.pathname)
   const isAdminRoute = location.pathname.startsWith("/admin")
-  const isUserRoute = ["/auth/login", "/auth/register", "/admin/recipes"].includes(location.pathname)
+  const isUserRoute = ["/auth/login", "/auth/register", "/recipes"].includes(location.pathname)
   const mainWidth = isAdminRoute || isUserRoute ? "w-full" : "w-3/4"
   return (
     <div className="flex w-full flex-col items-center justify-center border font-inter">
