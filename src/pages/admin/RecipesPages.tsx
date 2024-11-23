@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card } from "@/components/ui/card"
-import { BookPlus, PlusIcon, TrashIcon } from "lucide-react"
+import { BookPlus } from "lucide-react"
 import { Separator } from "@radix-ui/react-separator"
 import { useState } from "react"
 import { useIsMobile } from "@/hooks/use-mobile"
@@ -23,107 +23,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { FormControl } from "@/components/ui/form"
-import { useFieldArray, useForm } from "react-hook-form"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Label } from "../../components/ui/label"
-import { Textarea } from "../../components/ui/textarea"
-
-function ProfileForm({ className }: { className?: string }) {
-  const method = useForm()
-  const ingredientsArray = useFieldArray({
-    control: method.control,
-    name: "ingredients",
-  })
-
-  const stepsArray = useFieldArray({
-    control: method.control,
-    name: "steps",
-  })
-  async function onSubmit(e) {
-    e.preventDefault()
-    console.log(e)
-  }
-
-  return (
-    <form className={`flex flex-col items-start gap-4 ${className}`} onSubmit={onSubmit}>
-      <div className="flex w-full gap-5">
-        {/* Kolom Kiri */}
-        <div className="w-1/2 space-y-4">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="title">Nama resep</Label>
-            <Input type="text" id="title" placeholder="Nama resep" {...method.register("title")} />
-          </div>
-
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="text">Deskripsi</Label>
-            <Textarea id="text" placeholder="Deskripsi resep" {...method.register("description")} />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label htmlFor="image" className="text-sm font-medium">
-              Gambar
-            </label>
-            <Input id="image" type="file" className="w-full rounded border px-3 py-2" {...method.register("image")} />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label htmlFor="category" className="text-sm font-medium">
-              Kategori
-            </label>
-            <Select {...method.register("category")}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Pilih kategori" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                <SelectItem value="Makanan_Ringan">Makanan Ringan</SelectItem>
-                <SelectItem value="Makanan_Berat">Makanan Berat</SelectItem>
-                <SelectItem value="Kue">Kue</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        {/* Kolom Kanan */}
-        <div className="w-1/2 space-y-4">
-          <div className="space-y-2 p-4">
-            <h3 className="font-semibold">Bahan-bahan</h3>
-            {ingredientsArray.fields.map((field, index) => (
-              <div key={field.id} className="flex items-center gap-2">
-                <Input type="text" {...method.register(`ingredients.${index}`)} placeholder={`Bahan ${index + 1}`} />
-                <Button variant="destructive" size="icon" onClick={() => ingredientsArray.remove(index)}>
-                  <TrashIcon />
-                </Button>
-              </div>
-            ))}
-            <Button variant="secondary" size="sm" onClick={() => ingredientsArray.append("")}>
-              <PlusIcon className="mr-2" /> Tambah Bahan
-            </Button>
-          </div>
-
-          <div className="space-y-2 p-4">
-            <h3 className="font-semibold">Langkah-langkah</h3>
-            {stepsArray.fields.map((field, index) => (
-              <div key={field.id} className="flex items-center gap-2">
-                <Input {...method.register(`steps.${index}`)} placeholder={`Langkah ${index + 1}`} />
-                <Button variant="destructive" size="icon" onClick={() => stepsArray.remove(index)}>
-                  <TrashIcon />
-                </Button>
-              </div>
-            ))}
-            <Button variant="secondary" size="sm" onClick={() => stepsArray.append("")}>
-              <PlusIcon className="mr-2" /> Tambah Langkah
-            </Button>
-          </div>
-        </div>
-      </div>
-      <Button type="submit">Simpan Resep</Button>
-    </form>
-  )
-}
+import RecipeForm from "@/components/Admin/RecipeForm"
 
 export default function RecipesPages() {
   const [open, setOpen] = useState(false)
@@ -156,7 +56,7 @@ export default function RecipesPages() {
                       <DialogTitle>Tambahkan Resep Baru</DialogTitle>
                       <DialogDescription>Isi formulir di bawah ini untuk menambahkan resep baru..</DialogDescription>
                     </DialogHeader>
-                    <ProfileForm />
+                    <RecipeForm />
                   </DialogContent>
                 </Dialog>
               ) : (
@@ -170,7 +70,7 @@ export default function RecipesPages() {
                       <DrawerTitle>Tambahkan Resep Baru</DrawerTitle>
                       <DrawerDescription>Isi formulir di bawah ini untuk menambahkan resep baru..</DrawerDescription>
                     </DrawerHeader>
-                    <ProfileForm className="px-4" />
+                    <RecipeForm className="px-4" />
                     <DrawerFooter className="pt-2">
                       <DrawerClose asChild>
                         <Button variant="outline">Cancel</Button>
