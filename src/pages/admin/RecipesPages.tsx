@@ -51,7 +51,7 @@ export default function RecipesPages() {
                   <DialogTrigger asChild>
                     <Button variant="default">Tambahkan Resep Baru</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[888px]">
+                  <DialogContent className="sm:max-w-[900px]">
                     <DialogHeader>
                       <DialogTitle>Tambahkan Resep Baru</DialogTitle>
                       <DialogDescription>Isi formulir di bawah ini untuk menambahkan resep baru..</DialogDescription>

@@ -1,27 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FieldArrayWithId } from "react-hook-form";
+import { Control, FieldArrayWithId, FieldValues, UseFormRegister } from "react-hook-form";
 
-export interface FieldInputTypes {
+export interface FormInputProps {
     id: string
     label: string
     placeholder: string
-    method: { [key: string]: any }
+    form: { [key: string]: any }
     type: string
     isTextArea?: boolean
 }
 
-export interface FieldSelectTypes {
+export interface FormSelectProps {
     id: string
     label: string
     placeholder: string
-    method: { [key: string]: any }
+    control: Control<FieldValues>
 }
 
-export interface FieldsArrayTypes {
+export interface FormArrayProps {
     title: string
+    prefix: string
     fields: FieldArrayWithId<any, string>[]
-    method: { [key: string]: any }
-    prefix?: string
     onAdd: () => void
-    onRemove: () => void
+    onRemove: (index: number) => void
+    register: UseFormRegister<RecipeFormValues>;
 }
+export interface RecipeFormValues {
+    title: string;
+    description: string;
+    image: string;
+    category: string;
+    ingredients: string[];
+    steps: string[];
+  }
