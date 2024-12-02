@@ -6,7 +6,7 @@ import { Star } from "lucide-react"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 import { Separator } from "@/components/ui/separator"
-import { UserManagements } from "../../components/Admin/UserManagements"
+import { UserManagements } from "@/components/Admin/UserManagements"
 
 interface DashboardStatsProps {
   title: string
@@ -115,7 +115,7 @@ export default function DashboardPage() {
             <DashboardStats key={index} title={stat.title} description={stat.description} icon={stat.icon} />
           ))}
         </div>
-        <div className="my-5 w-full rounded-lg bg-white  py-10">
+        <div className="my-5 w-full rounded-lg bg-white py-10">
           <div className="flex gap-5">
             <UserManagements />
             <Analytics />
