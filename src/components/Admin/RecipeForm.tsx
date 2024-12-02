@@ -9,6 +9,7 @@ import { FormImage } from "./Form/FormImage"
 import { FormColumn } from "./Form/FormColumn"
 import { FormInput } from "./Form/FormInput"
 import { FormArray } from "./Form/FormArray"
+import { DialogClose, DialogFooter } from "@/components/ui/dialog"
 
 export default function RecipeForm({ className }: { className?: string }) {
   const form = useForm<RecipeFormValues>({
@@ -39,7 +40,7 @@ export default function RecipeForm({ className }: { className?: string }) {
     formData.append("title", values.title)
     formData.append("description", values.description)
     formData.append("category", values.category)
-    formData.append("image", values.image as unknown as File)
+    if (values.image) formData.append("image", values.image)
     formData.append("ingredients", JSON.stringify(values.ingredients))
     formData.append("steps", JSON.stringify(values.steps))
 
@@ -88,7 +89,7 @@ export default function RecipeForm({ className }: { className?: string }) {
               prefix="ingredients"
               onAdd={(e) => {
                 e.preventDefault()
-                ingredientsArray.append(" ")
+                ingredientsArray.append("")
               }}
               onRemove={ingredientsArray.remove}
               register={register}
@@ -99,14 +100,20 @@ export default function RecipeForm({ className }: { className?: string }) {
               prefix="steps"
               onAdd={(e) => {
                 e.preventDefault()
-                stepsArray.append(" ")
+                stepsArray.append("")
               }}
               onRemove={stepsArray.remove}
               register={register}
             />
           </FormColumn>
         </div>
-        <Button type="submit">Simpan Resep</Button>
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <Button type="submit" variant="secondary">
+              Simpan Resep
+            </Button>
+          </DialogClose>
+        </DialogFooter>
       </form>
     </Form>
   )
