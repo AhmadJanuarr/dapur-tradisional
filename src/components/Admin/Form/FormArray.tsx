@@ -21,7 +21,8 @@ export const FormArray = ({ title, fields, prefix, onAdd, onRemove, register }: 
         </div>
       ))}
       <Button variant="secondary" size="sm" onClick={onAdd}>
-        <PlusIcon className="mr-2" /> Tambah {title}
+        <PlusIcon className="mr-2" />
+        Tambah {title}
       </Button>
     </div>
   )
