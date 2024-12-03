@@ -1,27 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Control, FieldArrayWithId, FieldValues, UseFormRegister } from "react-hook-form";
+import { Control, FieldArrayWithId, UseFormRegister } from "react-hook-form";
+
 
 export interface FormInputProps {
-    id: string
+    name: "title" | "description"
     label: string
     placeholder: string
-    form: { [key: string]: any }
     type: string
     isTextArea?: boolean
+    control: Control<RecipeFormValues>
 }
 
 export interface FormSelectProps {
-    id: string
+    name: string
     label: string
     placeholder: string
-    control: Control<FieldValues>
+    control: Control<RecipeFormValues>
+}
+
+export interface FormImageProps {
+    name: string
+    label: string
+    type: string
+    control: Control<RecipeFormValues>
 }
 
 export interface FormArrayProps {
     title: string
     prefix: string
     fields: FieldArrayWithId<any, string>[]
-    onAdd: () => void
+    onAdd: (e: React.BaseSyntheticEvent) => void
     onRemove: (index: number) => void
     register: UseFormRegister<RecipeFormValues>;
 }
