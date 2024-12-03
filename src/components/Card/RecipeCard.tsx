@@ -14,15 +14,13 @@ export default function RecipeCard({
   category: string
 }) {
   return (
-    <Card className="flex flex-col items-center  border-none text-center shadow-none">
+    <Card className="flex w-[25%] flex-col items-center border-none text-center shadow-none">
       <CardHeader>
-        <div className="h-[400px] w-[300px]">
-          <img src={image} className="h-full w-full object-cover" alt="getuk" />
+        <div className="h-[300px] ">
+          <img src={image} className="object-cover w-full h-full" alt="getuk" />
         </div>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>
-          {description} - {category}
-        </CardDescription>
+        <CardDescription>{category.replace("_", " ")}</CardDescription>
       </CardHeader>
       <CardFooter>
         <Button variant="link">
