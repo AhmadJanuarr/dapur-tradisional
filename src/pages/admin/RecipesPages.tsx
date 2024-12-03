@@ -1,8 +1,8 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card } from "@/components/ui/card"
 import { BookPlus } from "lucide-react"
 import { Separator } from "@radix-ui/react-separator"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Dialog,
@@ -24,21 +24,39 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import RecipeForm from "@/components/Admin/RecipeForm"
+import axios from "axios"
+import { RecipeFormValues } from "@/types/RecipeForm.types"
+import RecipeList from "@/components/Admin/RecipeList"
+import PaginationControl from "@/components/Admin/PaginationControl"
 
 export default function RecipesPages() {
   const [open, setOpen] = useState(false)
   const isDesktop = useIsMobile()
+  const [recipes, setRecipes] = useState([])
 
+  useEffect(() => {
+    const getRecipes = async () => {
+      try {
+        const fetching = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes`)
+        const response = fetching.data
+        setRecipes(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getRecipes()
+  }, [])
+  console.log(recipes)
   return (
     <section className="flex w-full">
       <div className="w-full px-10">
-        <div className="py-10">
+        <div className="pt-10">
           <h1 className="text-3xl font-bold">Manajemen Resep</h1>
           <p>Tambahkan resep makanan daerah sesuai form yang tersedia</p>
         </div>
 
-        <Card className="w-full px-4">
-          <div className="flex w-full justify-between px-3 py-5 text-sm leading-none text-muted-foreground">
+        <Card className="w-full px-4 my-10">
+          <div className="flex justify-between w-full px-3 py-5 text-sm leading-none text-muted-foreground">
             <div className="flex items-center gap-5">
               <BookPlus />
               <h2 className="font-medium">Recipes list</h2>
@@ -83,29 +101,22 @@ export default function RecipesPages() {
           </div>
 
           <Separator />
+
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">ID</TableHead>
-                <TableHead>NAMA RESEP</TableHead>
-                <TableHead>GAMBAR</TableHead>
-                <TableHead>DESKRIPSI</TableHead>
-                <TableHead>KATEGORI</TableHead>
-                <TableHead>BAHAN</TableHead>
-                <TableHead>LANGKAH</TableHead>
+              <TableRow className="text-[13px]">
+                <TableHead className="w-[50px] text-black">ID</TableHead>
+                <TableHead className="w-[150px] text-black">NAMA RESEP</TableHead>
+                <TableHead className="text-black">GAMBAR</TableHead>
+                <TableHead className="w-[300px] text-black">DESKRIPSI</TableHead>
+                <TableHead className="text-black">KATEGORI</TableHead>
+                <TableHead className="text-black">BAHAN</TableHead>
+                <TableHead className="text-black">LANGKAH</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell className="font-medium ">01</TableCell>
-                <TableCell>Getuk</TableCell>
-                <TableCell>
-                  <img src="https://source.unsplash.com/1600x900/?food" width={100} height={100} alt="image" />
-                </TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableBody>
+            <RecipeList recipes={recipes} />
           </Table>
+          <PaginationControl />
         </Card>
       </div>
     </section>
