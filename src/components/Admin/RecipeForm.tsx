@@ -107,9 +107,9 @@ export default function RecipeForm({ className }: { className?: string }) {
             />
           </FormColumn>
         </div>
-        <DialogFooter className="sm:justify-start">
+        <DialogFooter className="flex w-full sm:justify-center">
           <DialogClose asChild>
-            <Button type="submit" variant="secondary">
+            <Button type="submit" variant="default">
               Simpan Resep
             </Button>
           </DialogClose>
