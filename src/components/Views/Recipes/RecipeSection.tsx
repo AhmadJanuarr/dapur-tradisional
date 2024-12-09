@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react"
-import RecipeCard from "../../Card/RecipeCard"
+import RecipeCard from "@/components/Card/RecipeCard"
 import HeadingSection from "./HeadingSection"
 import axios from "axios"
 
+interface RecipeProps {
+  title: string
+  id: number
+  image: string
+  category: string
+}
 export default function RecipesSection() {
   const [recipes, setRecipes] = useState([])
 
@@ -20,16 +26,31 @@ export default function RecipesSection() {
   useEffect(() => {
     getRecipes()
   }, [])
+  const sortNewRecipe = recipes.sort(() => Math.random() - 0.5)
+  const recipeMakananBerat = recipes.filter((recipe: RecipeProps) => recipe.category === "Makanan_Berat")
   return (
     <section>
+      {/* NewResep */}
       <HeadingSection heading="Resep Terbaru" description="Temukan resep favoritmu berdasarkan kategori" />
       <div className="flex w-full flex-wrap">
-        {recipes.map((recipe: any) => (
+        {sortNewRecipe.slice(0, 8).map((recipe: RecipeProps) => (
           <RecipeCard
             key={recipe.id}
             image={`${import.meta.env.VITE_API_URL}/images/${recipe.image}`}
             title={recipe.title}
-            description={recipe.description}
+            category={recipe.category}
+          />
+        ))}
+      </div>
+
+      {/* Resep Makanan Berat */}
+      <HeadingSection heading="Resep Makanan Berat" description="Temukan resep favoritmu berdasarkan kategori" />
+      <div className="flex w-full flex-wrap">
+        {recipeMakananBerat.slice(0, 8).map((recipe: RecipeProps) => (
+          <RecipeCard
+            key={recipe.id}
+            image={`${import.meta.env.VITE_API_URL}/images/${recipe.image}`}
+            title={recipe.title}
             category={recipe.category}
           />
         ))}

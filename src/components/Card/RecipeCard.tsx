@@ -1,23 +1,13 @@
-import { Button } from "../ui/button"
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react"
 
-export default function RecipeCard({
-  image,
-  title,
-  description,
-  category,
-}: {
-  image: string
-  title: string
-  description: string
-  category: string
-}) {
+export default function RecipeCard({ image, title, category }: { image: string; title: string; category: string }) {
   return (
     <Card className="flex w-[25%] flex-col items-center border-none text-center shadow-none">
       <CardHeader>
         <div className="h-[300px] ">
-          <img src={image} className="object-cover w-full h-full" alt="getuk" />
+          <img src={image} className="h-full w-full rounded-md object-cover" alt={title} />
         </div>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{category.replace("_", " ")}</CardDescription>
