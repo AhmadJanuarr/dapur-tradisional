@@ -10,13 +10,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = availablePaths.includes(location.pathname)
   const isAdminRoute = location.pathname.startsWith("/admin")
   const isUserRoute = ["/auth/login", "/auth/register", "/recipes"].includes(location.pathname)
-  const mainWidth = isAdminRoute || isUserRoute ? "w-full" : "w-3/4"
+  const mainWidth = isAdminRoute || isUserRoute ? "w-full" : "lg:w-3/4 w-full px-5 lg:px-0"
   return (
-    <div className="flex w-full flex-col items-center justify-center border font-inter">
+    <div className="flex flex-col items-center justify-center w-full border font-inter">
       <div className="w-full">
         {pathname && <Header />}
         <Toaster />
-        <main className="flex w-full items-center justify-center">
+        <main className="flex items-center justify-center w-full mt-14">
           <div className={mainWidth}>{children}</div>
         </main>
         {pathname && <Footer />}
