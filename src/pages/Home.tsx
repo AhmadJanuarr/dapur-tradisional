@@ -1,5 +1,8 @@
 import React from "react"
 import HeroSection from "@/components/Views/Home/Hero"
+import TraditionalCuisineBenefits from "@/components/Views/Home/TraditionalCuisineBenefits"
+import RecipeStatistics from "@/components/Views/Home/RecipeStatistics"
+import SupportFaq from "@/components/Views/Home/SupportFaq"
 
 export default function HomePage() {
   return (
@@ -11,6 +14,9 @@ export default function HomePage() {
         src="/svg/hero.svg"
         to="/recipes"
       />
+      <TraditionalCuisineBenefits />
+      <RecipeStatistics />
+      <SupportFaq />
     </React.Fragment>
   )
 }
