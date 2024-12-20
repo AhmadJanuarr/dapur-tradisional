@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        mona: ["Mona Sans", "serif"],
       },
       screens: {
         sm: {
