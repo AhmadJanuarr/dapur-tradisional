@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { AlignJustify } from "lucide-react"
+import { AlignJustify, BookOpenText } from "lucide-react"
+import { LIST_MENU } from "@/data/datas"
 
 function NavLink({ children, href }: { children: React.ReactNode; href: string }) {
   return (
@@ -23,19 +24,15 @@ export default function Header() {
   }
 
   return (
-    <header className="flex justify-between border-b px-10 py-5">
-      <div className="flex gap-10">
-        <Link to="/" className="text-2xl font-bold md:text-3xl">
-          ResepKita
+    <header className="fixed top-0 left-0 z-50 flex justify-between w-full px-5 py-5 bg-white border-b shadow-sm md:px-10">
+      <div className="flex gap-10 ">
+        <Link to="/" className="flex items-center flex-1 gap-2 text-xl font-bold md:text-2xl">
+          Dapur Tradisional
+          <BookOpenText className="text-[#F9802D]" />
         </Link>
         <nav className="hidden gap-10 md:flex">
           <ul className="flex items-center gap-5 ">
-            {[
-              { name: "Beranda", href: "/" },
-              { name: "Resep", href: "/" },
-              { name: "Tentang", href: "/" },
-              { name: "Kontak", href: "/" },
-            ].map((item) => (
+            {LIST_MENU.usefulLinks.map((item) => (
               <NavLink href={item.href} key={item.name}>
                 {item.name}
               </NavLink>
