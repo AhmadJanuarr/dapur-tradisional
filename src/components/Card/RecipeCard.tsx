@@ -6,8 +6,8 @@ export default function RecipeCard({ image, title, category }: { image: string; 
   return (
     <Card className="flex w-[25%] flex-col items-center border-none text-center shadow-none">
       <CardHeader>
-        <div className="h-[300px] ">
-          <img src={image} className="h-full w-full rounded-md object-cover" alt={title} />
+        <div className="h-[300px]">
+          <img src={image} className="h-full w-full object-cover" alt={title} />
         </div>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{category.replace("_", " ")}</CardDescription>
