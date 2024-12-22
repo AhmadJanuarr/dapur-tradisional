@@ -9,14 +9,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const availablePaths = ["/", "/about", "/contact", "/recipes"]
   const pathname = availablePaths.includes(location.pathname)
   const isAdminRoute = location.pathname.startsWith("/admin")
-  const isUserRoute = ["/auth/login", "/auth/register", "/recipes"].includes(location.pathname)
-  const mainWidth = isAdminRoute || isUserRoute ? "w-full" : "lg:w-3/4 w-full px-5 lg:px-0"
+  const isUserRoute = ["/auth/login", "/auth/register"].includes(location.pathname)
+  const mainWidth = isAdminRoute || isUserRoute ? "w-full" : "lg:w-4/5 w-full px-5 lg:px-0"
   return (
-    <div className="flex flex-col items-center justify-center w-full border font-inter">
+    <div className="flex w-full flex-col items-center justify-center border font-mona tracking-wide">
       <div className="w-full">
         {pathname && <Header />}
         <Toaster />
-        <main className="flex items-center justify-center w-full mt-14">
+        <main className="flex w-full items-center justify-center">
           <div className={mainWidth}>{children}</div>
         </main>
         {pathname && <Footer />}
