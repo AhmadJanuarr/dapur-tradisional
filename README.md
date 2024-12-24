@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+#Resep Tradisional
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Selamat di **Resep Tradisional**, sebuah platform yang memungkinkan pengguna untuk menjelajahi, membuat, dan berbagi resep favorit mereka. Proyek ini dirancang untuk memudahkan pengelolaan resep dengan antarmuka interaktif untuk memasukkan bahan, langkah-langkah, dan detail lainnya.
 
-Currently, two official plugins are available:
+## Fitur
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Manajemen Resep**: Tambahkan, perbarui, atau hapus resep dengan mudah.
+- **Input Dinamis**: Kelola bahan dan langkah-langkah dengan input yang dinamis.
+- **Pilihan Kategori**: Klasifikasikan resep ke dalam kategori seperti _"Makanan Ringan"_, _"Makanan Berat"_, atau _"Kue"_.
+- **Unggah Gambar**: Unggah gambar resep untuk mempercantik tampilan.
+- **Formulir Interaktif**: Formulir yang ramah pengguna dengan `react-hook-form` untuk pengelolaan data yang mulus.
+- **Desain Responsif**: Dioptimalkan untuk perangkat seluler dan desktop.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Teknologi yang Digunakan
 
-- Configure the top-level `parserOptions` property like this:
+Website Resep ini dibangun dengan teknologi berikut:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Frontend**: NextJs, TypeScript
+- **Manajemen Formulir**: `react-hook-form`, `@hookform/resolvers`
+- **Gaya**: Tailwind CSS
+- **Ikon**: `lucide-react`
+- **Komponen**: Komponen UI Kustom
+
+---
+
+## Memulai
+
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
+
+### Prasyarat
+
+Pastikan Anda sudah menginstal perangkat berikut:
+
+- Node.js (>= 16.x)
+- npm atau Yarn
+
+
+## Getting Started
+Untuk memulai, Anda cukup mengkloning repositori `recipe-managements` ini dan menginstal dependensi.
+
+Klon repositori `recipe-managements` menggunakan git:
+```bash
+git clone https://github.com/AhmadJanuarr/recipe-managements.git
+cd recipe-managements
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Instal dependensi dengan perintah ini:
+```bash
+npm install
+```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+Jalankan aplikasi dengan perintah ini:
+```bash
+npm start
 ```
