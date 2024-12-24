@@ -1,6 +1,10 @@
-#Resep Tradisional
+# Resep Tradisional
 
 Selamat di **Resep Tradisional**, sebuah platform yang memungkinkan pengguna untuk menjelajahi, membuat, dan berbagi resep favorit mereka. Proyek ini dirancang untuk memudahkan pengelolaan resep dengan antarmuka interaktif untuk memasukkan bahan, langkah-langkah, dan detail lainnya.
+
+## Demo
+
+----
 
 ## Fitur
 
