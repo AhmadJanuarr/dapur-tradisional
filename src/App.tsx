@@ -5,27 +5,30 @@ import AppLayout from "./components/Layout/App"
 import Authentication from "./pages/auth/Authentication"
 import Recipes from "./pages/Recipes"
 import AdminPanel from "./pages/admin/AdminPanel"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 export default function App() {
   return (
     <BrowserRouter>
-      <AppLayout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          {/* Halaman Authentication (Login & Signup) */}
-          <Route path="/auth/login" element={<Authentication />} />
-          <Route path="/auth/register" element={<Authentication />} />
+      <QueryClientProvider client={new QueryClient()}>
+        <AppLayout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            {/* Halaman Authentication (Login & Signup) */}
+            <Route path="/auth/login" element={<Authentication />} />
+            <Route path="/auth/register" element={<Authentication />} />
 
-          {/* Halaman Admin */}
-          <Route path="/admin/dashboard" element={<AdminPanel />} />
-          <Route path="/admin/recipes" element={<AdminPanel />} />
+            {/* Halaman Admin */}
+            <Route path="/admin/dashboard" element={<AdminPanel />} />
+            <Route path="/admin/recipes" element={<AdminPanel />} />
 
-          {/* Halaman Recipes */}
-          <Route path="/recipes" element={<Recipes />} />
-          {/* Halaman 404 */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </AppLayout>
+            {/* Halaman Recipes */}
+            <Route path="/recipes" element={<Recipes />} />
+            {/* Halaman 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </AppLayout>
+      </QueryClientProvider>
     </BrowserRouter>
   )
 }
