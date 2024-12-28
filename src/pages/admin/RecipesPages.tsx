@@ -47,8 +47,6 @@ export default function RecipesPages() {
   const records = recipes.slice(firstIndex, lastIndex)
   const totalPage = Math.ceil(recipes.length / recordPerPage)
   const number = [...Array(totalPage + 1).keys()].slice(1)
-
-  console.log(recipes)
   const prevPage = () => {
     if (current === 1) return
     if (current !== firstIndex) {
