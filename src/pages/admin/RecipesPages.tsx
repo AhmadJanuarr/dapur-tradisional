@@ -2,7 +2,7 @@ import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card } from "@/components/ui/card"
 import { BookPlus } from "lucide-react"
 import { Separator } from "@radix-ui/react-separator"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Dialog,
@@ -27,20 +27,28 @@ import RecipeForm from "@/components/Admin/RecipeForm"
 import axios from "axios"
 import RecipeList from "@/components/Admin/RecipeList"
 import PaginationControl from "@/components/Admin/PaginationControl"
+import { useQuery } from "@tanstack/react-query"
 
 export default function RecipesPages() {
   const [open, setOpen] = useState(false)
-  const [recipes, setRecipes] = useState([])
   const [current, setCurrent] = useState<number>(1)
-  const [loading, setLoading] = useState<boolean>(false)
   const recordPerPage: number = 10
   const lastIndex = current * recordPerPage
   const firstIndex = lastIndex - recordPerPage
   const isDesktop = useIsMobile()
+
+  const fetchData = async () => {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes`)
+    return data
+  }
+
+  const { data, isLoading } = useQuery({ queryKey: ["recipes"], queryFn: fetchData })
+  const recipes = Array.isArray(data?.data) ? data?.data : []
   const records = recipes.slice(firstIndex, lastIndex)
   const totalPage = Math.ceil(recipes.length / recordPerPage)
   const number = [...Array(totalPage + 1).keys()].slice(1)
 
+  console.log(recipes)
   const prevPage = () => {
     if (current === 1) return
     if (current !== firstIndex) {
@@ -57,21 +65,6 @@ export default function RecipesPages() {
     }
   }
 
-  useEffect(() => {
-    const getRecipes = async () => {
-      setLoading(true)
-      try {
-        const fetching = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes`)
-        const response = fetching.data
-        setRecipes(response.data)
-        setLoading(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getRecipes()
-  }, [])
-
   return (
     <section className="flex w-full">
       <div className="w-full px-10">
@@ -80,8 +73,8 @@ export default function RecipesPages() {
           <p>Tambahkan resep makanan daerah sesuai form yang tersedia</p>
         </div>
 
-        <Card className="my-10 w-full px-4">
-          <div className="flex w-full justify-between px-3 py-5 text-sm leading-none text-muted-foreground">
+        <Card className="w-full px-4 my-10">
+          <div className="flex justify-between w-full px-3 py-5 text-sm leading-none text-muted-foreground">
             <div className="flex items-center gap-5">
               <BookPlus />
               <h2 className="font-medium">Recipes list</h2>
@@ -141,7 +134,7 @@ export default function RecipesPages() {
               </TableRow>
             </TableHeader>
 
-            {loading ? <div>Loading...</div> : <RecipeList recipes={records} />}
+            {isLoading ? <div>Loading...</div> : <RecipeList recipes={records} />}
           </Table>
           <PaginationControl
             numbers={number}
