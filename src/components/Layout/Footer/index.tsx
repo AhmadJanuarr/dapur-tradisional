@@ -1,40 +1,46 @@
 import { LIST_MENU } from "@/data/datas"
+import { Link } from "react-router-dom"
 
-const RenderLinks = (title: string, items: { name: string; href: string }[]) => {
-  return (
-    <ol className="flex flex-col flex-1 gap-4">
-      <p className="font-bold">{title}</p>
-      {items.map((item) => (
-        <li key={item.name}>
-          <a href={item.href}>{item.name}</a>
-        </li>
-      ))}
-    </ol>
-  )
+interface MenuItem {
+  name: string
+  href: string
 }
+
+const RenderLinks = ({ title, items }: { title: string; items: MenuItem[] }) => (
+  <ol className="flex flex-1 flex-col gap-4">
+    <p className="text-lg font-bold">{title}</p>
+    {items.map((item) => (
+      <li key={item.name}>
+        <a href={item.href} className="subheading-mobile hover:underline">
+          {item.name}
+        </a>
+      </li>
+    ))}
+  </ol>
+)
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col justify-center w-full">
-      <div className="w-full">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 310">
-          <path
-            fill="#F5F5F4"
-            fillOpacity="1"
-            d="M0,224L60,224C120,224,240,224,360,224C480,224,600,224,720,240C840,256,960,288,1080,282.7C1200,277,1320,235,1380,213.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-          />
-        </svg>
-      </div>
-      <div className="flex w-full justify-center gap-10 bg-[#F5F5F4] px-5">
-        <div className="flex flex-col flex-1 max-w-6xl gap-10 py-5 md:flex-row">
-          <p className="flex-1 font-bold">Dapur Tradisional</p>
-          {RenderLinks("Useful Links", LIST_MENU.usefulLinks)}
-          {RenderLinks("Resources", LIST_MENU.resources)}
-          {RenderLinks("Support", LIST_MENU.support)}
+    <footer className="flex w-full flex-col justify-center bg-black py-5 text-white">
+      <div className="mx-auto flex justify-center gap-10 px-5 py-10 lg:w-4/5">
+        <div className="flex w-full flex-1 flex-col gap-10 py-5 md:flex-row">
+          <div className="flex-col lg:w-2/5">
+            <Link to="/" className="flex items-center gap-2 font-italian text-xl font-bold lg:text-2xl">
+              <img src="/logo/logo-t.png" alt="logo" className="w-10" />
+              Dapur Tradisional
+            </Link>
+            <p className="subheading-mobile mt-5">
+              Resep tradisional adalah kumpulan cara memasak makanan khas suatu daerah yang diwariskan secara
+              turun-temurun.
+            </p>
+          </div>
+          <RenderLinks title="Tautan Berguna" items={LIST_MENU.usefulLinks} />
+          <RenderLinks title="Sumber daya" items={LIST_MENU.resources} />
+          <RenderLinks title="Bantuan" items={LIST_MENU.support} />
         </div>
       </div>
-      <div className="w-full bg-[#F5F5F4] pb-5 pt-8 text-center">
-        <p className="text-sm">Copyright © 2024 Dapur Tradisional</p>
+      <div className="w-full pb-5 pt-8 text-center">
+        <p className="subheading-mobile">Copyright © 2024 Dapur Tradisional</p>
       </div>
     </footer>
   )
