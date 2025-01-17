@@ -22,13 +22,13 @@ const HeroSection = ({ heading, description, callToAction, to, href }: HeroSecti
           <p className="subheading mt-6">{description}</p>
           <div className="mt-10 flex justify-center gap-5">
             <Link to={to}>
-              <Button className="border bg-white text-[0.8rem] text-black hover:border-white hover:text-white lg:py-5 lg:text-[1.2rem]">
+              <Button className="border bg-white text-[0.8rem] text-black hover:border-white hover:text-white lg:py-5 lg:text-[1rem]">
                 <Dessert />
                 {callToAction}
               </Button>
             </Link>
             <a href={href} target="_blank">
-              <Button variant="link" className="border text-[0.8rem] text-white lg:py-5 lg:text-[1.2rem]">
+              <Button variant="link" className="border text-[0.8rem] text-white lg:py-5 lg:text-[1rem]">
                 Dokumentasi
               </Button>
             </a>
