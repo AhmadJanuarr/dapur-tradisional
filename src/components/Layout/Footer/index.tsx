@@ -8,10 +8,10 @@ interface MenuItem {
 
 const RenderLinks = ({ title, items }: { title: string; items: MenuItem[] }) => (
   <ol className="flex flex-1 flex-col gap-4">
-    <p className="text-lg font-bold">{title}</p>
+    <p className="text-md font-bold">{title}</p>
     {items.map((item) => (
       <li key={item.name}>
-        <a href={item.href} className="subheading-mobile hover:underline">
+        <a href={item.href} className="subheading hover:underline">
           {item.name}
         </a>
       </li>
@@ -29,7 +29,7 @@ export default function Footer() {
               <img src="/logo/logo-t.png" alt="logo" className="w-10" />
               Dapur Tradisional
             </Link>
-            <p className="subheading-mobile mt-5">
+            <p className="subheading mt-5">
               Resep tradisional adalah kumpulan cara memasak makanan khas suatu daerah yang diwariskan secara
               turun-temurun.
             </p>
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="w-full pb-5 pt-8 text-center">
-        <p className="subheading-mobile">Copyright © 2024 Dapur Tradisional</p>
+        <p className="subheading">Copyright © 2024 Dapur Tradisional</p>
       </div>
     </footer>
   )
