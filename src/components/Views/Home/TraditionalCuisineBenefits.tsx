@@ -7,7 +7,7 @@ interface TraditionalProps {
   icon: LucideIcon
 }
 
-export default function TraditionalCuisineBenefits({ heading }: { heading: string }) {
+const TraditionalCuisineBenefits = ({ heading }: { heading: string }) => {
   return (
     <section className="mx-auto mt-10 flex flex-col items-center justify-center lg:mt-10 lg:w-4/5 lg:py-20">
       <h1 className="w-full py-10 text-center font-domine text-[1.5rem] leading-tight lg:w-1/2 lg:text-5xl">
@@ -33,3 +33,5 @@ export default function TraditionalCuisineBenefits({ heading }: { heading: strin
     </section>
   )
 }
+
+export default TraditionalCuisineBenefits
