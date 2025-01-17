@@ -19,16 +19,16 @@ const HeroSection = ({ heading, description, callToAction, to, href }: HeroSecti
       <div className="z-30 flex items-center justify-center">
         <div className="w-3/4 text-center text-white">
           <h1 className="font-italian text-[2rem] font-normal lg:text-[5rem]">{heading}</h1>
-          <p className="mt-6 text-[0.8rem] lg:text-[1rem]">{description}</p>
+          <p className="subheading mt-6">{description}</p>
           <div className="mt-10 flex justify-center gap-5">
             <Link to={to}>
-              <Button className="border bg-white text-[0.7rem] text-black hover:border-white hover:text-white lg:py-5 lg:text-[1.rem]">
+              <Button className="border bg-white text-[0.8rem] text-black hover:border-white hover:text-white lg:py-5 lg:text-[1.2rem]">
                 <Dessert />
                 {callToAction}
               </Button>
             </Link>
             <a href={href} target="_blank">
-              <Button variant="link" className="border text-[0.7rem] text-white lg:py-5 lg:text-[1rem]">
+              <Button variant="link" className="border text-[0.8rem] text-white lg:py-5 lg:text-[1.2rem]">
                 Dokumentasi
               </Button>
             </a>
