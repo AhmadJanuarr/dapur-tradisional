@@ -5,7 +5,8 @@ interface StatisticsProps {
   img: string
   description: string
 }
-export default function RecipeStatistics({ heading, img, description }: StatisticsProps) {
+
+const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
   const statistics = [
     {
       icon: <Database />,
@@ -27,7 +28,7 @@ export default function RecipeStatistics({ heading, img, description }: Statisti
         </div>
         <div className="lg:w-2/3">
           <h1 className="heading-mobile pb-5 text-center font-domine text-black lg:text-left">{heading}</h1>
-          <div className="w-full lg:hidden ">
+          <div className="w-full lg:hidden">
             <img src={img} alt="hero" />
           </div>
           <p className="subheading-mobile">{description}</p>
@@ -48,3 +49,5 @@ export default function RecipeStatistics({ heading, img, description }: Statisti
     </section>
   )
 }
+
+export default RecipeStatistics
