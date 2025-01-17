@@ -1,4 +1,4 @@
-import React from "react"
+import { Fragment } from "react/jsx-runtime"
 import HeroSection from "@/components/Views/Home/Hero"
 import TraditionalCuisineBenefits from "@/components/Views/Home/TraditionalCuisineBenefits"
 import RecipeStatistics from "@/components/Views/Home/RecipeStatistics"
@@ -6,7 +6,7 @@ import SupportFaq from "@/components/Views/Home/SupportFaq"
 
 export default function HomePage() {
   return (
-    <React.Fragment>
+    <Fragment>
       <HeroSection
         heading="Masak Dengan Lebih Mudah & Kreatif."
         description="Dengan Dapur Tradisional, Anda bisa menemukan inspirasi untuk masakan lezat setiap hari. Cari resep favorit Anda sekarang!"
@@ -24,6 +24,6 @@ export default function HomePage() {
         heading="Pertanyaan yang Sering Diajukan"
         subheading="Jawaban untuk Pertanyaan Umum tentang Resep dan Penggunaan Website"
       />
-    </React.Fragment>
+    </Fragment>
   )
 }
