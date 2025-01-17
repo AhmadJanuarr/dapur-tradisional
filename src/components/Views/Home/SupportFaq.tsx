@@ -9,7 +9,7 @@ interface SupportFaqProps {
   icon: LucideIcon
 }
 
-export default function SupportFaq() {
+export default function SupportFaq({ heading, subheading }: { heading: string; subheading: string }) {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -26,10 +26,8 @@ export default function SupportFaq() {
   return (
     <section className="mx-auto mt-10 flex flex-col items-center justify-center px-5 py-20 lg:w-4/5 lg:px-0">
       <div className="w-full">
-        <h1 className="text heading-mobile pb-5 font-domine text-black">Pertanyaan yang Sering Diajukan</h1>
-        <p className="subheading-mobile text-gray-500">
-          Jawaban untuk Pertanyaan Umum tentang Resep dan Penggunaan Website
-        </p>
+        <h1 className="text heading-mobile pb-5 font-domine text-black">{heading}</h1>
+        <p className="subheading-mobile text-gray-500">{subheading}</p>
       </div>
 
       <div className="grid w-full grid-cols-1 place-items-center justify-center justify-items-center py-10 md:grid-cols-2 xl:grid-cols-3">
