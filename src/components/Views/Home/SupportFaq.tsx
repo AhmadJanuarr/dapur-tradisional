@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { SupportsFaqList } from "@/data/datas"
+import { useIsMobile } from "@/hooks/useIsMobile"
 import { LucideIcon } from "lucide-react"
-import { useEffect, useState } from "react"
 
 interface SupportFaqProps {
   question: string
@@ -9,28 +9,21 @@ interface SupportFaqProps {
   icon: LucideIcon
 }
 
-export default function SupportFaq({ heading, subheading }: { heading: string; subheading: string }) {
-  const [isMobile, setIsMobile] = useState(false)
+interface SupportFaqSectionProps {
+  heading: string
+  subheading: string
+}
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
-
+const SupportFaq = ({ heading, subheading }: SupportFaqSectionProps) => {
+  const isMobile = useIsMobile()
   return (
     <section className="mx-auto mt-10 flex flex-col items-center justify-center px-5 py-20 lg:w-4/5 lg:px-0">
-      <div className="w-full">
+      <header className="w-full">
         <h1 className="text heading-mobile pb-5 font-domine text-black">{heading}</h1>
         <p className="subheading-mobile text-gray-500">{subheading}</p>
-      </div>
+      </header>
 
-      <div className="grid w-full grid-cols-1 place-items-center justify-center justify-items-center py-10 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid w-full grid-cols-1 place-items-center py-10 md:grid-cols-2 xl:grid-cols-3">
         {SupportsFaqList.map(({ question, answer, icon: IconComponent }: SupportFaqProps, index) => (
           <div className="w-full" key={index}>
             {isMobile ? (
@@ -57,3 +50,5 @@ export default function SupportFaq({ heading, subheading }: { heading: string; s
     </section>
   )
 }
+
+export default SupportFaq
