@@ -27,17 +27,17 @@ const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
           <img src={img} alt="hero" />
         </div>
         <div className="lg:w-2/3">
-          <h1 className="heading-mobile pb-5 text-center font-domine text-black lg:text-left">{heading}</h1>
+          <h1 className="heading pb-5 text-center font-domine text-black lg:text-left">{heading}</h1>
           <div className="w-full lg:hidden">
             <img src={img} alt="hero" />
           </div>
-          <p className="subheading-mobile">{description}</p>
+          <p className="subheading">{description}</p>
 
           <div className="flex gap-10 pt-10">
             {statistics.map((stat, index) => (
               <div key={index} className="flex items-center gap-5">
                 {stat.icon}
-                <div className="subheading-mobile flex flex-col">
+                <div className="subheading flex flex-col">
                   <p className="text-gray-500">{stat.label}</p>
                   <p className="font-semibold text-black">{stat.value}</p>
                 </div>
