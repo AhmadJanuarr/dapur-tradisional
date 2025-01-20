@@ -21,7 +21,7 @@ export default function HomePage() {
         description="Dapur Tradisional menyediakan berbagai macam resep makanan ringan khas daerah yang penuh cita rasa dan keunikan. Dengan resep-resep ini, Anda dapat menikmati kelezatan kuliner khas daerah dengan mudah."
       />
       <SupportFaq
-        heading="Pertanyaan yang Sering Diajukan"
+        heading="Frequently Asked Questions"
         subheading="Jawaban untuk Pertanyaan Umum tentang Resep dan Penggunaan Website"
       />
     </Fragment>
