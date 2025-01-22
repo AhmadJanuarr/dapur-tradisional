@@ -53,11 +53,16 @@ export default function LoginForm({ setIsLoading }: { setIsLoading: React.Dispat
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.message
-        if (errorMessage.includes("Pengguna tidak ditemukan")) {
-          toast.error("Pengguna tidak ditemukan")
+        if (errorMessage.includes("Validasi gagal")) {
+          toast.warning("Email tidak terdaftar")
+        } else if (errorMessage.includes("Kata sandi salah")) {
+          toast.warning("Kata sandi salah")
         } else {
           toast.error("Terjadi kesalahan saat masuk")
         }
+      } else {
+        console.error("Unknown error:", error)
+        toast.error("Terjadi kesalahan yang tidak diketahui")
       }
       setIsLoading(false)
     }
