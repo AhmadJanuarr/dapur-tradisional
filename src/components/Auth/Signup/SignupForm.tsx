@@ -1,47 +1,48 @@
 import axios from "axios"
-import React from "react"
+import React, { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
-import { formSchemaSignup } from "@/schemas/FormSchema"
+import { formSchemaRegister } from "@/schemas/FormSchema"
 import { Form } from "@/components/ui/form"
 import { FormFieldWrapper } from "@/components/FormField/FormFieldWrapper"
 import { AuthOption } from "../AuthOption"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
-export default function SignupForm({
-  isLoading,
-  setIsLoading,
-}: {
+type SignupProps = {
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-}) {
+}
+
+export default function SignupForm({ isLoading, setIsLoading }: SignupProps) {
   const navigate = useNavigate()
-  const methods = useForm<z.infer<typeof formSchemaSignup>>({
-    resolver: zodResolver(formSchemaSignup),
-    defaultValues: { name: "", email: "", password: "" },
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const methods = useForm<z.infer<typeof formSchemaRegister>>({
+    resolver: zodResolver(formSchemaRegister),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchemaSignup>) {
+  async function onSubmit(values: z.infer<typeof formSchemaRegister>) {
     setIsLoading(true)
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, values)
       const data = await response.data
       if (data.success === true) {
         toast.success("Pendaftaran berhasil")
-        console.log("Navigating to login...")
-        setTimeout(() => {
-          setIsLoading(false)
-          navigate("/auth/login")
-        }, 3000)
+        setIsLoading(false)
+        navigate("/auth/login")
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data.message
         if (errorMessage.includes("Email sudah digunakan")) {
-          toast.error("Email sudah digunakan")
+          toast.warning("Email sudah digunakan")
         } else {
           toast.error("Terjadi kesalahan pendaftaran akun")
         }
@@ -76,6 +77,8 @@ export default function SignupForm({
           placeholder="*****"
           inputType="password"
           formControl={methods.control}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
         />
 
         <Button type="submit" className="w-full" disabled={isLoading}>
