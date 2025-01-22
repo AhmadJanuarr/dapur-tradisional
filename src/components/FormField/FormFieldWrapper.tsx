@@ -1,14 +1,17 @@
 import { Control } from "react-hook-form"
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
+import { Eye, EyeOff } from "lucide-react"
 
 interface FormFieldWrapperProps<T> {
   name: string
   label: string
   placeholder: string
   description?: string
-  inputType?: string
+  inputType: string
   formControl: Control<T>
+  setShowPassword?: (showPassword: boolean) => void
+  showPassword?: boolean
 }
 
 export function FormFieldWrapper<T>({
@@ -18,6 +21,8 @@ export function FormFieldWrapper<T>({
   description,
   inputType = "text",
   formControl,
+  setShowPassword,
+  showPassword,
 }: FormFieldWrapperProps<T>) {
   return (
     <FormField
@@ -27,7 +32,22 @@ export function FormFieldWrapper<T>({
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input placeholder={placeholder} type={inputType} {...field} />
+            <div className="relative">
+              <Input
+                placeholder={placeholder}
+                type={inputType === "password" && showPassword ? "text" : inputType}
+                {...field}
+              />
+              {inputType === "password" && (
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+                  {showPassword ? (
+                    <Eye onClick={() => setShowPassword!(!showPassword)} />
+                  ) : (
+                    <EyeOff onClick={() => setShowPassword!(!showPassword)} />
+                  )}
+                </div>
+              )}
+            </div>
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
