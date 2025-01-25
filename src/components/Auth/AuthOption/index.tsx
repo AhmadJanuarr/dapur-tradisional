@@ -9,9 +9,8 @@ export function AuthOption({ linkText, linkTo }: { linkText: string; linkTo: str
       <Divider text="Atau masuk dengan" />
       <SocialLoginButton provider="Google" icon={<Mail />} />
       <SocialLoginButton provider="Github" icon={<Github />} />
-
       <p className="text-center text-[0.8rem]">
-        {linkText}{" "}
+        {linkText}
         <Link to={`/auth/${linkTo}`} className="text-blue-500">
           {linkTo}
         </Link>
