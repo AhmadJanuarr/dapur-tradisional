@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Repeat } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const ErrorRecipe = () => {
+  const handleClick = () => {
+    window.location.reload()
+  }
+
   return (
     <section className="flex flex-col items-center justify-center w-full h-screen px-5 my-20">
       <div className="flex flex-col items-center text-center lg:w-1/2">
@@ -19,14 +24,16 @@ const ErrorRecipe = () => {
         </header>
 
         <div className="flex gap-4 mt-5">
-          <Button className="rounded-md subheading">
+          <Button className="rounded-md subheading" onClick={handleClick}>
             <Repeat />
             Coba lagi
           </Button>
-          <Button className="rounded-md subheading" variant="secondary">
-            <ArrowLeft />
-            Kembali ke beranda
-          </Button>
+          <Link to="/">
+            <Button className="rounded-md subheading" variant="secondary">
+              <ArrowLeft />
+              Kembali ke beranda
+            </Button>
+          </Link>
         </div>
 
         <footer className="mt-5">
