@@ -1,3 +1,4 @@
+// Refactored Sidebar Component for Better Maintainability
 import { useEffect, useState } from "react"
 import { CircleUser, LayoutGrid, ChevronsUpDown, Lock, LogOut, BookText } from "lucide-react"
 import { Link } from "react-router-dom"
@@ -11,68 +12,50 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
-import { Avatar, AvatarImage } from "../ui/avatar"
-import { Button } from "../ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 
-interface NavListProps {
+type MenuItem = {
+  title: string
+  icon: React.ReactNode
+  onClick?: () => void
+}
+
+type NavListProps = {
   to: string
-  children: React.ReactNode
+  label: string
   icon: React.ReactNode
   isActive: boolean
   onClick: () => void
 }
 
-interface MenuItem {
-  title: string
-  icon: React.ReactNode
-}
-
-const items = [
-  {
-    to: "/admin/dashboard",
-    label: "Dashboard",
-    icon: <LayoutGrid />,
-  },
-  {
-    to: "/admin/recipes",
-    label: "Recipes",
-    icon: <BookText />,
-  },
+const navItems = [
+  { to: "/admin/dashboard", label: "Dashboard", icon: <LayoutGrid /> },
+  { to: "/admin/recipes", label: "Recipes", icon: <BookText /> },
 ]
 
-const menuItems: MenuItem[] = [
-  {
-    title: "Profile",
-    icon: <CircleUser />,
-  },
-  {
-    title: "Lupa Password",
-    icon: <Lock />,
-  },
-  {
-    title: "Keluar",
-    icon: <LogOut />,
-  },
-]
-
-const NavList = ({ to, children, icon, isActive, onClick }: NavListProps) => {
-  return (
-    <Link to={to} onClick={onClick}>
-      <Button
-        className={`flex w-full justify-start gap-8 py-5 font-semibold hover:cursor-pointer hover:rounded-md ${
-          isActive ? "bg-black text-white" : "hover:bg-black hover:text-white"
-        }`}
-        variant={"ghost"}
-      >
-        {icon}
-        {children}
-      </Button>
-    </Link>
-  )
+const handleLogout = () => {
+  localStorage.removeItem("token")
+  window.location.href = "/"
 }
 
-const Footer = () => {
+// Components
+const NavList = ({ to, label, icon, isActive, onClick }: NavListProps) => (
+  <Link to={to} onClick={onClick}>
+    <Button
+      className={`flex w-full justify-start gap-8 py-5 font-semibold hover:cursor-pointer hover:rounded-md ${
+        isActive ? "bg-black text-white" : "hover:bg-black hover:text-white"
+      }`}
+      variant="ghost"
+    >
+      {icon}
+      {label}
+    </Button>
+  </Link>
+)
+
+const Footer = ({ menuItems }: { menuItems: MenuItem[] }) => {
   return (
     <SidebarFooter>
       <SidebarMenu>
@@ -89,7 +72,14 @@ const Footer = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent side="top" className="w-[--radix-popper-anchor-width]">
               {menuItems.map((item) => (
-                <DropdownMenuItem key={item.title}>
+                <DropdownMenuItem
+                  key={item.title}
+                  onClick={() => {
+                    if (item.title === "Keluar") {
+                      handleLogout()
+                    }
+                  }}
+                >
                   {item.icon}
                   <span>{item.title}</span>
                 </DropdownMenuItem>
@@ -102,31 +92,38 @@ const Footer = () => {
   )
 }
 
-export default function AppSideBar() {
-  const [activeItem, setActiveItem] = useState<string>()
-
+// Main Component
+const AppSideBar = () => {
+  const [activeItem, setActiveItem] = useState<string>("")
   useEffect(() => {
     setActiveItem(window.location.pathname)
   }, [])
+
+  const menuItems = [
+    { title: "Profile", icon: <CircleUser />, onClick: () => {} },
+    { title: "Lupa Password", icon: <Lock />, onClick: () => {} },
+    { title: "Keluar", icon: <LogOut />, onClick: () => {} },
+  ]
 
   return (
     <Sidebar>
       <SidebarHeader>Resep Manajemen</SidebarHeader>
       <SidebarGroupLabel>Utama</SidebarGroupLabel>
       <SidebarContent>
-        {items.map((item) => (
+        {navItems.map((item) => (
           <NavList
             key={item.to}
             to={item.to}
+            label={item.label}
             icon={item.icon}
             isActive={activeItem === item.to}
             onClick={() => setActiveItem(item.to)}
-          >
-            {item.label}
-          </NavList>
+          />
         ))}
       </SidebarContent>
-      <Footer />
+      <Footer menuItems={menuItems} />
     </Sidebar>
   )
 }
+
+export default AppSideBar
