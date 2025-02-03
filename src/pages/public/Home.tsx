@@ -1,13 +1,13 @@
-import { Fragment } from "react/jsx-runtime"
-import HeroSection from "@/components/Views/Home/Hero"
+import HeroSectionHome from "@/components/Views/Home/HeroSection"
 import TraditionalCuisineBenefits from "@/components/Views/Home/TraditionalCuisineBenefits"
 import RecipeStatistics from "@/components/Views/Home/RecipeStatistics"
 import SupportFaq from "@/components/Views/Home/SupportFaq"
+import { Fragment } from "react/jsx-runtime"
 
 export default function HomePage() {
   return (
     <Fragment>
-      <HeroSection
+      <HeroSectionHome
         heading="Masak Dengan Lebih Mudah & Kreatif."
         description="Dengan Dapur Tradisional, Anda bisa menemukan inspirasi untuk masakan lezat setiap hari. Cari resep favorit Anda sekarang!"
         callToAction="Jelajahi Resep Terbaru"
