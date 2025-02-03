@@ -2,9 +2,9 @@ import { Globe, Leaf, UtensilsCrossed, Wheat, Home, Handshake, Book, Heart, Chec
 export const LIST_MENU = {
   usefulLinks: [
     { name: "Beranda", href: "/" },
-    { name: "Resep", href: "/" },
-    { name: "Tentang", href: "/" },
-    { name: "Kontak", href: "/" },
+    { name: "Resep", href: "/recipes" },
+    { name: "Tentang Kami", href: "/about" },
+    { name: "Kontak", href: "/contact" },
   ],
   resources: [
     { name: "Blog", href: "/blog" },
@@ -103,10 +103,6 @@ export const SupportsFaqList = [
       "Ya, semua resep di website ini telah melalui proses uji coba untuk memastikan keakuratannya. Kami juga menerima masukan dari pengguna agar resep terus ditingkatkan jika diperlukan.",
     icon: ShieldCheck,
   },
-  {
-    question: "Apakah ada resep untuk diet atau makanan sehat?",
-    answer:
-      "Ya, kami memiliki kategori khusus untuk makanan sehat dan resep yang cocok untuk diet. Resep ini menggunakan bahan-bahan rendah kalori dan cara memasak yang lebih sehat, seperti kukus atau panggang.",
-    icon: Leaf,
-  },
 ];
+
+
