@@ -1,7 +1,7 @@
 import DashboardPage from "./DashboardPage"
 import AppLayout from "@/components/Admin/AppLayout"
-import { useLocation } from "react-router-dom"
 import RecipesPages from "./RecipesPages"
+import { useLocation } from "react-router-dom"
 
 export default function AdminPanel() {
   const location = useLocation().pathname
