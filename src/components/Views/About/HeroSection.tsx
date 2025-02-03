@@ -1,16 +1,17 @@
 type HeroSectionAboutProps = {
   heading: string
   subheading: string
+  src: string
 }
-const HeroSectionAbout = ({ heading, subheading }: HeroSectionAboutProps) => {
+const HeroSectionAbout = ({ heading, subheading, src }: HeroSectionAboutProps) => {
   return (
-    <div className="lg:mt-28">
-      <div className="flex flex-col items-center justify-center w-4/5 mx-auto text-center">
-        <h1 className="font-semibold heading lg:w-2/3">{heading}</h1>
-        <p className="w-4/5 mt-5 font-light text-gray-500 ">{subheading}</p>
+    <div className="mt-24 lg:mt-28">
+      <div className="mx-auto flex flex-col items-center justify-center lg:w-4/5 lg:text-center">
+        <h1 className="heading font-semibold lg:w-2/3">{heading}</h1>
+        <p className="subheading mt-5 font-light text-gray-500 lg:w-4/5">{subheading}</p>
       </div>
-      <div className="py-28">
-        <img src="/img/bg-about.jpg" alt="bg-about" className="w-full rounded-xl " />
+      <div className="mt-10 lg:py-28">
+        <img src={src} alt="bg-about" className="w-full rounded-xl" />
       </div>
     </div>
   )
