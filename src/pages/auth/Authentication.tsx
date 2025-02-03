@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom"
-import LoginForm from "@/components/Auth/Login/LoginForm"
-import SignupForm from "@/components/Auth/Signup/SignupForm"
 import { HeadingAuth } from "@/components/Auth/HeadingAuth"
 import { useState } from "react"
 import { LoadingFullScreen } from "@/components/Loading"
 import { ArrowLeft } from "lucide-react"
+import LoginForm from "@/components/Auth/Login/LoginForm"
+import SignupForm from "@/components/Auth/Signup/SignupForm"
 
 export default function Authentication() {
   const [isLoading, setIsLoading] = useState(false)
@@ -26,22 +26,20 @@ export default function Authentication() {
   }
 
   return (
-    <section className="flex justify-center w-full gap-5 px-5 md:px-0 lg:min-h-screen">
+    <section className="flex w-full justify-center gap-5 px-5 md:px-0 lg:min-h-screen">
       <div className="hidden w-1/2 md:block">
-        <div className="w-full h-screen bg-center bg-cover" style={{ backgroundImage: "url('/img/bg-auth.png')" }}>
-          <h1 className="flex gap-2 p-10 text-3xl font-bold text-white">
+        <div className="h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url('/img/bg-auth.png')" }}>
+          <Link to={"/"} className="flex gap-2 p-10 text-3xl">
             <img src="/logo/logo-t.png" alt="logo" className="w-10" />
-            <Link to={"/"} className="flex items-center gap-2 text-black font-italian">
-              Dapur Tradisional
-            </Link>
-          </h1>
+            <h1 className="flex items-center gap-2 font-inter text-black">Dapur Tradisional</h1>
+          </Link>
         </div>
       </div>
-      <div className="flex flex-col justify-center w-full md:w-1/2">
+      <div className="flex w-full flex-col justify-center md:w-1/2">
         {isLoading ? (
           <LoadingFullScreen />
         ) : (
-          <div className="flex flex-col w-full lg:items-center">
+          <div className="flex w-full flex-col lg:items-center">
             <Link to={"/"} className="flex gap-2 py-3 text-left lg:hidden">
               <ArrowLeft />
               Kembali
