@@ -1,8 +1,10 @@
+import { useQuery } from "@tanstack/react-query"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import RecipeCard from "@/components/Card/RecipeCard"
 import HeadingSection from "./HeadingSection"
 import RecipeSkeleton from "@/components/Skeleton/recipeSkeleton"
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
+import ErrorRecipe from "@/pages/error/RecipeError"
 
 interface RecipeProps {
   title: string
@@ -10,79 +12,55 @@ interface RecipeProps {
   image: string
   category: string
 }
+const APIUrl = import.meta.env.VITE_API_URL
+const fetchDataApi = async (): Promise<RecipeProps[]> => {
+  const { data } = await axios.get(`${APIUrl}/api/recipes`)
+  return Array.isArray(data?.data) ? data.data : []
+}
 
 export default function RecipesSection() {
-  const apiUrl = import.meta.env.VITE_API_URL
+  const navigate = useNavigate()
+  const {
+    data: recipes = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["recipes"],
+    queryFn: fetchDataApi,
+    staleTime: 1000 * 60 * 5,
+  })
 
-  const fetchData = async () => {
-    const { data } = await axios.get(`${apiUrl}/api/recipes`)
-    return data
-  }
-  const { data, isLoading, error } = useQuery({ queryKey: ["recipes"], queryFn: fetchData })
-
-  // Validasi data
-  const recipes = Array.isArray(data?.data) ? data?.data : []
-  const sortNewRecipe = [...recipes].sort(() => Math.random() - 0.5)
-  const recipeMakananBerat = recipes.filter((recipe: RecipeProps) => recipe.category === "Makanan_Berat")
-  const recipesMakananRingan = recipes.filter((recipe: RecipeProps) => recipe.category === "Makanan_Ringan")
-  const recipeKue = recipes.filter((recipe: RecipeProps) => recipe.category === "Kue")
-
-  console.log(recipes)
-  if (error) {
-    return <p className="text-red-500 ">An error has occurred: {error.message}</p>
-  }
-
-  const renderRecipes = (recipesToRender: RecipeProps[]) =>
-    recipesToRender
-      .slice(0, 8)
-      .map((recipe: RecipeProps) => (
-        <RecipeCard
-          key={recipe.id}
-          image={`${apiUrl}/images/${recipe.image}`}
-          title={recipe.title}
-          category={recipe.category}
-        />
-      ))
+  const NewestRecipe = [...recipes].sort(() => Math.random() - 0.5)
+  const handleClick = (id: number) => navigate(`/recipes/${id}`)
 
   return (
     <section>
-      {/* Resep Terbaru */}
       <HeadingSection
-        heading="Resep Terbaru"
-        description="Temukan resep favoritmu berdasarkan kategori"
-        isShowButton={false}
+        heading="Inspirasi Masak Setiap Hari"
+        description="Butuh ide untuk menu makan siang? Atau ingin mencoba resep dessert baru? Semua ada di sini."
+        isShowButton
+        cta="Lihat semua resep"
       />
-      <div className="flex flex-wrap w-full">
-        {isLoading ? <RecipeSkeleton index={8} /> : renderRecipes(sortNewRecipe)}
+      <div className="w-full">
+        {isLoading ? (
+          <RecipeSkeleton index={4} />
+        ) : error ? (
+          <ErrorRecipe />
+        ) : (
+          <div className="flex w-full flex-col flex-wrap gap-4 md:flex-row">
+            {NewestRecipe.slice(0, 4).map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                image={`${APIUrl}/images/${recipe.image}`}
+                title={recipe.title}
+                category={recipe.category}
+                handleClick={() => handleClick(recipe.id)}
+              />
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* Resep Makanan Berat */}
-      <HeadingSection
-        heading="Resep Makanan Berat"
-        description="Temukan resep favoritmu berdasarkan kategori"
-        isShowButton={true}
-      />
-      <div className="flex flex-wrap w-full">
-        {isLoading ? <RecipeSkeleton index={8} /> : renderRecipes(recipeMakananBerat)}
-      </div>
-
-      {/* Resep Makanan Ringan */}
-      <HeadingSection
-        heading="Resep Makanan Ringan"
-        description="Temukan resep favoritmu berdasarkan kategori"
-        isShowButton={true}
-      />
-      <div className="flex flex-wrap w-full">
-        {isLoading ? <RecipeSkeleton index={8} /> : renderRecipes(recipesMakananRingan)}
-      </div>
-
-      {/* Resep Kue */}
-      <HeadingSection
-        heading="Resep Kue"
-        description="Temukan resep favoritmu berdasarkan kategori"
-        isShowButton={true}
-      />
-      <div className="flex flex-wrap w-full">{isLoading ? <RecipeSkeleton index={8} /> : renderRecipes(recipeKue)}</div>
+      <HeadingSection heading="Makanan rutin kami" isShowButton cta="Lihat resep makanan rutin" />
     </section>
   )
 }
