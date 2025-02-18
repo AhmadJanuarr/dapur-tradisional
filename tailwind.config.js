@@ -6,15 +6,13 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
   	extend: {
-
   		fontFamily: {
-  			inter: [
-  				'Inter',
+  			nunito :[
+  				'Nunito',
+  				'sans-serif'],
+  			poppins :[
+  				'Poppins',
   				'sans-serif'
-  			],
-  			domine: [
-  				'Domine',
-  				'serif'
   			],
   			italian: [
   				'Italiana',
@@ -41,6 +39,9 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+			darkSecondary: "#171717",
+			darkPrimary: "#1B1B1B",
+			darkBackground: "#181616",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
