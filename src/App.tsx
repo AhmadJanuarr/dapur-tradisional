@@ -42,10 +42,9 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-
             {/* Halaman Recipes */}
             <Route path="/recipes" element={<Recipes />} />
-            <Route path="/recipes/:id" element={<DetailRecipe />} />
+            <Route path="/recipes/:slug" element={<DetailRecipe />} />
 
             {/* Halaman 404 */}
             <Route path="/unauthorized" element={<UnauthorizedPage />} />
