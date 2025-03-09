@@ -12,7 +12,12 @@ interface AuthProviderProps {
   children: ReactNode
 }
 
-type UserProps = {
+type LoginProps = {
+  email: string
+  password: string
+}
+
+type RegisterProps = {
   name: string
   email: string
   password: string
@@ -22,8 +27,8 @@ interface AuthContextType {
   user: any
   logout: () => void
   state: any
-  login: (userData: UserProps) => void
-  signup: (userData: UserProps) => void
+  login: (userData: LoginProps) => void
+  signup: (userData: RegisterProps) => void
   dispatch: React.Dispatch<any>
 }
 interface JwtPayloadWithRole extends JwtPayload {
@@ -95,6 +100,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
   console.log(user)
+
   const signup = async (values: z.infer<typeof formSchemaRegister>) => {
     dispatch({ type: "START_LOADING" })
     try {
