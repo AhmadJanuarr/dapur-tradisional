@@ -7,15 +7,20 @@ export default {
   theme: {
   	extend: {
   		fontFamily: {
-  			nunito :[
-  				'Nunito',
-  				'sans-serif'],
-  			poppins :[
-  				'Poppins',
+  			marcellus :[
+  				'Marcellus',
+  				'serif'
+  			],
+  			urbanist :[
+  				'Urbanist',
   				'sans-serif'
   			],
-  			italian: [
-  				'Italiana',
+  			rubik: [
+				'Rubik',
+				'sans-serif'
+			],
+  			playfair :[
+  				'Playfair Display',
   				'serif'
   			]
   		},
