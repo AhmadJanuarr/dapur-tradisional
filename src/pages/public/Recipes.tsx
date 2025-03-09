@@ -1,7 +1,7 @@
+import { Fragment } from "react/jsx-runtime"
 import CategorySection from "@/components/Views/Recipes/CategorySection"
 import HeroSectionRecipe from "@/components/Views/Recipes/HeroSection"
 import RecipesSection from "@/components/Views/Recipes/RecipeSection"
-import { Fragment } from "react/jsx-runtime"
 
 export default function RecipesPage() {
   return (
