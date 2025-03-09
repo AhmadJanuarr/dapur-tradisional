@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 export const UserManagements = () => {
   return (
     <section className="w-full">
-      <Card className="w-full px-4">
+      <Card className="w-full px-4 shadow-none">
         <div className="flex items-center gap-5 px-3 py-5 text-sm leading-none text-muted-foreground">
           <UsersRound />
           <div className="font-medium">Manajemen pengguna</div>
