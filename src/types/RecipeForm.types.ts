@@ -42,8 +42,8 @@ export interface RecipeFormValues {
   description: string
   image: string
   category: string
-  ingredients: string[]
-  steps: string[]
+  ingredients: { id: number; name: string }[]
+  steps: { id: number; description: string }[]
   calories: number | null
   protein: number | null
   carbs: number | null
