@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react"
 import { BookMarksButton } from "../Button/Bookmark"
-import { useState } from "react"
-import { Recipe } from "@/types/Recipe.types"
+// import { useState } from "react"
+// import { Recipe } from "@/types/Recipe.types"
 
 type RecipeCardProps = {
   image: string
@@ -19,7 +19,7 @@ const RecipeImage = ({ image, title }: { image: string; title: string }) => (
 )
 
 export default function RecipeCard({ image, title, category, handleClickViewDetail }: RecipeCardProps) {
-  const [bookmarks, setBookmarks] = useState<Recipe[]>([])
+  // const [bookmarks, setBookmarks] = useState<Recipe[]>([])
   return (
     <Card className="relative flex w-full flex-col rounded-xl border-none bg-slate-100 shadow-none dark:bg-darkBackground">
       <CardHeader className="relative overflow-hidden">
