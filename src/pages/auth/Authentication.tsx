@@ -1,13 +1,15 @@
 import { Link, useLocation } from "react-router-dom"
 import { HeadingAuth } from "@/components/Auth/HeadingAuth"
-import { useState } from "react"
+import { ArrowLeft, Moon, Sun } from "lucide-react"
+import { useTheme } from "@/hooks/useTheme"
 import { LoadingFullScreen } from "@/components/Loading"
-import { ArrowLeft } from "lucide-react"
+import { useAuth } from "@/context/AuthContext"
 import LoginForm from "@/components/Auth/Login/LoginForm"
 import SignupForm from "@/components/Auth/Signup/SignupForm"
 
 export default function Authentication() {
-  const [isLoading, setIsLoading] = useState(false)
+  const { theme, toggleDarkMode } = useTheme()
+  const { state } = useAuth()
   const pathname = useLocation().pathname
   const isLoginPage = pathname.includes("/auth/login")
   const isSignupPage = pathname.includes("/auth/register")
@@ -18,9 +20,9 @@ export default function Authentication() {
 
   const formComponent = () => {
     if (isLoginPage) {
-      return <LoginForm setIsLoading={setIsLoading} />
+      return <LoginForm />
     } else if (isSignupPage) {
-      return <SignupForm isLoading={isLoading} setIsLoading={setIsLoading} />
+      return <SignupForm />
     }
     return null
   }
@@ -31,12 +33,19 @@ export default function Authentication() {
         <div className="h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url('/img/bg-auth.png')" }}>
           <Link to={"/"} className="flex gap-2 p-10 text-3xl">
             <img src="/logo/logo-t.png" alt="logo" className="w-10" />
-            <h1 className="flex items-center gap-2 font-inter text-black">Dapur Tradisional</h1>
+            <h1 className="font-inter flex items-center gap-2 text-black">Dapur Tradisional</h1>
           </Link>
         </div>
       </div>
-      <div className="flex w-full flex-col justify-center md:w-1/2">
-        {isLoading ? (
+      <div className="relative flex w-full flex-col justify-center md:w-1/2">
+        <div className="absolute right-10 top-10 hidden rounded-full bg-darkBackground p-2 dark:bg-white md:block">
+          {theme === "dark" ? (
+            <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer text-darkBackground " />
+          ) : (
+            <Moon onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer text-white dark:bg-white" />
+          )}
+        </div>
+        {state.isLoading ? (
           <LoadingFullScreen />
         ) : (
           <div className="flex w-full flex-col lg:items-center">
