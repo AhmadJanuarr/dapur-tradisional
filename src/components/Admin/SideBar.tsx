@@ -1,127 +1,109 @@
-// Refactored Sidebar Component for Better Maintainability
-import { useEffect, useState } from "react"
-import { CircleUser, LayoutGrid, ChevronsUpDown, Lock, LogOut, BookText } from "lucide-react"
-import { Link } from "react-router-dom"
+import { BookText, LayoutGrid, LogOut, Moon, Sun, User } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
+  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-
-type MenuItem = {
-  title: string
-  icon: React.ReactNode
-  onClick?: () => void
-}
-
-type NavListProps = {
-  to: string
-  label: string
-  icon: React.ReactNode
-  isActive: boolean
-  onClick: () => void
-}
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { toast } from "sonner"
+import { LoadingFullScreen } from "../Loading"
+import { useState } from "react"
+import { useTheme } from "@/hooks/useTheme"
+import { useAuth } from "@/context/AuthContext"
 
 const navItems = [
-  { to: "/admin/dashboard", label: "Dashboard", icon: <LayoutGrid /> },
-  { to: "/admin/recipes", label: "Recipes", icon: <BookText /> },
+  { to: "/admin/dashboard", label: "Dashboards", icon: LayoutGrid },
+  { to: "/admin/recipes", label: "Resep", icon: BookText },
+  { to: "/admin/users", label: "Users", icon: User },
 ]
-
-const handleLogout = () => {
-  localStorage.removeItem("token")
-  window.location.href = "/"
-}
-
-// Components
-const NavList = ({ to, label, icon, isActive, onClick }: NavListProps) => (
-  <Link to={to} onClick={onClick}>
-    <Button
-      className={`flex w-full justify-start gap-8 py-5 font-semibold hover:cursor-pointer hover:rounded-md ${
-        isActive ? "bg-black text-white" : "hover:bg-black hover:text-white"
-      }`}
-      variant="ghost"
-    >
-      {icon}
-      {label}
-    </Button>
-  </Link>
-)
-
-const Footer = ({ menuItems }: { menuItems: MenuItem[] }) => {
-  return (
-    <SidebarFooter>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <SidebarMenuButton className="py-5 hover:bg-gray-100">
-                <Avatar className="h-8 w-8 rounded-md">
-                  <AvatarImage src="/img/me.jpg" alt="AhmadJanuar" />
-                </Avatar>
-                Admin@gmail.com
-                <ChevronsUpDown className="ml-auto" />
-              </SidebarMenuButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent side="top" className="w-[--radix-popper-anchor-width]">
-              {menuItems.map((item) => (
-                <DropdownMenuItem
-                  key={item.title}
-                  onClick={() => {
-                    if (item.title === "Keluar") {
-                      handleLogout()
-                    }
-                  }}
-                >
-                  {item.icon}
-                  <span>{item.title}</span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarFooter>
-  )
-}
 
 // Main Component
 const AppSideBar = () => {
-  const [activeItem, setActiveItem] = useState<string>("")
-  useEffect(() => {
-    setActiveItem(window.location.pathname)
-  }, [])
+  const { theme, toggleDarkMode } = useTheme()
+  const { logout } = useAuth()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const navigate = useNavigate()
 
-  const menuItems = [
-    { title: "Profile", icon: <CircleUser />, onClick: () => {} },
-    { title: "Lupa Password", icon: <Lock />, onClick: () => {} },
-    { title: "Keluar", icon: <LogOut />, onClick: () => {} },
-  ]
+  const handleLogout = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      logout()
+      navigate("/")
+      toast.success("Berhasil keluar dari akun admin")
+    }, 3000)
+  }
 
   return (
-    <Sidebar>
-      <SidebarHeader>Resep Manajemen</SidebarHeader>
-      <SidebarGroupLabel>Utama</SidebarGroupLabel>
-      <SidebarContent>
-        {navItems.map((item) => (
-          <NavList
-            key={item.to}
-            to={item.to}
-            label={item.label}
-            icon={item.icon}
-            isActive={activeItem === item.to}
-            onClick={() => setActiveItem(item.to)}
-          />
-        ))}
+    <Sidebar collapsible="icon">
+      <SidebarContent className="bg-white dark:bg-darkBackground">
+        {isLoading && <LoadingFullScreen />}
+        <SidebarHeader className="text-2xl font-bold">Resep Manajemen</SidebarHeader>
+        <SidebarGroupLabel className="heading">Utama</SidebarGroupLabel>
+        <hr />
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuSubItem className="flex flex-col gap-5 pl-2">
+              {navItems.map((item) => (
+                <SidebarMenuSubButton asChild key={item.label}>
+                  <Link to={item.to}>
+                    <item.icon className="subheading w-5" />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuSubButton>
+              ))}
+              <hr />
+              <SidebarMenuSubButton asChild onClick={toggleDarkMode}>
+                <span className="subheading flex cursor-pointer gap-2 pl-2">
+                  {theme === "dark" ? (
+                    <Sun className="h-5 w-5 cursor-pointer" />
+                  ) : (
+                    <Moon className="h-5 w-5 cursor-pointer" />
+                  )}
+                  Mode {theme === "dark" ? "terang" : "gelap"}
+                </span>
+              </SidebarMenuSubButton>
+              <SidebarMenuSubButton asChild>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <span className="subheading flex cursor-pointer gap-2 pl-2">
+                      <LogOut className="w-4" />
+                      Keluar
+                    </span>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Apakah kamu yakin ingin keluar?</AlertDialogTitle>
+                      <AlertDialogDescription>Kamu akan keluar dari akun ini.</AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel className="rounded-md">Batalkan</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleLogout} className="rounded-md">
+                        Lanjutkan
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </SidebarMenuSubButton>
+            </SidebarMenuSubItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
       </SidebarContent>
-      <Footer menuItems={menuItems} />
     </Sidebar>
   )
 }
