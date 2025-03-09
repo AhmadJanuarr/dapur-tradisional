@@ -46,7 +46,7 @@ export default function RecipesCategory() {
                 image={recipe.image}
                 title={recipe.title}
                 category={recipe.category}
-                handleClick={() => handleClick(recipe.title)}
+                handleClickViewDetail={() => handleClick(recipe.title)}
               />
             ))}
           </div>
