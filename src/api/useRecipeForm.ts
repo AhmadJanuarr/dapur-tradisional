@@ -24,12 +24,12 @@ export function useRecipeForm(setOpenForm: React.Dispatch<React.SetStateAction<b
     },
   })
   const { control, handleSubmit, register, reset } = form
-  const ingredientsArray = useFieldArray({
+  const ingredientsArray = useFieldArray<RecipeFormValues>({
     control,
     name: "ingredients",
   })
 
-  const stepsArray = useFieldArray({
+  const stepsArray = useFieldArray<RecipeFormValues>({
     control,
     name: "steps",
   })
