@@ -12,7 +12,7 @@ export const FormArray = ({ title, fields, prefix, onAdd, onRemove, register }: 
         <div key={field.id} className="flex items-center gap-2">
           <Input
             type="text"
-            placeholder={`${title} ${index + 1}`} //error placeholder not showing
+            placeholder={`${title} ${index + 1}`}
             {...register(`${prefix}[${index}]` as `ingredients.${number}` | `steps.${number}`)}
           />
           <Button variant="destructive" size="icon" onClick={() => onRemove(index)}>
