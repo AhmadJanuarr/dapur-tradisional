@@ -7,7 +7,7 @@ type SocialLoginButtonProps = {
 
 export function SocialLoginButton({ icon, provider }: SocialLoginButtonProps) {
   return (
-    <Button className="w-full" variant={"outline"}>
+    <Button className="w-full rounded-sm" variant={"outline"} disabled>
       {icon}
       {provider}
     </Button>
