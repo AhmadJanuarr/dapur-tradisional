@@ -1,22 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import { fetchDataApi } from "@/api/useFetchDataRecipe"
+import { Recipe } from "@/types/Recipe.types"
 import RecipeCard from "@/components/Card/RecipeCard"
 import HeadingSection from "./HeadingSection"
-import RecipeSkeleton from "@/components/Skeleton/recipeSkeleton"
+import RecipeSkeleton from "@/components/Skeleton/RecipeSkeleton"
 import ErrorRecipe from "@/pages/error/RecipeError"
-
-interface RecipeProps {
-  title: string
-  id: number
-  image: string
-  category: string
-}
-const APIUrl = import.meta.env.VITE_API_URL
-const fetchDataApi = async (): Promise<RecipeProps[]> => {
-  const { data } = await axios.get(`${APIUrl}/api/recipes`)
-  return Array.isArray(data?.data) ? data.data : []
-}
 
 export default function RecipesSection() {
   const navigate = useNavigate()
@@ -27,12 +16,11 @@ export default function RecipesSection() {
   } = useQuery({
     queryKey: ["recipes"],
     queryFn: fetchDataApi,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 0,
+    refetchOnMount: true,
   })
-
-  const NewestRecipe = [...recipes].sort(() => Math.random() - 0.5)
-  const handleClick = (id: number) => navigate(`/recipes/${id}`)
-
+  const NewestRecipe = Array.isArray(recipes) ? [...(recipes || [])].sort(() => Math.random() - 0.5) : []
+  const handleClickViewDetail = (title: string) => navigate(`/recipes/${title}`)
   return (
     <section>
       <HeadingSection
@@ -47,14 +35,14 @@ export default function RecipesSection() {
         ) : error ? (
           <ErrorRecipe />
         ) : (
-          <div className="flex w-full flex-col flex-wrap gap-4 md:flex-row">
-            {NewestRecipe.slice(0, 4).map((recipe) => (
+          <div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
+            {NewestRecipe.slice(0, 4).map((recipe: Recipe) => (
               <RecipeCard
                 key={recipe.id}
-                image={`${APIUrl}/images/${recipe.image}`}
+                image={recipe.image}
                 title={recipe.title}
                 category={recipe.category}
-                handleClick={() => handleClick(recipe.id)}
+                handleClickViewDetail={() => handleClickViewDetail(recipe.title)}
               />
             ))}
           </div>
