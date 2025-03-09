@@ -5,9 +5,9 @@ import Marquee from "react-fast-marquee"
 
 const TestimonialSection = () => {
   return (
-    <section className="py-10">
+    <section className="pb-64 pt-20">
       <HeadingSection heading="Testimonial" subHeading="Apa kata mereka tentang kami." />
-      <div className="relative overflow-x-auto py-2 md:py-10">
+      <div className="relative py-2 md:py-10">
         <Marquee className="absolute flex gap-4" pauseOnHover>
           {TetimonialsData.map((item) => (
             <TestimonialCard key={item.id} name={item.name} desc={item.desc} role={item.role} img={item.img} />
