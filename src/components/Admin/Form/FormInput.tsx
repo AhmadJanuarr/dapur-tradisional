@@ -13,14 +13,14 @@ export const FormInput = ({ name, label, placeholder, control, type = "text", is
           <FormLabel>{label}</FormLabel>
           <FormControl>
             {isTextArea ? (
-              <Textarea id={name} placeholder={placeholder} {...field} value={field.value ?? ""} />
+              <Textarea id={name} placeholder={placeholder} {...field} value={field.value?.toString() ?? ""} />
             ) : (
               <Input
                 type={type}
                 id={name}
                 placeholder={placeholder}
                 {...field}
-                value={field.value ?? ""}
+                value={field.value?.toString() ?? ""}
                 className="subheading"
               />
             )}
