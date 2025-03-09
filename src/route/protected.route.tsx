@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from "react-router-dom"
-import { useContext, useEffect } from "react"
-import { AuthContext } from "@/context/AuthContext"
+import { useEffect } from "react"
+import { useAuth } from "@/context/AuthContext"
 
 interface ProtectedRouteProps extends React.PropsWithChildren {
   allowedRoles: string[]
 }
 export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
-  const { user } = useContext(AuthContext)
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -17,8 +18,6 @@ export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) 
     if (!allowedRoles.includes(user.role)) {
       return navigate("/unauthorized")
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, allowedRoles, children])
 
   return <>{children}</>
