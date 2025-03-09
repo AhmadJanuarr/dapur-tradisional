@@ -13,7 +13,7 @@ export default function AboutUsPage() {
           melalui desain digital modern, membuat warisan kuliner dapat diakses untuk semua orang."
         src="/img/bg-about.png"
       />
-      <ProfileSection name="Ahmad Januar A" role="UI/UX Designer | Web Developer" src="img/user.png" />
+      <ProfileSection name="Ahmad Januar A" role="UI/UX Designer | Web Developer" src="/elements/user.png" />
       <DesignProcess />
       <TestimonialSection />
     </Fragment>
