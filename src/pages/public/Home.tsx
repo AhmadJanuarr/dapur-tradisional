@@ -9,9 +9,8 @@ export default function HomePage() {
   return (
     <Fragment>
       <HeroSectionHome
-        heading="Masak dengan lebih mudah & kreatif."
         description="Dengan Dapur Tradisional, Anda bisa menemukan inspirasi untuk masakan lezat setiap hari. Cari resep favorit Anda sekarang!"
-        callToAction="Jelajahi Resep Terbaru"
+        callToAction="Jelajahi resep terbaru"
         to="/recipes"
         href="https://github.com/AhmadJanuarr/recipe-managements"
       />
