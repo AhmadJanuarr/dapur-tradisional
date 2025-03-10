@@ -1,4 +1,19 @@
-import { Globe, Leaf, UtensilsCrossed, Wheat, Home, Handshake, Book, Heart, CheckCheck, Utensils, Layers, Bookmark, ShieldCheck, Search, } from "lucide-react";
+import {
+  Globe,
+  Leaf,
+  UtensilsCrossed,
+  Wheat,
+  Home,
+  Handshake,
+  Book,
+  Heart,
+  CheckCheck,
+  Utensils,
+  Layers,
+  Bookmark,
+  ShieldCheck,
+  Search,
+} from "lucide-react"
 export const LIST_MENU = {
   usefulLinks: [
     { name: "Beranda", href: "/" },
@@ -18,41 +33,40 @@ export const LIST_MENU = {
     { name: "Ketentuan Layanan", href: "/terms" },
     { name: "Kebijakan Privasi", href: "/privacy" },
   ],
-};
+}
 
 export const ListTraditionalCuisineBenefits = [
   {
-    title: "Warisan Budaya",
+    title: "Warisan budaya",
     description: "Masakan tradisional mencerminkan budaya dan sejarah yang kaya.",
-    icon: Globe
+    icon: Globe,
   },
   {
-    title: "Kaya Nutrisi Alami",
+    title: "Kaya nutrisi alami",
     description: "Menggunakan bahan lokal segar dan rempah-rempah bergizi.",
     icon: Leaf,
   },
   {
-    title: "Rasa yang Autentik",
+    title: "Rasa yang autentik",
     description: "Hidangan tradisional menawarkan rasa asli yang unik.",
     icon: UtensilsCrossed,
   },
   {
-    title: "Dukung Petani dan UMKM Lokal",
+    title: "Dukung petani dan UMKM lokal",
     description: "Memasak tradisional mendukung petani dan pelaku UMKM.",
     icon: Wheat,
   },
   {
-    title: "Mudah Dibuat di Rumah",
+    title: "Mudah dibuat di rumah",
     description: "Resep praktis yang tetap mempertahankan rasa asli.",
     icon: Home,
   },
   {
-    title: "Perpaduan Budaya Lokal",
+    title: "Perpaduan budaya lokal",
     description: "Hidangan tradisional adalah hasil perpaduan budaya.",
     icon: Handshake,
   },
-];
-
+]
 
 export const SupportsFaqList = [
   {
@@ -103,6 +117,4 @@ export const SupportsFaqList = [
       "Ya, semua resep di website ini telah melalui proses uji coba untuk memastikan keakuratannya. Kami juga menerima masukan dari pengguna agar resep terus ditingkatkan jika diperlukan.",
     icon: ShieldCheck,
   },
-];
-
-
+]
