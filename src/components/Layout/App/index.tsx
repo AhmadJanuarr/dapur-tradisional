@@ -21,7 +21,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       : "2xl:w-4/5 lg:w-11/12 w-full px-5 lg:px-0"
 
   return (
-    <div className="flex w-full flex-col items-center justify-center font-rubik transition-all duration-300">
+    <div className="flex w-full flex-col items-center justify-center font-rubik tracking-wide transition-all duration-300">
       <div className="w-full">
         {showHeaderFooter && <Header />}
         <Toaster richColors />
