@@ -15,9 +15,9 @@ interface SupportFaqSectionProps {
 
 const SupportFaq = ({ heading, subheading }: SupportFaqSectionProps) => {
   return (
-    <section className="mx-auto mt-10 flex flex-col items-center justify-center px-5 py-20 lg:w-11/12 lg:px-0 2xl:w-4/5">
+    <section className="mx-auto mt-20 flex flex-col items-center justify-center px-5 pb-10 lg:mt-52 lg:w-11/12 lg:px-0 2xl:w-4/5 ">
       <header className="w-full">
-        <h1 className="text heading pb-5 font-semibold text-black dark:text-white">{heading}</h1>
+        <h1 className="text heading pb-2 font-semibold text-black dark:text-white md:pb-5">{heading}</h1>
         <p className="subheading text-gray-500 dark:text-white">{subheading}</p>
       </header>
 
@@ -30,7 +30,7 @@ const SupportFaq = ({ heading, subheading }: SupportFaqSectionProps) => {
               className="w-full rounded-md bg-gray-100 px-2 dark:bg-darkBackground lg:px-4"
             >
               <AccordionItem value={`item-${index}`} className="subheading border-none dark:text-white">
-                <AccordionTrigger>{question}</AccordionTrigger>
+                <AccordionTrigger className="text-left">{question}</AccordionTrigger>
                 <AccordionContent>{answer}</AccordionContent>
               </AccordionItem>
             </Accordion>
