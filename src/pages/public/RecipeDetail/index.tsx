@@ -99,8 +99,8 @@ export default function DetailRecipe() {
   if (!recipe) return []
 
   return (
-    <div className="mx-auto mt-28 flex flex-col  md:w-[80%]" key={recipe.id}>
-      <div className="md:pb-8">
+    <div className="mx-auto mt-28 flex flex-col md:w-[80%]" key={recipe.id}>
+      <div className="pb-4 md:pb-8">
         <BreadcrumbWithCustomSeparator title={recipe.title} />
       </div>
       <h1 className="heading py-2 font-bold">{recipe.title}</h1>
@@ -133,7 +133,7 @@ export default function DetailRecipe() {
         <NutritionInfo nutrition="Kalori" value={recipe.nutrition.calories} unit="kcal" />
         <NutritionInfo nutrition="Protein" value={recipe.nutrition.protein} unit="g" />
         <NutritionInfo nutrition="Lemak" value={recipe.nutrition.fat} unit="g" />
-        <NutritionInfo nutrition="Karbohidrat" value={recipe.nutrition.carbohydrate} unit="g" />
+        <NutritionInfo nutrition="Karbohidrat" value={recipe.nutrition.carbs} unit="g" />
       </div>
       <div className="mt-6 flex gap-5 ">
         <Button className="rounded-md">
