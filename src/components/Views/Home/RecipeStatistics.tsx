@@ -21,7 +21,7 @@ const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
   ]
 
   return (
-    <section className="relative mx-auto mt-52 w-full px-5 lg:w-11/12 lg:px-0 lg:py-20 2xl:w-4/5">
+    <section className="relative mx-auto mt-20 w-full px-5 lg:mt-52 lg:w-11/12 lg:px-0 lg:py-20 2xl:w-4/5">
       <div className="flex w-full flex-col items-center justify-center gap-10 lg:flex-row">
         <div className="z-20 hidden lg:block lg:w-1/3">
           <img src={img} alt="food" className="z-10 w-full lg:w-[500px]" />
