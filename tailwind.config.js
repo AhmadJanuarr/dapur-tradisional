@@ -11,10 +11,6 @@ export default {
   				'Marcellus',
   				'serif'
   			],
-  			urbanist :[
-  				'Urbanist',
-  				'sans-serif'
-  			],
   			rubik: [
 				'Rubik',
 				'sans-serif'
@@ -22,7 +18,11 @@ export default {
   			playfair :[
   				'Playfair Display',
   				'serif'
-  			]
+  			],
+  			sail:[
+				'Sail',
+				'system-ui'
+			]
   		},
   		screens: {
   			sm: {
