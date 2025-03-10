@@ -26,7 +26,7 @@ export default function RecipeCard({ image, title, category, handleClickViewDeta
         <RecipeImage image={image} title={title} />
         <BookMarksButton />
       </CardHeader>
-      <div className="flex flex-col justify-between gap-2 rounded-xl border border-slate-200 bg-white px-2 py-2 lg:h-[180px] lg:px-6 lg:py-4">
+      <div className="flex h-32 flex-col justify-between gap-2 rounded-xl border border-slate-200 bg-white px-2 py-2 lg:h-[180px] lg:px-6 lg:py-4">
         <div className="flex flex-col gap-2 dark:text-black">
           <CardDescription>{category.replace("_", " ")}</CardDescription>
           <CardTitle className="mb-2 lg:text-2xl">{title}</CardTitle>
