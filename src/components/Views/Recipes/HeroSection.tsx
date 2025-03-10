@@ -23,6 +23,7 @@ const HeroSectionRecipe = ({ heading, subheading, image }: HeroSectionProps) => 
               placeholder="Cari resep..."
               className="mt-4 w-full rounded-md border-none bg-white pl-11 text-black placeholder:text-black"
               aria-label="Search recipes"
+              disabled
             />
           </div>
         </div>
