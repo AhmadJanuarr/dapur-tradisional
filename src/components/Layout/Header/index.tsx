@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { AlignJustify, Bookmark, LogOut, Moon, Settings, Sun, User } from "lucide-react"
+import { Bookmark, LogOut, Menu, Moon, Settings, Sun, User, X } from "lucide-react"
 import { LIST_MENU } from "@/data/datas"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -157,8 +157,8 @@ export default function Header() {
         )}
 
         {/* Mobile Menu Toggle */}
-        <Button className="flex items-center md:hidden" onClick={() => setOpen(!open)}>
-          <AlignJustify className="h-6 w-6" />
+        <Button className="flex items-center rounded-xl md:hidden" onClick={() => setOpen(!open)}>
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
       </div>
 
@@ -168,7 +168,7 @@ export default function Header() {
           shadow-lg transition-all duration-500 ${!open && "-translate-y-[30rem] opacity-0"}`}
       >
         <div
-          className="absolute -z-20 block h-screen w-screen bg-slate-800 opacity-50 md:hidden "
+          className="absolute -z-20 block h-screen w-screen bg-gradient-to-t from-white to-black opacity-85 backdrop-blur-xl md:hidden"
           onClick={() => setOpen(false)}
         ></div>
         <div className="rounded-b-xl border bg-white px-2 py-5">
