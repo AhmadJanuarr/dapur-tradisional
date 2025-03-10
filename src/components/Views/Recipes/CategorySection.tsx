@@ -12,7 +12,7 @@ const CardCategory = ({ title, src, color, to }: { title: string; src: string; c
         <div className="z-20 flex w-2/3 flex-col gap-5">
           <h1 className="font-inter text-xl font-semibold text-black lg:text-3xl">{title}</h1>
           <Link to={to}>
-            <Button className="w-10 lg:w-12" variant="default">
+            <Button className="w-14 rounded-xl lg:w-12" variant="default">
               <ArrowRight />
             </Button>
           </Link>
