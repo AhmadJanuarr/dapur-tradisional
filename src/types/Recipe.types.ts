@@ -9,7 +9,7 @@ export type Recipe = {
     calories: number
     protein: number
     fat: number
-    carbohydrate: number
+    carbs: number
   }
   ingredients: { id: number; name: string }[]
   steps: { id: number; description: string }[]
