@@ -22,14 +22,14 @@ type UserAlreadyLoggedProps = {
 }
 
 interface UserNotLooggedProps extends UserAlreadyLoggedProps {
-  isHome: boolean
-  isScrollY: boolean
+  isHome?: boolean
+  isScrollY?: boolean
 }
 
 const NavLink = ({ children, href, onClick }: NavLinkProps) => {
   return (
     <li>
-      <Link to={href} className="hover:underline" onClick={onClick}>
+      <Link to={href} className="text-[#F97316] hover:underline" onClick={onClick}>
         {children}
       </Link>
       <hr className="mt-2 block border-gray-200 md:hidden" />
@@ -39,7 +39,7 @@ const NavLink = ({ children, href, onClick }: NavLinkProps) => {
 
 const LogoHeader = () => {
   return (
-    <Link to="/" className="flex w-1/3 items-center gap-2 text-xl md:text-2xl">
+    <Link to="/" className="flex w-1/3 items-center gap-2 text-[1rem]">
       <img src="/logo/logo-t.png" alt="logo website" className="w-10" />
       Dapur <span className="text-[#F97316]">tadisional</span>
     </Link>
@@ -91,7 +91,7 @@ const UserAlreadyLogged = ({ handleAuth, toggleDarkMode, theme, handleUserProfil
   </div>
 )
 
-const UserNotLogged = ({ handleAuth, isHome, isScrollY, theme, toggleDarkMode }: UserNotLooggedProps) => (
+const UserNotLogged = ({ handleAuth, theme, toggleDarkMode }: UserNotLooggedProps) => (
   <div className="hidden w-1/3 items-center justify-end gap-5 md:flex">
     {theme === "dark" ? (
       <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer" />
@@ -101,16 +101,12 @@ const UserNotLogged = ({ handleAuth, isHome, isScrollY, theme, toggleDarkMode }:
     <Separator orientation="vertical" className="h-5 bg-gray-700" />
     <Button
       variant="ghost"
-      className={`${isHome && !isScrollY ? "border border-white" : "border border-black dark:border-white "} subheading`}
+      className="subheading border border-black dark:border-white"
       onClick={() => handleAuth("login")}
     >
       Masuk
     </Button>
-    <Button
-      variant={`${isHome && !isScrollY ? "secondary" : "default"}`}
-      onClick={() => handleAuth("register")}
-      className="subheading"
-    >
+    <Button variant="default" onClick={() => handleAuth("register")} className="subheading">
       Daftar sekarang
     </Button>
   </div>
@@ -127,11 +123,11 @@ export default function Header() {
   return (
     <header className={`fixed left-0 top-0 z-30 w-full`}>
       <div
-        className={`flex w-full justify-between px-5 py-5 transition-all duration-200 ${isScrollY && isHome ? " bg-white text-black dark:bg-darkSecondary dark:text-white" : isHome ? "text-white" : "bg-white text-black dark:bg-darkSecondary dark:text-white"}`}
+        className={`flex w-full justify-between px-5 py-5 text-black transition-all duration-200 ${isScrollY && isHome ? "bg-white shadow-xl dark:bg-darkSecondary dark:text-white" : isHome ? "bg-transparent" : "bg-white dark:bg-darkSecondary dark:text-white"}`}
       >
         <LogoHeader />
         <nav className="hidden w-1/3 justify-center md:flex">
-          <ul className="flex items-center justify-center gap-5">
+          <ul className="flex items-center justify-center gap-8">
             {LIST_MENU.usefulLinks.map((item) => (
               <NavLink href={item.href} key={item.name}>
                 {item.name}
@@ -147,19 +143,13 @@ export default function Header() {
             handleUserProfile={handleUserProfile}
           />
         ) : (
-          <UserNotLogged
-            handleAuth={handleAuth}
-            isHome={isHome}
-            isScrollY={isScrollY}
-            theme={theme}
-            toggleDarkMode={toggleDarkMode}
-          />
+          <UserNotLogged handleAuth={handleAuth} theme={theme} toggleDarkMode={toggleDarkMode} />
         )}
 
         {/* Mobile Menu Toggle */}
-        <Button className="flex items-center rounded-xl md:hidden" onClick={() => setOpen(!open)}>
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </Button>
+        <button className="text-[#F97316] md:hidden" onClick={() => setOpen(!open)}>
+          {open ? <X className="size-8" /> : <Menu className="size-8" />}
+        </button>
       </div>
 
       {/* Mobile Devices */}
