@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const routes = {
     availablePaths: ["/", "/about", "/contact", "/recipes", "/profile"],
     isAdminRoute: location.pathname.startsWith("/admin"),
-    isFullWidthRoute: ["/auth/login", "/auth/register", "/contact"].includes(location.pathname),
+    isFullWidthRoute: ["/auth/login", "/auth/register"].includes(location.pathname),
     isHome: pathname === "/",
   }
   const showHeaderFooter = routes.availablePaths.includes(pathname) || pathname.startsWith("/recipes/")
@@ -21,8 +21,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       : "2xl:w-4/5 lg:w-11/12 w-full px-5 lg:px-0"
 
   return (
-    <div className="flex w-full flex-col items-center justify-center font-rubik tracking-wide transition-all duration-300">
-      <div className="w-full">
+    <div className="flex w-full flex-col items-center justify-center font-mona tracking-wide">
+      <div className="relative w-full">
         {showHeaderFooter && <Header />}
         <Toaster richColors />
         <main className="flex w-full items-center justify-center dark:bg-darkPrimary ">
