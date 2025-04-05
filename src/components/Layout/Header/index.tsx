@@ -157,10 +157,6 @@ export default function Header() {
         className={`absolute left-0 -z-10  mx-auto w-full rounded-b-xl  
           shadow-lg transition-all duration-500 ${!open && "-translate-y-[30rem] opacity-0"}`}
       >
-        <div
-          className="absolute -z-20 block h-screen w-screen bg-gradient-to-t from-white to-black opacity-85 backdrop-blur-xl md:hidden"
-          onClick={() => setOpen(false)}
-        ></div>
         <div className="rounded-b-xl border bg-white px-2 py-5">
           <ul className="flex w-full flex-col gap-5">
             {LIST_MENU.usefulLinks.map((item) => (
@@ -187,6 +183,12 @@ export default function Header() {
               </div>
             )}
           </ul>
+          {open && (
+            <div
+              className="absolute -z-20 block h-screen w-screen bg-gradient-to-t from-white to-black opacity-85 backdrop-blur-xl md:hidden"
+              onClick={() => setOpen(false)}
+            ></div>
+          )}
         </div>
       </div>
       {loading && <LoadingFullScreen />}
