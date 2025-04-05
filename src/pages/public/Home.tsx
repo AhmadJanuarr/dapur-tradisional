@@ -1,9 +1,10 @@
 import { Fragment } from "react/jsx-runtime"
-import HeroSectionHome from "@/components/Views/Home/HeroSection"
-import TraditionalCuisineBenefits from "@/components/Views/Home/TraditionalCuisineBenefits"
-import RecipeStatistics from "@/components/Views/Home/RecipeStatistics"
-import SupportFaq from "@/components/Views/Home/SupportFaq"
-import CallToAction from "@/components/Views/Home/CallToAction"
+import HeroSectionHome from "@/Views/Home/HeroSection"
+import TraditionalCuisineBenefits from "@/Views/Home/TraditionalCuisineBenefits"
+import RecipeStatistics from "@/Views/Home/RecipeStatistics"
+import SupportFaq from "@/Views/Home/SupportFaq"
+import CallToAction from "@/Views/Home/CallToAction"
+import NewsLetter from "@/Views/Home/NewsLetter"
 
 export default function HomePage() {
   return (
@@ -25,6 +26,9 @@ export default function HomePage() {
         heading="Frequently Asked Questions"
         subheading="Jawaban untuk Pertanyaan Umum tentang Resep dan Penggunaan Website"
       />
+      <div className="mx-auto mt-24 lg:w-11/12 2xl:w-4/5">
+        <NewsLetter />
+      </div>
     </Fragment>
   )
 }
