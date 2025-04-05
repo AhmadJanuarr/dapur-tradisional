@@ -1,42 +1,46 @@
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Contact, Mail } from "lucide-react"
-import React from "react"
 import { Textarea } from "../ui/textarea"
 
 type FieldProps = {
-  icon?: React.ReactNode
-  placeholder: string
+  label: string
   type: string
+  placeholder?: string
+}
+
+type NameFieldItem = {
+  label: string
+  placeholder: string
 }
 
 type NameFieldProps = {
-  placeholder: string[]
+  fields: NameFieldItem[]
 }
-const FieldInput = ({ icon, placeholder, type }: FieldProps) => {
+
+const FieldInput = ({ label, type, placeholder }: FieldProps) => {
   return (
-    <div className="relative gap-2">
-      {icon && (
-        <span className="absolute left-7 top-1/2 -translate-y-1/2 transform text-gray-500 dark:text-white">{icon}</span>
-      )}
+    <div className="flex flex-col gap-2">
+      <label>{label}</label>
       <Input
-        placeholder={placeholder}
         type={type}
-        className={`px-6 py-6 text-gray-500 placeholder:text-[1rem] dark:text-white dark:placeholder:text-white ${icon ? "pl-16" : ""} shadow-none`}
-      ></Input>
+        placeholder={placeholder}
+        className="px-6 py-6 text-gray-500 shadow-none dark:text-white dark:placeholder:text-white"
+      />
     </div>
   )
 }
 
-const NameFieldInput = ({ placeholder }: NameFieldProps) => {
+const NameFieldInput = ({ fields }: NameFieldProps) => {
   return (
-    <div className="flex w-full flex-col gap-3 lg:flex-row">
-      {placeholder.map((item, index) => (
-        <Input
-          key={index}
-          placeholder={item}
-          className="px-6 py-6 text-gray-500 shadow-none placeholder:text-[1rem] dark:text-white dark:placeholder:text-white "
-        />
+    <div className="grid grid-cols-2 gap-5">
+      {fields.map((item, index) => (
+        <div key={index} className="flex flex-col gap-3">
+          <label>{item.label}</label>
+          <Input
+            placeholder={item.placeholder}
+            className="px-6 py-6 text-gray-500 shadow-none dark:text-white dark:placeholder:text-white"
+          />
+        </div>
       ))}
     </div>
   )
@@ -45,17 +49,24 @@ const NameFieldInput = ({ placeholder }: NameFieldProps) => {
 const FormFieldContact = () => {
   return (
     <form>
-      <div className="subheading font-inter flex w-full flex-col gap-3">
-        <NameFieldInput placeholder={["Nama Depan", "Nama Belakang"]} />
-        <FieldInput icon={<Mail size={20} />} placeholder="Email" type="email" />
-        <FieldInput icon={<Contact size={20} />} placeholder="No Handphone" type="text" />
-        <Textarea
-          placeholder="Bagaimana kami bisa membantu?"
-          rows={5}
-          className="font-inter rounded-md px-3 py-5 text-gray-500 placeholder:text-[1rem] dark:text-white dark:placeholder:text-white"
+      <div className="subheading font-inter flex w-full flex-col gap-6">
+        <NameFieldInput
+          fields={[
+            { label: "Nama depan", placeholder: "John" },
+            { label: "Nama belakang", placeholder: "Doe" },
+          ]}
         />
-        <Button type="submit" variant="default" className="rounded-md py-5">
-          Submit
+        <FieldInput label="Email" type="email" placeholder="you@example.com" />
+        <div className="flex flex-col gap-3">
+          <label className="font-inter">Pesan</label>
+          <Textarea
+            placeholder="Masukkan pesan Anda"
+            rows={5}
+            className="font-inter rounded-md px-6 py-5 text-gray-500 dark:text-white dark:placeholder:text-white"
+          />
+        </div>
+        <Button type="submit" variant="default" className="rounded-md py-5 font-semibold">
+          Kirim pesan
         </Button>
       </div>
     </form>
