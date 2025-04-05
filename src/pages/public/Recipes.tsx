@@ -1,7 +1,9 @@
 import { Fragment } from "react/jsx-runtime"
-import CategorySection from "@/components/Views/Recipes/CategorySection"
-import HeroSectionRecipe from "@/components/Views/Recipes/HeroSection"
-import RecipesSection from "@/components/Views/Recipes/RecipeSection"
+import CategorySection from "@/Views/Recipes/CategorySection"
+import HeroSectionRecipe from "@/Views/Recipes/HeroSection"
+import RecipesSection from "@/Views/Recipes/RecipeSection"
+import NewsLetter from "@/Views/Home/NewsLetter"
+import ImageSwitcherSection from "@/Views/Recipes/ImageSwitcherSection"
 
 export default function RecipesPage() {
   return (
@@ -13,6 +15,10 @@ export default function RecipesPage() {
       />
       <CategorySection />
       <RecipesSection />
+      <ImageSwitcherSection />
+      <div className="mt-24 w-full lg:mt-40">
+        <NewsLetter />
+      </div>
     </Fragment>
   )
 }
