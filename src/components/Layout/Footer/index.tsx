@@ -1,6 +1,6 @@
 import { LIST_MENU } from "@/data/datas"
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6"
 import { Link } from "react-router-dom"
-
 interface MenuItem {
   name: string
   href: string
@@ -11,7 +11,7 @@ const RenderLinks = ({ title, items }: { title: string; items: MenuItem[] }) => 
     <p className="text-md font-bold">{title}</p>
     {items.map((item) => (
       <li key={item.name}>
-        <a href={item.href} className="subheading hover:underline">
+        <a href={item.href} className="subheading text-[#656565] hover:underline">
           {item.name}
         </a>
       </li>
@@ -21,26 +21,39 @@ const RenderLinks = ({ title, items }: { title: string; items: MenuItem[] }) => 
 
 export default function Footer() {
   return (
-    <footer className="bg-darkPrimary dark:bg-darkBackground flex w-full flex-col justify-center py-5 text-white dark:text-white">
-      <div className="mx-auto flex justify-center gap-10 px-5 py-10 lg:w-4/5">
-        <div className="flex w-full flex-1 flex-col gap-10 py-5 md:flex-row">
-          <div className="flex-col lg:w-2/5">
-            <Link to="/" className="flex items-center gap-2 font-italian text-xl font-bold lg:text-2xl">
-              <img src="/logo/logo-t.png" alt="logo" className="w-10" />
-              Dapur Tradisional
-            </Link>
-            <p className="subheading mt-5">
-              Resep tradisional adalah kumpulan cara memasak makanan khas suatu daerah yang diwariskan secara
-              turun-temurun.
-            </p>
+    <footer className="relative mt-20 flex w-full flex-col justify-center overflow-hidden px-5 py-10 text-black dark:bg-darkBackground dark:text-white">
+      <img
+        src="/elements/element-footer.png"
+        alt="element-footer"
+        className="absolute bottom-0 -z-20 w-full lg:-bottom-40"
+      />
+      <img src="/elements/element-daun2.png" alt="element-daun2" className="absolute bottom-0 -z-10 w-32 opacity-50" />
+      <div className="mx-auto flex flex-col justify-center gap-10 lg:w-4/5 ">
+        <div className="flex justify-center">
+          <div className="flex w-full flex-1 flex-col gap-10 py-5 md:flex-row">
+            <div className="flex-col lg:w-2/5">
+              <Link to="/" className="font-italian flex items-center gap-2 text-xl font-bold lg:text-2xl">
+                <img src="/logo/logo-t.png" alt="logo" className="w-10" />
+                Dapur Tradisional
+              </Link>
+              <p className="subheading mt-5 text-[#656565]">
+                Resep tradisional adalah kumpulan cara memasak makanan khas suatu daerah yang diwariskan secara
+                turun-temurun.
+              </p>
+            </div>
+            <RenderLinks title="Tautan Berguna" items={LIST_MENU.usefulLinks} />
+            <RenderLinks title="Sumber daya" items={LIST_MENU.resources} />
+            <RenderLinks title="Bantuan" items={LIST_MENU.support} />
           </div>
-          <RenderLinks title="Tautan Berguna" items={LIST_MENU.usefulLinks} />
-          <RenderLinks title="Sumber daya" items={LIST_MENU.resources} />
-          <RenderLinks title="Bantuan" items={LIST_MENU.support} />
         </div>
-      </div>
-      <div className="w-full pb-5 pt-8 text-center">
-        <p className="subheading">Copyright © 2024 Dapur Tradisional</p>
+        <div className="flex w-full flex-col-reverse justify-between gap-5 pb-5 text-center lg:flex-row">
+          <p className="subheading text-[#656565]">Copyright © 2024 Dapur Tradisional</p>
+          <div className="flex justify-center gap-4">
+            <FaFacebook className="size-5 text-[#656565] hover:text-[#F97316]" />
+            <FaInstagram className="size-5 text-[#656565] hover:text-[#F97316]" />
+            <FaLinkedin className="size-5 text-[#656565] hover:text-[#F97316]" />
+          </div>
+        </div>
       </div>
     </footer>
   )
