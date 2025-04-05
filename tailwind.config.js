@@ -7,22 +7,8 @@ export default {
   theme: {
   	extend: {
   		fontFamily: {
-  			marcellus :[
-  				'Marcellus',
-  				'serif'
-  			],
-  			rubik: [
-				'Rubik',
-				'sans-serif'
-			],
-  			playfair :[
-  				'Playfair Display',
-  				'serif'
-  			],
-  			sail:[
-				'Sail',
-				'system-ui'
-			]
+  		mona : ["Mona Sans", "sans-serif"],
+  		prata : ["Prata", "serif"],
   		},
   		screens: {
   			sm: {
