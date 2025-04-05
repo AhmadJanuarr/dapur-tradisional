@@ -176,7 +176,7 @@ export default function Header() {
                   </Button>
                 </li>
                 <li>
-                  <Button className="w-full rounded-xl" variant="default" onClick={() => handleAuth("signup")}>
+                  <Button className="w-full rounded-xl" variant="default" onClick={() => handleAuth("register")}>
                     Daftar sekarang
                   </Button>
                 </li>
