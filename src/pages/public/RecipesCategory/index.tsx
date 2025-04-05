@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom"
 import RecipeCard from "@/components/Card/RecipeCard"
 import RecipeSkeleton from "@/components/Skeleton/RecipeSkeleton"
-import HeadingSection from "@/components/Views/Recipes/HeadingSection"
+import HeadingSection from "@/Views/Recipes/HeadingSection"
 import ErrorRecipe from "@/pages/error/RecipeError"
 
 export default function RecipesCategory() {
