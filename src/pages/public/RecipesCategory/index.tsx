@@ -43,10 +43,10 @@ export default function RecipesCategory() {
             {food.slice(0, 4).map((recipe: Recipe) => (
               <RecipeCard
                 key={recipe.id}
-                image={recipe.image}
+                img={recipe.image}
                 title={recipe.title}
                 category={recipe.category}
-                handleClickViewDetail={() => handleClick(recipe.title)}
+                onClick={() => handleClick(recipe.title)}
               />
             ))}
           </div>
