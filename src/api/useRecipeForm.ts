@@ -51,6 +51,7 @@ export function useRecipeForm(setOpenForm: React.Dispatch<React.SetStateAction<b
     formData.append("fat", String(Number(values.fat) || 0))
 
     try {
+      console.log(APIUrl)
       await axios.post(`${APIUrl}/api/recipes`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
