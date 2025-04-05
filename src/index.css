@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sail&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -78,7 +76,7 @@
     @apply text-[1.5rem] lg:text-5xl;
   }
   .subheading {
-    @apply text-[0.8rem] lg:text-[1rem];
+    @apply text-[0.87rem] lg:text-[1rem];
   }
 }
 
