@@ -24,10 +24,10 @@ const TestimonialSection = () => {
       <div className="flex justify-between pt-2 lg:items-center">
         <p className="pl-3 text-[11px] lg:text-[16px]">Peringkat 4.9 berdasarkan 1.234 ulasan</p>
         <div className="flex gap-3 pt-8 lg:gap-5">
-          <div className="group rounded-full border p-2 hover:bg-[#f97316] lg:p-4">
+          <div className="group rounded-full border p-2 hover:bg-[#f97316] dark:border-white lg:p-4">
             <ArrowLeft className="group-hover:text-white" />
           </div>
-          <div className="group rounded-full border p-2 hover:bg-[#f97316] lg:p-4">
+          <div className="group rounded-full border p-2 hover:bg-[#f97316] dark:border-white lg:p-4">
             <ArrowRight className="group-hover:text-white" />
           </div>
         </div>
