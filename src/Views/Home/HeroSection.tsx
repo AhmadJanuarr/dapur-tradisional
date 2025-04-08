@@ -38,8 +38,8 @@ const HeroSectionHome = ({ description, callToAction, to }: HeroSectionProps) =>
       />
 
       <div className="z-20 flex items-center justify-center px-5 lg:w-11/12 lg:px-0 2xl:w-4/5">
-        <div className="flex flex-col gap-7 text-left text-black lg:w-[60%]">
-          <h1 className="font-prata text-[2rem] font-normal lg:text-[5rem]">
+        <div className="flex flex-col gap-7 text-left text-black dark:text-white lg:w-[60%]">
+          <h1 className="font-prata text-[2rem] font-normal  lg:text-[5rem]">
             Masak dengan lebih <span className="text-[#F97316]">mudah & kreatif</span>.
           </h1>
           <p className="subheading lg:w-2/3">{description}</p>
