@@ -26,10 +26,10 @@ const RecipeCard = ({ img, title, category, onClick }: RecipeCardProps) => {
         <RecipeImage img={img} title={title} />
         <BookMarksButton />
       </CardHeader>
-      <div className="flex h-32 flex-col justify-between gap-2 rounded-xl border border-slate-200 bg-white px-2 py-2 lg:h-[180px] lg:px-6 lg:py-4">
+      <div className="flex h-32 flex-col justify-between gap-2 rounded-xl border border-slate-200 bg-white px-2 py-2  dark:bg-neutral-900 lg:h-[180px] lg:px-6 lg:py-4">
         <div className="flex flex-col gap-2 dark:text-black">
-          <CardDescription>{category.replace("_", " ")}</CardDescription>
-          <CardTitle className="mb-2 lg:text-2xl">{title}</CardTitle>
+          <CardDescription className="dark:text-white">{category.replace("_", " ")}</CardDescription>
+          <CardTitle className="mb-2 dark:text-white lg:text-2xl">{title}</CardTitle>
         </div>
         <Button
           onClick={onClick}
