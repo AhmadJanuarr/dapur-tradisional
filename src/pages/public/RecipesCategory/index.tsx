@@ -35,12 +35,12 @@ export default function RecipesCategory() {
       />
       <div className="w-full">
         {isLoading ? (
-          <RecipeSkeleton index={4} />
+          <RecipeSkeleton index={8} />
         ) : error ? (
           <ErrorRecipe />
         ) : (
-          <div className="flex w-full flex-col flex-wrap gap-4 md:flex-row">
-            {food.slice(0, 4).map((recipe: Recipe) => (
+          <div className="grid grid-cols-4 gap-4">
+            {food.map((recipe: Recipe) => (
               <RecipeCard
                 key={recipe.id}
                 img={recipe.image}
