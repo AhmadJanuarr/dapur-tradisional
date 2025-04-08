@@ -2,7 +2,13 @@
 
 Selamat di **Resep Tradisional**, sebuah platform yang memungkinkan pengguna untuk menjelajahi, membuat, dan berbagi resep favorit mereka. Proyek ini dirancang untuk memudahkan pengelolaan resep dengan antarmuka interaktif untuk memasukkan bahan, langkah-langkah, dan detail lainnya.
 
-## Demo
+<h3>Pratinjau website</h3>
+<img src="public/demo/demo-website.png" width="800px"/>
+
+----
+
+<h3>Pratinjau mobile</h3>
+<img src="public/demo/demo-mobile.png" width="800px"/>
 
 ----
 
@@ -21,33 +27,21 @@ Selamat di **Resep Tradisional**, sebuah platform yang memungkinkan pengguna unt
 
 Website Resep ini dibangun dengan teknologi berikut:
 
-- **Frontend**: NextJs, TypeScript
+- **Frontend**: Reactjs, TypeScript, Tailwindcss
+- **Backend**: ExpressJs
 - **Manajemen Formulir**: `react-hook-form`, `@hookform/resolvers`
-- **Gaya**: Tailwind CSS
 - **Ikon**: `lucide-react`
 - **Komponen**: Komponen UI Kustom
 
 ---
-
-## Memulai
-
-Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
-
-### Prasyarat
-
-Pastikan Anda sudah menginstal perangkat berikut:
-
-- Node.js (>= 16.x)
-- npm atau Yarn
-
 
 ## Getting Started
 Untuk memulai, Anda cukup mengkloning repositori `recipe-managements` ini dan menginstal dependensi.
 
 Klon repositori `recipe-managements` menggunakan git:
 ```bash
-git clone https://github.com/AhmadJanuarr/recipe-managements.git
-cd recipe-managements
+git clone https://github.com/AhmadJanuarr/dapur-tradisional.git
+cd dapur-tradisional
 ```
 
 Instal dependensi dengan perintah ini:
