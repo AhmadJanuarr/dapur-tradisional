@@ -22,7 +22,7 @@ const data = [
 ]
 
 const ImageDisplay = ({ image }: { image: string }) => (
-  <div className="absolute left-1/2 -z-20 flex -translate-x-1/2 items-center justify-center rounded-full bg-white p-3 shadow-2xl lg:p-8">
+  <div className="absolute left-1/2 z-10 flex -translate-x-1/2 items-center justify-center rounded-full bg-white p-3 shadow-2xl dark:bg-neutral-800 lg:p-8">
     <img src={image} alt="selected-food" className="z-10 w-[200px] transition-all duration-300 lg:w-[450px]" />
   </div>
 )
@@ -38,7 +38,7 @@ const DescriptionSection = ({ title, description }: { title: string; description
 )
 
 const NavigationButtons = ({ currentIndex, onSelect }: { currentIndex: number; onSelect: (index: number) => void }) => (
-  <div className="absolute right-0 z-20 w-28 overflow-hidden px-2 lg:relative lg:w-1/3 lg:flex-grow lg:pl-96">
+  <div className="absolute right-0 z-20 w-28 overflow-hidden pl-2 lg:relative lg:w-1/3 lg:flex-grow lg:pl-96">
     <div className="space-y-2 py-8">
       {data.map((item, index) => (
         <button
