@@ -39,7 +39,7 @@ const NavLink = ({ children, href, onClick }: NavLinkProps) => {
 
 const LogoHeader = () => {
   return (
-    <Link to="/" className="flex w-1/3 items-center gap-2 text-[1rem]">
+    <Link to="/" className="flex w-1/3 items-center gap-2 text-[1rem] dark:text-white">
       <img src="/logo/logo-t.png" alt="logo website" className="w-10" />
       Dapur <span className="text-[#F97316]">tadisional</span>
     </Link>
@@ -49,7 +49,7 @@ const LogoHeader = () => {
 const UserAlreadyLogged = ({ handleAuth, toggleDarkMode, theme, handleUserProfile }: UserAlreadyLoggedProps) => (
   <div className="hidden w-1/3 items-center justify-end gap-5 md:flex">
     {theme === "dark" ? (
-      <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer" />
+      <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer text-white" />
     ) : (
       <Moon onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer" />
     )}
@@ -94,7 +94,7 @@ const UserAlreadyLogged = ({ handleAuth, toggleDarkMode, theme, handleUserProfil
 const UserNotLogged = ({ handleAuth, theme, toggleDarkMode }: UserNotLooggedProps) => (
   <div className="hidden w-1/3 items-center justify-end gap-5 md:flex">
     {theme === "dark" ? (
-      <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer" />
+      <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer text-white" />
     ) : (
       <Moon onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer" />
     )}
@@ -123,7 +123,7 @@ export default function Header() {
   return (
     <header className={`fixed left-0 top-0 z-30 w-full`}>
       <div
-        className={`flex w-full justify-between px-5 py-5 text-black transition-all duration-200 ${isScrollY && isHome ? "bg-white shadow-xl dark:bg-darkSecondary dark:text-white" : isHome ? "bg-transparent" : "bg-white dark:bg-darkSecondary dark:text-white"}`}
+        className={`flex w-full justify-between px-5 py-5 text-black transition-all duration-200 ${isScrollY && isHome ? "bg-white shadow-xl dark:bg-neutral-800 dark:text-white" : isHome ? "bg-transparent" : "bg-white dark:bg-neutral-800 dark:text-white"}`}
       >
         <LogoHeader />
         <nav className="hidden w-1/3 justify-center md:flex">
@@ -147,9 +147,18 @@ export default function Header() {
         )}
 
         {/* Mobile Menu Toggle */}
-        <button className="text-[#F97316] md:hidden" onClick={() => setOpen(!open)}>
-          {open ? <X className="size-8" /> : <Menu className="size-8" />}
-        </button>
+        <div className="flex items-center justify-between gap-5 md:hidden">
+          <button>
+            {theme === "dark" ? (
+              <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer text-white" />
+            ) : (
+              <Moon onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer" />
+            )}
+          </button>
+          <button className="text-[#F97316]" onClick={() => setOpen(!open)}>
+            {open ? <X className="size-8" /> : <Menu className="size-8" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Devices */}
