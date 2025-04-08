@@ -21,11 +21,11 @@ const RenderLinks = ({ title, items }: { title: string; items: MenuItem[] }) => 
 
 export default function Footer() {
   return (
-    <footer className="relative mt-20 flex w-full flex-col justify-center overflow-hidden px-5 py-10 text-black dark:bg-darkBackground dark:text-white">
+    <footer className="relative flex w-full flex-col justify-center overflow-hidden px-5 py-10 pt-20 text-black dark:text-white">
       <img
         src="/elements/element-footer.png"
         alt="element-footer"
-        className="absolute bottom-0 -z-20 w-full lg:-bottom-40"
+        className="absolute bottom-0 -z-20 w-full dark:hidden lg:-bottom-40"
       />
       <img src="/elements/element-daun2.png" alt="element-daun2" className="absolute bottom-0 -z-10 w-32 opacity-50" />
       <div className="mx-auto flex flex-col justify-center gap-10 lg:w-4/5 ">
