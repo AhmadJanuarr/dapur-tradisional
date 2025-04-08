@@ -23,7 +23,7 @@ const TraditionalCuisineBenefits = ({ heading }: { heading: string }) => {
 
       <div className="flex flex-col items-center justify-center lg:w-11/12 2xl:w-4/5">
         <h1 className="heading w-full pb-5 text-center font-prata lg:h-2/3 lg:leading-relaxed 2xl:w-1/2">{heading}</h1>
-        <div className="grid grid-cols-1 overflow-hidden rounded-2xl border bg-white pt-11 shadow-none sm:grid-cols-2 md:grid-cols-3 lg:pt-0">
+        <div className="grid grid-cols-1 overflow-hidden rounded-2xl border pt-11 shadow-none sm:grid-cols-2 md:grid-cols-3 lg:pt-0">
           {ListTraditionalCuisineBenefits.map(
             ({ title, description, icon: IconComponent }: TraditionalProps, index) => (
               <div
