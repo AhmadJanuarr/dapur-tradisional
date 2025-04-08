@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { fetchDataApi } from "@/api/useFetchDataRecipe"
 import { Recipe } from "@/types/Recipe.types"
+import { Button } from "@/components/ui/button"
 import HeadingSection from "./HeadingSection"
 import RecipeSkeleton from "@/components/Skeleton/RecipeSkeleton"
 import ErrorRecipe from "@/pages/error/RecipeError"
 import InspirationCard from "@/components/Card/InspirationCard"
 import RecipeCard from "@/components/Card/RecipeCard"
-import { Button } from "@/components/ui/button"
 
 export default function RecipesSection() {
   const navigate = useNavigate()
