@@ -17,7 +17,7 @@ export default function HeadingSection({
       <div className={`flex w-full ${isShowButton ? "justify-between" : " justify-center text-center"} `}>
         <div>
           <h1 className="heading font-prata">{heading}</h1>
-          <p className="subheading my-2 text-[#656565]">{description}</p>
+          <p className="subheading my-2 text-[#656565] dark:text-slate-200">{description}</p>
         </div>
         {isShowButton && (
           <Button variant="link" className="hidden w-1/5 items-center text-[16px] lg:flex">
