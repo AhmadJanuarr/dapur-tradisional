@@ -13,7 +13,7 @@ const HeadingSection = ({ heading, subheading, description }: HeadingSectionProp
           {subheading}
         </h2>
       )}
-      <p className="subheading text-[#434343] lg:w-1/2 lg:py-3">{description}</p>
+      <p className="subheading text-[#434343] dark:text-neutral-200 lg:w-1/2 lg:py-3">{description}</p>
     </div>
   )
 }
