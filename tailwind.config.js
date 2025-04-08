@@ -32,7 +32,7 @@ export default {
   		colors: {
 			darkSecondary: "#171717",
 			darkPrimary: "#1B1B1B",
-			darkBackground: "#181616",
+			darkBackground: "#262626",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
