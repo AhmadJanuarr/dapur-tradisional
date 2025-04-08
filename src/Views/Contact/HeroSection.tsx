@@ -31,7 +31,7 @@ const ContactInfo = () => {
 
 const LeftFormCard = () => {
   return (
-    <div className="w-full border-none bg-white shadow-none dark:bg-darkBackground lg:mt-0">
+    <div className="border-non w-full shadow-none lg:mt-0">
       <FormFieldContact />
     </div>
   )
