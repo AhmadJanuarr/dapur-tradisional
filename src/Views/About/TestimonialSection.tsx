@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 
 const TestimonialSection = () => {
   return (
-    <section className="relative pt-14 lg:pb-64 lg:pt-64">
+    <section className="relative pt-14 lg:py-20">
       <HeadingSection
         heading="Testimonial"
         subheading="Kami mengutamakan kualitas, mereka merasakan manfaatnya!"
