@@ -15,9 +15,9 @@ interface SupportFaqSectionProps {
 
 const SupportFaq = ({ heading, subheading }: SupportFaqSectionProps) => {
   return (
-    <section className="items-left mx-auto mt-24 flex flex-col justify-center gap-10 px-5 lg:w-11/12 lg:px-0 lg:py-40 2xl:w-4/5">
-      <h1 className="text heading font-prata text-black dark:text-white">{heading}</h1>
-      <p className="subheading text-[#656565] dark:text-white">{subheading}</p>
+    <section className="items-left mx-auto mt-24 flex flex-col justify-center gap-10 px-5 lg:w-11/12 lg:px-0 lg:py-14 2xl:w-4/5">
+      <h1 className="text heading font-raleway text-black dark:text-white">{heading}</h1>
+      <p className="subheading text-gray-800 dark:text-white">{subheading}</p>
       <div className="grid w-full grid-cols-1 place-items-center gap-4 md:grid-cols-2 xl:grid-cols-2">
         {SupportsFaqList.map(({ question, answer }: SupportFaqProps, index) => (
           <div className="w-full" key={index}>
