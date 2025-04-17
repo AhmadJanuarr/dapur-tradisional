@@ -9,8 +9,8 @@ const ProcessCard = ({ index, title, desc }: ProcessCardProps) => {
       <div className="absolute -top-3 left-5 rounded-full bg-darkPrimary px-2 text-white dark:bg-white dark:text-black">
         {index}
       </div>
-      <h1 className="font-prata text-[24px]">{title}</h1>
-      <p className="text-gray-500 dark:text-white">{desc}</p>
+      <h1 className="font-raleway text-[24px]">{title}</h1>
+      <p className="text-gray-800 dark:text-white">{desc}</p>
     </div>
   )
 }
