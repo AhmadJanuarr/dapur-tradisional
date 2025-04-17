@@ -8,8 +8,8 @@ export default {
   	extend: {
   		fontFamily: {
   		mona : ["Mona Sans", "sans-serif"],
-  		prata : ["Prata", "serif"],
-  		},
+		raleway : ["Raleway", "sans-serif"],
+	},
   		screens: {
   			sm: {
   				min: '640px'
