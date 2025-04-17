@@ -24,7 +24,7 @@ const FieldInput = ({ label, type, placeholder }: FieldProps) => {
       <Input
         type={type}
         placeholder={placeholder}
-        className="px-6 py-6 text-gray-500 shadow-none dark:text-white dark:placeholder:text-white"
+        className="px-6 py-6 text-gray-500 shadow-none dark:border-white dark:text-white dark:placeholder:text-white"
       />
     </div>
   )
@@ -38,7 +38,7 @@ const NameFieldInput = ({ fields }: NameFieldProps) => {
           <label>{item.label}</label>
           <Input
             placeholder={item.placeholder}
-            className="px-6 py-6 text-gray-500 shadow-none dark:text-white dark:placeholder:text-white"
+            className="px-6 py-6 text-gray-500 shadow-none dark:border-white dark:text-white dark:placeholder:text-white"
           />
         </div>
       ))}
@@ -62,7 +62,7 @@ const FormFieldContact = () => {
           <Textarea
             placeholder="Masukkan pesan Anda"
             rows={5}
-            className="font-inter rounded-md px-6 py-5 text-gray-500 dark:text-white dark:placeholder:text-white"
+            className="font-inter rounded-md px-6 py-5 text-gray-500 dark:border-white dark:text-white dark:placeholder:text-white"
           />
         </div>
         <Button type="submit" variant="default" className="rounded-md py-5 font-semibold">
