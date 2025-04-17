@@ -5,6 +5,8 @@ export type Recipe = {
   category: string
   image: string
   difficulty: string
+  favorite?: string[]
+  isFavorite: boolean
   nutrition: {
     calories: number
     protein: number
