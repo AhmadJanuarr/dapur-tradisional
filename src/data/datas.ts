@@ -17,21 +17,21 @@ import {
 export const LIST_MENU = {
   usefulLinks: [
     { name: "Beranda", href: "/" },
-    { name: "Resep", href: "/recipes" },
-    { name: "Tentang Kami", href: "/about" },
-    { name: "Kontak", href: "/contact" },
+    { name: "Resep", href: "/resep" },
+    { name: "Tentang Kami", href: "/tentang-kami" },
+    { name: "Kontak", href: "/kontak" },
   ],
   resources: [
     { name: "Blog", href: "/blog" },
-    { name: "Panduan", href: "/guides" },
-    { name: "API Dokumentasi", href: "/api-docs" },
-    { name: "Karir", href: "/careers" },
+    { name: "Panduan", href: "/panduan" },
+    { name: "API Dokumentasi", href: "/api-dokumentasi" },
+    { name: "Karir", href: "/karir" },
   ],
   support: [
     { name: "FAQ", href: "/faq" },
-    { name: "Bantuan", href: "/help" },
-    { name: "Ketentuan Layanan", href: "/terms" },
-    { name: "Kebijakan Privasi", href: "/privacy" },
+    { name: "Bantuan", href: "/bantuan" },
+    { name: "Ketentuan Layanan", href: "/kentelayanan" },
+    { name: "Kebijakan Privasi", href: "/kebijakan-privasi" },
   ],
 }
 
