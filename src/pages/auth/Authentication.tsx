@@ -33,7 +33,7 @@ export default function Authentication() {
         <div className="h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url('/img/bg-auth.png')" }}>
           <Link to={"/"} className="flex gap-2 p-10 text-3xl">
             <img src="/logo/logo-t.png" alt="logo" className="w-10" />
-            <h1 className="font-inter flex items-center gap-2 text-black">Dapur Tradisional</h1>
+            <h1 className="font-raleway flex items-center gap-2 text-black">Dapur Tradisional</h1>
           </Link>
         </div>
       </div>
