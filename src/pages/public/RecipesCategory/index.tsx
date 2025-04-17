@@ -1,4 +1,4 @@
-import { fetchDataApi } from "@/api/useFetchDataRecipe"
+import { fetchDataApiRecipes } from "@/api/useFetchDataRecipe"
 import { Recipe } from "@/types/Recipe.types"
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom"
@@ -8,7 +8,7 @@ import HeadingSection from "@/Views/Recipes/HeadingSection"
 import ErrorRecipe from "@/pages/error/RecipeError"
 
 export default function RecipesCategory() {
-  const { slug = "" } = useParams()
+  const { slug } = useParams()
   const navigate = useNavigate()
   const {
     data = [],
@@ -16,19 +16,20 @@ export default function RecipesCategory() {
     error,
   } = useQuery({
     queryKey: ["recipes", slug],
-    queryFn: fetchDataApi,
+    queryFn: fetchDataApiRecipes,
     staleTime: 0,
     refetchOnMount: true,
   })
 
-  const food = data.filter((recipe: Recipe) => recipe.category === slug)
+  const food = data.filter((recipe: Recipe) => recipe.category === slug?.replace("-", "_"))
   const handleClick = (title: string) => {
-    navigate(`/recipes/${title}`)
+    navigate(`/resep/${title}`)
   }
+
   return (
     <section className="pb-64">
       <HeadingSection
-        heading={`Resep ${slug.replace("_", " ")}`}
+        heading={`Resep ${slug?.replace("-", " ")}`}
         description="Butuh ide untuk menu makan siang? Atau ingin mencoba resep dessert baru? Semua ada di sini."
         isShowButton
         cta="Lihat semua resep"
@@ -46,7 +47,8 @@ export default function RecipesCategory() {
                 img={recipe.image}
                 title={recipe.title}
                 category={recipe.category}
-                onClick={() => handleClick(recipe.title)}
+                onClickViewDetail={() => handleClick(recipe.title)}
+                onClickFavorite={() => console.log("favorite")}
               />
             ))}
           </div>
