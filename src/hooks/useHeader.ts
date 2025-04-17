@@ -25,11 +25,10 @@ export function useHeader() {
       logout()
       setTimeout(() => {
         setLoading(false)
-        navigate("/")
         toast.success("Berhasil keluar dari akun")
       }, 2000)
     } else {
-      navigate(`/auth/${action}`)
+      navigate(`/auth/${action} `)
     }
   }
   return { open, setOpen, isScrollY, handleAuth, user, isHome, loading }
