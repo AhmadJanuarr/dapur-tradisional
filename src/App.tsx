@@ -1,59 +1,50 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { ProtectedRoute } from "./route/protected.route"
+import { UserProfile } from "./pages/user/UserProfile"
+import { SettingProfile } from "./pages/user/SettingProfile"
+import { Notification } from "./pages/user/Notification"
 import { AuthProvider } from "./context/AuthContext"
-import HomePage from "./pages/public/Home"
-import NotFoundPage from "./pages/error/404"
 import AppLayout from "./components/Layout/App"
-import Authentication from "./pages/auth/Authentication"
-import Recipes from "./pages/public/Recipes"
 import AdminPanel from "./pages/admin/AdminPanel"
-import DetailRecipe from "./pages/public/RecipeDetail"
+import Authentication from "./pages/auth/Authentication"
+import NotFoundPage from "./pages/error/404"
 import UnauthorizedPage from "./pages/error/unauthorized"
 import AboutUsPage from "./pages/public/AboutUs"
 import ContactPage from "./pages/public/Contact"
+import HomePage from "./pages/public/Home"
+import DetailRecipe from "./pages/public/RecipeDetail"
+import Recipes from "./pages/public/Recipes"
 import RecipesCategory from "./pages/public/RecipesCategory"
-import UserProfile from "./pages/user/UserProfile"
+import LayoutProfile from "./pages/user/LayoutProfile"
 
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <QueryClientProvider client={new QueryClient()}>
+      <QueryClientProvider client={new QueryClient()}>
+        <AuthProvider>
           <AppLayout>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutUsPage />} />
-              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/tentang-kami" element={<AboutUsPage />} />
+              <Route path="/kontak" element={<ContactPage />} />
               {/* Halaman Authentication (Login & Signup) */}
               <Route path="/auth/login" element={<Authentication />} />
               <Route path="/auth/register" element={<Authentication />} />
 
               {/* Halaman profile user */}
               <Route
-                path="/profile"
+                path="/profile/:username"
                 element={
                   <ProtectedRoute allowedRoles={["USER"]}>
-                    <UserProfile />
+                    <LayoutProfile />
                   </ProtectedRoute>
                 }
-              />
-              <Route
-                path="/profile/edit"
-                element={
-                  <ProtectedRoute allowedRoles={["USER"]}>
-                    <UserProfile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/profile/change-password"
-                element={
-                  <ProtectedRoute allowedRoles={["USER"]}>
-                    <UserProfile />
-                  </ProtectedRoute>
-                }
-              />
+              >
+                <Route index element={<UserProfile />} />
+                <Route path="pengaturan-akun" element={<SettingProfile />} />
+                <Route path="notifikasi" element={<Notification />} />
+              </Route>
               {/* Halaman Admin */}
               <Route
                 path="/admin/dashboard"
@@ -64,25 +55,25 @@ export default function App() {
                 }
               />
               <Route
-                path="/admin/recipes"
+                path="/admin/resep"
                 element={
                   <ProtectedRoute allowedRoles={["ADMIN"]}>
                     <AdminPanel />
                   </ProtectedRoute>
                 }
               />
-              {/* Halaman Recipes */}
-              <Route path="/recipes" element={<Recipes />} />
-              <Route path="/recipes/:slug" element={<DetailRecipe />} />
-              <Route path="/recipes/category/:slug" element={<RecipesCategory />} />
+              {/* Halaman resep */}
+              <Route path="/resep" element={<Recipes />} />
+              <Route path="/resep/:slug" element={<DetailRecipe />} />
+              <Route path="/resep/kategori/:slug" element={<RecipesCategory />} />
 
               {/* Halaman 404 */}
               <Route path="/unauthorized" element={<UnauthorizedPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </AppLayout>
-        </QueryClientProvider>{" "}
-      </AuthProvider>
+        </AuthProvider>
+      </QueryClientProvider>{" "}
     </BrowserRouter>
   )
 }
