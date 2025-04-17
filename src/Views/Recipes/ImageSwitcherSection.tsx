@@ -29,7 +29,7 @@ const ImageDisplay = ({ image }: { image: string }) => (
 
 const DescriptionSection = ({ title, description }: { title: string; description: string }) => (
   <div className="z-20 w-1/4 min-w-0 flex-grow pr-32 lg:px-20">
-    <h1 className="w-1/2 font-prata text-[2rem] leading-none lg:text-[6rem]">{title}</h1>
+    <h1 className="font-raleway w-1/2 text-[2rem] leading-none lg:text-[6rem]">{title}</h1>
     <div className="flex gap-5 py-10">
       <hr className="w-1/3 border" />
       <p className="hidden w-2/3 lg:block">{description}</p>
@@ -50,7 +50,7 @@ const NavigationButtons = ({ currentIndex, onSelect }: { currentIndex: number; o
         >
           <img src={item.image} alt={item.title} className="size-14 rounded-full lg:size-24" />
           <div className="hidden lg:block">
-            <p className="text-sm font-light">{item.category}</p>
+            <p className="text-sm text-gray-800">{item.category}</p>
             <h5 className="text-[1.1rem] font-semibold">{item.title}</h5>
           </div>
         </button>
