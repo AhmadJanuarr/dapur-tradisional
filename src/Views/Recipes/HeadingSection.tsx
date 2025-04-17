@@ -14,10 +14,10 @@ export default function HeadingSection({
 }) {
   return (
     <section className="w-full pb-8 pt-14 lg:pb-5 lg:pt-20">
-      <div className={`flex w-full ${isShowButton ? "justify-between" : " justify-center text-center"} `}>
+      <div className={`flex w-full ${isShowButton ? "justify-between" : "justify-center text-center"} `}>
         <div>
-          <h1 className="heading font-prata">{heading}</h1>
-          <p className="subheading my-2 text-[#656565] dark:text-slate-200">{description}</p>
+          <h1 className="heading font-raleway">{heading}</h1>
+          <p className="subheading my-2 text-gray-800 dark:text-slate-200">{description}</p>
         </div>
         {isShowButton && (
           <Button variant="link" className="hidden w-1/5 items-center text-[16px] lg:flex">
