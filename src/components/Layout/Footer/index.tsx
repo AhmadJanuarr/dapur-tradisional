@@ -21,7 +21,7 @@ const RenderLinks = ({ title, items }: { title: string; items: MenuItem[] }) => 
 
 export default function Footer() {
   return (
-    <footer className="relative flex w-full flex-col justify-center overflow-hidden px-5 py-10 pt-20 text-black dark:text-white">
+    <footer className="relative flex w-full flex-col justify-center overflow-hidden px-5 py-10 pt-20 text-black dark:bg-[#262626] dark:text-white">
       <img
         src="/elements/element-footer.png"
         alt="element-footer"
