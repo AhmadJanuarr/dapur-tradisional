@@ -5,12 +5,12 @@ import { Link } from "react-router-dom"
 const CardCategory = ({ title, src, color, to }: { title: string; src: string; color: string; to: string }) => {
   return (
     <div
-      className={`relative flex h-[150px] items-center justify-between overflow-hidden rounded-xl border-none bg-cover bg-center bg-no-repeat lg:h-[250px] lg:w-1/3`}
+      className={`relative flex h-[150px] items-center justify-between overflow-hidden rounded-xl border-none bg-cover bg-center bg-no-repeat  lg:h-[250px] lg:w-1/3`}
       style={{ backgroundColor: `${color}` }}
     >
       <div className="z-10 flex w-full items-center justify-between px-5">
         <div className="z-20 flex w-full flex-col gap-5 lg:w-2/3">
-          <h1 className="heading font-prata text-black lg:text-3xl">{title}</h1>
+          <h1 className="heading font-raleway text-black lg:text-3xl">{title}</h1>
           <Link to={to}>
             <Button className="w-14 rounded-xl lg:w-12" variant="default">
               <ArrowRight />
@@ -33,15 +33,15 @@ const CategorySection = () => {
           title="Makanan Ringan (Cemilan)"
           color="#ffeddf"
           src="/logo/kategori-ringan.png"
-          to="/recipes/category/Makanan_Ringan"
+          to="/resep/kategori/Makanan-Ringan"
         />
         <CardCategory
           title="Makanan Utama (Berat)"
           color="#ffeddf"
           src="/logo/kategori-berat.png"
-          to="/recipes/category/Makanan_Berat "
+          to="/resep/kategori/Makanan-Berat "
         />
-        <CardCategory title="Kue Tradisional" color="#ffeddf" src="/logo/kategori-kue.png" to="/recipes/category/Kue" />
+        <CardCategory title="Kue Tradisional" color="#ffeddf" src="/logo/kategori-kue.png" to="/resep/kategori/Kue" />
       </div>
     </section>
   )
