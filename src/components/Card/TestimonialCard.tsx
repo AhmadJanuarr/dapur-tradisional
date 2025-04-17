@@ -19,10 +19,10 @@ const TestimonialCard = ({ name, desc, date, stars }: TestimonialCardProps) => {
         ))}
       </div>
 
-      <p className="subheading text-[#434343] dark:text-white">{desc}</p>
+      <p className="subheading text-gray-800 dark:text-white">{desc}</p>
       <div className="flex flex-col dark:text-white">
         <h3 className="font-semibold">{name}</h3>
-        <p className="text-gray-500 dark:text-white">{date}</p>
+        <p className="text-gray-800 dark:text-white">{date}</p>
       </div>
     </div>
   )
