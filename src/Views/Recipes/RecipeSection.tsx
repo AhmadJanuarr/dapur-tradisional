@@ -1,28 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { fetchDataApiRecipes } from "@/api/useFetchDataRecipe"
+import { Button } from "@/components/ui/button"
+import { useAuth } from "@/context/AuthContext"
+import { useFavorite } from "@/hooks/useFavorite"
+import { Recipe } from "@/types/Recipe.types"
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
-import { fetchDataApi } from "@/api/useFetchDataRecipe"
-import { Recipe } from "@/types/Recipe.types"
-import { Button } from "@/components/ui/button"
-import HeadingSection from "./HeadingSection"
-import RecipeSkeleton from "@/components/Skeleton/RecipeSkeleton"
 import ErrorRecipe from "@/pages/error/RecipeError"
 import InspirationCard from "@/components/Card/InspirationCard"
 import RecipeCard from "@/components/Card/RecipeCard"
+import RecipeSkeleton from "@/components/Skeleton/RecipeSkeleton"
+import HeadingSection from "./HeadingSection"
 
 export default function RecipesSection() {
+  const { user } = useAuth()
+  const { handleClickFavorite } = useFavorite()
   const navigate = useNavigate()
   const {
     data: recipes = [],
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["recipes"],
-    queryFn: fetchDataApi,
+    queryKey: ["recipes", user?.id ?? "guest"],
+    enabled: user !== undefined || true,
     staleTime: 0,
     refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    queryFn: fetchDataApiRecipes,
+    placeholderData: (prevData) => prevData,
   })
-  const NewestRecipe = Array.isArray(recipes) ? [...(recipes || [])].sort(() => Math.random() - 0.5) : []
-  const handleClickViewDetail = (title: string) => navigate(`/recipes/${title}`)
+  const handleClickViewDetail = (title: string) => navigate(`/resep/${title}`)
+  console.log("Fetch recipes with ID:", user.id)
+
   return (
     <section>
       <HeadingSection
@@ -38,7 +47,7 @@ export default function RecipesSection() {
           <ErrorRecipe />
         ) : (
           <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
-            {NewestRecipe.slice(0, 3).map((recipe: Recipe) => (
+            {recipes.slice(0, 3).map((recipe: Recipe) => (
               <InspirationCard
                 key={recipe.id}
                 img={recipe.image}
@@ -46,7 +55,9 @@ export default function RecipesSection() {
                 category={recipe.category}
                 description={recipe.description}
                 difficulty={recipe.difficulty}
-                onClick={() => handleClickViewDetail(recipe.title)}
+                isFavorite={recipe.isFavorite}
+                onClickViewDetail={() => handleClickViewDetail(recipe.title)}
+                onClickFavorite={() => handleClickFavorite(recipe.id)}
               />
             ))}
           </div>
@@ -60,13 +71,15 @@ export default function RecipesSection() {
           <ErrorRecipe />
         ) : (
           <div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
-            {NewestRecipe.slice(0, 8).map((recipe: Recipe) => (
+            {recipes.slice(0, 8).map((recipe: Recipe) => (
               <RecipeCard
                 key={recipe.id}
                 img={recipe.image}
                 title={recipe.title}
                 category={recipe.category}
-                onClick={() => handleClickViewDetail(recipe.title)}
+                onClickViewDetail={() => handleClickViewDetail(recipe.title)}
+                onClickFavorite={() => handleClickFavorite(recipe.id)}
+                isFavorite={recipe.isFavorite}
               />
             ))}
           </div>
