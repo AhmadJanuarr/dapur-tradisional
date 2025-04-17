@@ -21,7 +21,7 @@ const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
   ]
 
   return (
-    <section className="relative mx-auto mt-24 flex w-full items-center justify-center px-5 lg:mt-52 lg:px-0 lg:py-28">
+    <section className="relative mx-auto mt-14 flex w-full items-center justify-center px-5 lg:mt-24 lg:px-0 lg:py-28">
       <img
         src="/elements/element-spice.png"
         alt="spice"
@@ -52,14 +52,14 @@ const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
           <img src={img} alt="food" className="z-10 w-full lg:w-[500px]" />
         </div>
         <div className="z-20 items-center lg:w-2/3">
-          <h1 className="heading text-center font-prata text-black dark:text-white lg:text-left">{heading}</h1>
-          <p className="subheading py-8 text-center text-[#656565] dark:text-white lg:text-left">{description}</p>
+          <h1 className="heading text-center font-raleway text-black dark:text-white lg:text-left">{heading}</h1>
+          <p className="subheading py-8 text-center text-gray-800 dark:text-white lg:text-left">{description}</p>
           <div className="flex gap-10 pt-5">
             {statistics.map((stat, index) => (
               <div key={index} className="flex items-center gap-2 dark:text-white">
                 {stat.icon}
                 <div className="subheading flex flex-col">
-                  <p className="font-semibold text-gray-500">{stat.label}</p>
+                  <p className="font-regular text-gray-800">{stat.label}</p>
                   <p className="font-semibold text-[#f97316] dark:text-white">{stat.value}</p>
                 </div>
               </div>
