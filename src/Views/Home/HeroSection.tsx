@@ -10,7 +10,7 @@ type HeroSectionProps = {
 }
 const HeroSectionHome = ({ description, callToAction, to }: HeroSectionProps) => {
   return (
-    <section className="relative flex w-full justify-center overflow-hidden pt-40 lg:min-h-screen">
+    <section className="relative flex w-full justify-center overflow-hidden pt-20 lg:min-h-screen">
       <img
         src="/elements/element-blur.png"
         alt="element-blur"
@@ -37,9 +37,9 @@ const HeroSectionHome = ({ description, callToAction, to }: HeroSectionProps) =>
         className="absolute -left-2 top-32 z-10 w-20 rotate-45 scale-x-[-1] opacity-80"
       />
 
-      <div className="z-20 flex items-center justify-center px-5 lg:w-11/12 lg:px-0 2xl:w-4/5">
+      <div className="z-20 mt-20 flex items-center justify-center px-5 lg:mt-0 lg:w-11/12 lg:px-0 2xl:w-4/5">
         <div className="flex flex-col gap-7 text-left text-black dark:text-white lg:w-[60%]">
-          <h1 className="font-prata text-[2rem] font-normal  lg:text-[5rem]">
+          <h1 className="font-raleway text-[2rem] font-normal leading-tight tracking-tight lg:text-[4rem]">
             Masak dengan lebih <span className="text-[#F97316]">mudah & kreatif</span>.
           </h1>
           <p className="subheading lg:w-2/3">{description}</p>
