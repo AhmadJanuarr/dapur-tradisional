@@ -4,7 +4,7 @@ import { DesignData } from "@/data/design.data"
 
 const DesignProcess = () => {
   return (
-    <section className="py-10 pt-20 lg:pt-40">
+    <section className="py-10 pt-20">
       <HeadingSection
         heading="Our Process"
         description="Pendekatan sistematis untuk menciptakan pengalaman digital yang luar biasa."
