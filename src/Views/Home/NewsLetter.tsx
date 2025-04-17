@@ -3,14 +3,14 @@ import { MailPlus } from "lucide-react"
 
 export default function NewsLetter() {
   return (
-    <section className="relative flex w-full flex-col items-center justify-start overflow-hidden rounded-xl bg-[#ffeddf] lg:mb-52 lg:h-[480px] lg:flex-row lg:rounded-[50px] lg:py-0">
+    <section className="relative flex w-full flex-col items-center justify-start overflow-hidden rounded-xl bg-[#ffeddf] lg:mb-32 lg:h-[400px] lg:flex-row lg:rounded-[50px] lg:py-0 2xl:h-[480px]">
       <img
         className="absolute bottom-0 left-0 w-1/3 opacity-30 lg:top-0 lg:w-[30%] lg:opacity-100"
         src="/elements/element-sawi.png"
         alt="Element Sawi"
       />
       <div className="z-20 flex w-full flex-col items-center justify-center gap-8 px-5 py-10 text-center dark:text-black">
-        <h1 className="heading w-full font-prata ">Siap jadi master chef di rumah?</h1>
+        <h1 className="heading w-full font-raleway">Siap jadi master chef di rumah?</h1>
         <p className="subheading lg:w-[60%]">
           Jangan lewatkan rahasia kuliner nusantara! Berlangganan newsletter kami dan dapatkan resep tradisional
           autentik, tips memasak, serta kisah menarik di balik setiap hidangan langsung ke inbox Anda.
@@ -27,7 +27,7 @@ export default function NewsLetter() {
           </Button>
         </form>
 
-        <p className="subheading text-[14px] text-[#656565]">
+        <p className="subheading text-[14px] text-gray-800">
           Tinjau Kebijakan Privasi kami untuk informasi lebih lanjut tentang praktik privasi kami.
         </p>
       </div>
