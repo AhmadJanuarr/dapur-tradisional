@@ -12,7 +12,7 @@ export default function HomePage() {
       <HeroSectionHome
         description="Dengan Dapur Tradisional, Anda bisa menemukan inspirasi untuk masakan lezat setiap hari. Cari resep favorit Anda sekarang!"
         callToAction="Jelajahi resep terbaru"
-        to="/recipes"
+        to="/resep"
         href="https://github.com/AhmadJanuarr/recipe-managements"
       />
       <TraditionalCuisineBenefits heading="Mengapa Masakan Tradisional Tak Tergantikan?" />
