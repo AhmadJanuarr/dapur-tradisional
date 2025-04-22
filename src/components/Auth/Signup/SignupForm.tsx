@@ -9,7 +9,7 @@ import { FormFieldWrapper } from "@/components/FormField/FormFieldWrapper"
 import { AuthOption } from "../AuthOption"
 import { useAuth } from "@/context/AuthContext"
 
-export default function SignupForm() {
+export function SignupForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const { signup } = useAuth()
   const methods = useForm<z.infer<typeof formSchemaRegister>>({
