@@ -1,9 +1,9 @@
 import { Fragment } from "react/jsx-runtime"
-import CategorySection from "@/Views/Recipes/CategorySection"
-import HeroSectionRecipe from "@/Views/Recipes/HeroSection"
-import RecipesSection from "@/Views/Recipes/RecipeSection"
-import NewsLetter from "@/Views/Home/NewsLetter"
-import ImageSwitcherSection from "@/Views/Recipes/ImageSwitcherSection"
+import { CategorySection } from "@/Views/Recipes/CategorySection"
+import { HeroSectionRecipe } from "@/Views/Recipes/HeroSection"
+import { RecipesSection } from "@/Views/Recipes/RecipeSection"
+import { NewsLetter } from "@/Views/Home/NewsLetter"
+import { ImageSwitcherSection } from "@/Views/Recipes/ImageSwitcherSection"
 
 export default function RecipesPage() {
   return (
