@@ -1,4 +1,6 @@
-export function HeadingAuth({ heading, description }: { heading: string; description: string }) {
+import { HeadingAuthOptionProps } from "@/types/components.type"
+
+export const HeadingAuth = ({ heading, description }: HeadingAuthOptionProps) => {
   return (
     <div className="my-5 flex flex-col items-center justify-center text-center">
       <img src="/logo/logo-t.png" alt="logo" className="w-16" />
