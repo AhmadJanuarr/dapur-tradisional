@@ -1,9 +1,16 @@
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { FormInputProps } from "@/types/RecipeForm.types"
+import { RecipeFormInputProps } from "@/types/recipe.types"
 
-export const FormInput = ({ name, label, placeholder, control, type = "text", isTextArea = false }: FormInputProps) => {
+export const FormInput = ({
+  name,
+  label,
+  placeholder,
+  control,
+  type = "text",
+  isTextArea = false,
+}: RecipeFormInputProps) => {
   return (
     <FormField
       control={control}
