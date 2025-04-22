@@ -1,113 +1,52 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { authReducer, initialState } from "@/lib/authReducer"
+import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
+import { clearAuthStorage } from "@/lib/localStorage"
 import { formSchemaLogin, formSchemaRegister } from "@/schemas/FormSchema"
-import { jwtDecode, JwtPayload } from "jwt-decode"
-import { createContext, ReactNode, useContext, useEffect, useReducer } from "react"
+import { AuthContextProps, AuthProviderProps, JwtPayloadWithRole } from "@/types/auth.types"
+import { useQueryClient } from "@tanstack/react-query"
+import { jwtDecode } from "jwt-decode"
+import { createContext, useContext, useEffect, useReducer } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import { z } from "zod"
 import axios from "axios"
-import { useQueryClient } from "@tanstack/react-query"
-import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
 
-interface AuthProviderProps {
-  children: ReactNode
-}
+const AuthContext = createContext<AuthContextProps>(null!)
 
-type LoginProps = {
-  email: string
-  password: string
-}
-
-type RegisterProps = {
-  name: string
-  email: string
-  password: string
-}
-type User = {
-  id: number
-  name: string
-  email: string
-  role: string
-}
-
-interface AuthContextType {
-  user: User
-  logout: () => void
-  state: any
-  login: (userData: LoginProps) => void
-  signup: (userData: RegisterProps) => void
-  dispatch: React.Dispatch<any>
-  updateName: (newName: string) => Promise<any>
-  updateEmail: (newEmail: string) => Promise<any>
-}
-interface JwtPayloadWithRole extends JwtPayload {
-  role: string
-}
-
-const initialState = { isLoading: false }
-const authReducer = (state: any, action: any) => {
-  switch (action.type) {
-    case "START_LOADING":
-      return { ...state, isLoading: true }
-    case "STOP_LOADING":
-      return { ...state, isLoading: false }
-    case "UPDATE_USER":
-      return { ...state, user: action.payload }
-    default:
-      return state
-  }
-}
-
-const AuthContext = createContext<AuthContextType>(null!)
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const queryClient = useQueryClient()
-  const APIUrl = import.meta.env.VITE_API_URL
   const [state, dispatch] = useReducer(authReducer, initialState)
   const user = JSON.parse(localStorage.getItem("user") || "{}")
-  const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const APIUrl = import.meta.env.VITE_API_URL
   const pathname = useLocation().pathname
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const isAdminRoute = pathname.startsWith("/admin")
     const accessToken = localStorage.getItem("accessToken")
+    const isAdminRoute = pathname.startsWith("/admin")
 
-    console.log("User Role:", user)
-    if (!isAdminRoute && user.role === "ADMIN") {
-      localStorage.removeItem("accessToken")
-      localStorage.removeItem("refreshToken")
-      localStorage.removeItem("user")
+    if (!isAdminRoute && user?.role === "ADMIN") {
+      clearAuthStorage()
     }
-
     if (accessToken) {
       try {
-        const expTime = new Date().getTime() / 1000
-        const decodedToken: JwtPayloadWithRole = jwtDecode(accessToken)
-        if (decodedToken.exp && decodedToken.exp < expTime) {
-          localStorage.removeItem("accessToken")
-          localStorage.removeItem("refreshToken")
-          localStorage.removeItem("user")
-          return
+        const decoded: JwtPayloadWithRole = jwtDecode(accessToken)
+        if (decoded.exp && decoded.exp < Date.now() / 1000) {
+          clearAuthStorage()
         }
-      } catch (error) {
-        console.error("Error decoding token:", error)
-        localStorage.removeItem("accessToken")
-        localStorage.removeItem("refreshToken")
-        localStorage.removeItem("user")
+      } catch {
+        clearAuthStorage()
       }
     }
-
-    if (user?.id) {
-      queryClient.invalidateQueries({ queryKey: ["recipes", user?.id] })
-    }
-  }, [pathname, queryClient, user, user?.id])
+  }, [navigate, pathname, queryClient, user, user?.id])
 
   const login = async (values: z.infer<typeof formSchemaLogin>) => {
     dispatch({ type: "START_LOADING" })
     try {
       const response = await axios.post(`${APIUrl}/api/auth/login`, values)
       const data = await response.data
-      console.log(data.data)
       if (response.status === 200) {
         localStorage.setItem("accessToken", data.accessToken)
         localStorage.setItem("refreshToken", data.refreshToken)
@@ -152,6 +91,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signup = async (values: z.infer<typeof formSchemaRegister>) => {
     dispatch({ type: "START_LOADING" })
+
     try {
       const response = await axios.post(`${APIUrl}/api/auth/register`, values)
       const data = await response.data
@@ -185,9 +125,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     if (refreshToken) {
       try {
         await axios.post(`${APIUrl}/api/auth/logout`, { refreshToken })
-        localStorage.removeItem("accessToken")
-        localStorage.removeItem("refreshToken")
-        localStorage.removeItem("user")
+        clearAuthStorage()
         queryClient.clear()
         queryClient.invalidateQueries({ queryKey: ["recipes", user?.id] })
         queryClient.removeQueries({ queryKey: ["recipes", user?.id] })
@@ -209,12 +147,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           name: newName,
         })
         const updateUser = { ...data, name: newName }
-        localStorage.setItem("user", JSON.stringify(updateUser))
         dispatch({ type: "UPDATE_NAME", payload: updateUser })
+        localStorage.setItem("user", JSON.stringify(updateUser))
         toast.success("Nama pengguna berhasil diperbarui")
         return response
-      } catch (error) {
-        console.log(error)
+      } catch (error: any) {
+        console.log(error.response.data.message || "Gagal memperbarui nama")
       }
     }
   }
@@ -222,6 +160,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const updateEmail = async (newEmail: string) => {
     const accessToken = localStorage.getItem("accessToken")
     const user = localStorage.getItem("user")
+
     if (accessToken) {
       try {
         const data = JSON.parse(user!)
@@ -233,19 +172,39 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         dispatch({ type: "UPDATE_USER", payload: updateUser })
         toast.success("Email pengguna berhasil diperbarui")
         return response
-      } catch (error) {
-        console.log(error)
+      } catch (error: any) {
+        toast.error(error.response.data.message || "Gagal memperbarui email")
       }
     }
   }
 
+  const updatePassword = async (newPassword: string, currentPassword: string) => {
+    const accessToken = localStorage.getItem("accessToken")
+
+    if (accessToken) {
+      try {
+        const response = await AxiosWithAuth.put(`${APIUrl}/api/auth/profile/update-password`, {
+          newPassword,
+          currentPassword,
+        })
+        toast.success("Password pengguna berhasil diperbarui")
+        return response
+      } catch (error: any) {
+        toast.error(error.response.data.message || "Gagal memperbarui password")
+      }
+    }
+  }
   return (
-    <AuthContext.Provider value={{ updateEmail, updateName, login, user, signup, logout, state, dispatch }}>
+    <AuthContext.Provider
+      value={{ user, state, updatePassword, updateEmail, updateName, login, signup, logout, dispatch }}
+    >
       {children}
     </AuthContext.Provider>
   )
 }
 
 export function useAuth() {
-  return useContext(AuthContext)
+  const context = useContext(AuthContext)
+  if (!context) throw new Error("useAuth must be used within AuthProvider")
+  return context
 }
