@@ -17,6 +17,9 @@ import DetailRecipe from "./pages/public/RecipeDetail"
 import Recipes from "./pages/public/Recipes"
 import RecipesCategory from "./pages/public/RecipesCategory"
 import LayoutProfile from "./pages/user/LayoutProfile"
+import FavoritePage from "./pages/user/FavoritePage"
+import DashboardPage from "./pages/admin/DashboardPage"
+import ManageRecipes from "./pages/admin/ManageRecipes"
 
 export default function App() {
   return (
@@ -44,24 +47,23 @@ export default function App() {
                 <Route index element={<UserProfile />} />
                 <Route path="pengaturan-akun" element={<SettingProfile />} />
                 <Route path="notifikasi" element={<Notification />} />
+                <Route path="favorit" element={<FavoritePage />} />
               </Route>
+
               {/* Halaman Admin */}
               <Route
-                path="/admin/dashboard"
+                path="/admin/"
                 element={
                   <ProtectedRoute allowedRoles={["ADMIN"]}>
                     <AdminPanel />
                   </ProtectedRoute>
                 }
-              />
-              <Route
-                path="/admin/resep"
-                element={
-                  <ProtectedRoute allowedRoles={["ADMIN"]}>
-                    <AdminPanel />
-                  </ProtectedRoute>
-                }
-              />
+              >
+                <Route index element={<AdminPanel />} />
+                <Route path="dashboard" element={<DashboardPage />} />
+                <Route path="manage-resep" element={<ManageRecipes />} />
+              </Route>
+
               {/* Halaman resep */}
               <Route path="/resep" element={<Recipes />} />
               <Route path="/resep/:slug" element={<DetailRecipe />} />
