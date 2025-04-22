@@ -2,10 +2,10 @@ import { Link, useLocation } from "react-router-dom"
 import { HeadingAuth } from "@/components/Auth/HeadingAuth"
 import { ArrowLeft, Moon, Sun } from "lucide-react"
 import { useTheme } from "@/hooks/useTheme"
-import { LoadingFullScreen } from "@/components/Loading"
+import { LoadingFullScreen } from "@/components/Loading/LoadingFullScreen"
 import { useAuth } from "@/context/AuthContext"
-import LoginForm from "@/components/Auth/Login/LoginForm"
-import SignupForm from "@/components/Auth/Signup/SignupForm"
+import { LoginForm } from "@/components/Auth/Login/LoginForm"
+import { SignupForm } from "@/components/Auth/Signup/SignupForm"
 
 export default function Authentication() {
   const { theme, toggleDarkMode } = useTheme()
@@ -33,7 +33,7 @@ export default function Authentication() {
         <div className="h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url('/img/bg-auth.png')" }}>
           <Link to={"/"} className="flex gap-2 p-10 text-3xl">
             <img src="/logo/logo-t.png" alt="logo" className="w-10" />
-            <h1 className="font-raleway flex items-center gap-2 text-black">Dapur Tradisional</h1>
+            <h1 className="flex items-center gap-2 font-raleway text-black">Dapur Tradisional</h1>
           </Link>
         </div>
       </div>
