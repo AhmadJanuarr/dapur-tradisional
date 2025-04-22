@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, Repeat } from "lucide-react"
 import { Link } from "react-router-dom"
 
-export default function ErrorRecipe() {
+export const ErrorRecipe = () => {
   const handleClick = () => {
     window.location.reload()
   }
@@ -11,7 +11,7 @@ export default function ErrorRecipe() {
     <section className="my-2 flex w-full flex-col items-center justify-center px-5">
       <div className="flex flex-col items-center text-center lg:w-1/2">
         <figure>
-          <img src="/img/error-recipe.png" alt="Ilustrasi kesalahan saat memuat resep" className="mx-auto" />
+          <img src="/elements/error-recipe.png" alt="Ilustrasi kesalahan saat memuat resep" className="mx-auto" />
           <figcaption className="sr-only">Ilustrasi kesalahan memuat resep</figcaption>
         </figure>
         <header>
