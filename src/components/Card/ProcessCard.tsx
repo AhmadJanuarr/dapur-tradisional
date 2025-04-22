@@ -1,9 +1,6 @@
-type ProcessCardProps = {
-  index: number
-  title: string
-  desc: string
-}
-const ProcessCard = ({ index, title, desc }: ProcessCardProps) => {
+import { ProcessCardProps } from "@/types/components.type"
+
+export const ProcessCard = ({ index, title, desc }: ProcessCardProps) => {
   return (
     <div className="subheading relative flex h-[180px] w-full flex-col gap-5 rounded-xl border p-5 pt-6 dark:border-gray-50 md:h-[250px] lg:h-[220px]">
       <div className="absolute -top-3 left-5 rounded-full bg-darkPrimary px-2 text-white dark:bg-white dark:text-black">
@@ -14,5 +11,3 @@ const ProcessCard = ({ index, title, desc }: ProcessCardProps) => {
     </div>
   )
 }
-
-export default ProcessCard
