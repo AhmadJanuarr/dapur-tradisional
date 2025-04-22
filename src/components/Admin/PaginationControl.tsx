@@ -7,9 +7,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
-import { PagintaionControlProps } from "@/types/RecipeForm.types"
+import { PagintaionControlProps } from "@/types/recipe.types"
 
-export default function PaginationControl({ prevPage, changePage, numbers, nextPage }: PagintaionControlProps) {
+export const PaginationControl = ({ numbers, prevPage, changePage, nextPage }: PagintaionControlProps) => {
   return (
     <Pagination className="w-full items-center py-10 ">
       <PaginationContent>
