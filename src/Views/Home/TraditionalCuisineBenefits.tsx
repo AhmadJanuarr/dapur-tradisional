@@ -7,7 +7,7 @@ interface TraditionalProps {
   icon: LucideIcon
 }
 
-const TraditionalCuisineBenefits = ({ heading }: { heading: string }) => {
+export const TraditionalCuisineBenefits = ({ heading }: { heading: string }) => {
   return (
     <section className="relative mx-auto mt-24 flex w-full flex-col items-center justify-center overflow-hidden px-5 lg:mt-10">
       <img
@@ -49,5 +49,3 @@ const TraditionalCuisineBenefits = ({ heading }: { heading: string }) => {
     </section>
   )
 }
-
-export default TraditionalCuisineBenefits
