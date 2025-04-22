@@ -1,17 +1,8 @@
+import { InspirationCardProps } from "@/types/components.type"
 import { BookmarkIcon } from "@heroicons/react/24/outline"
 import { BookmarkIcon as BookmarkIconSolid } from "@heroicons/react/24/solid"
-type InspirationCardProps = {
-  img: string
-  title: string
-  category: string
-  description: string
-  difficulty: string
-  isFavorite: boolean
-  onClickViewDetail: () => void
-  onClickFavorite: () => void
-}
 
-const InspirationCard = ({
+export const InspirationCard = ({
   img,
   title,
   category,
@@ -50,5 +41,3 @@ const InspirationCard = ({
     </div>
   )
 }
-
-export default InspirationCard
