@@ -9,7 +9,7 @@ import { AuthOption } from "@/components/Auth/AuthOption"
 import { useState } from "react"
 import { useAuth } from "@/context/AuthContext"
 
-export default function LoginForm() {
+export function LoginForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const { login } = useAuth()
   const methods = useForm<z.infer<typeof formSchemaLogin>>({
