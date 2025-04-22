@@ -3,7 +3,7 @@ type HeroSectionAboutProps = {
   subheading: string
   src: string
 }
-const HeroSectionAbout = ({ heading, subheading, src }: HeroSectionAboutProps) => {
+export const HeroSectionAbout = ({ heading, subheading, src }: HeroSectionAboutProps) => {
   return (
     <div className="mt-24 lg:mt-40">
       <div className="mx-auto flex flex-col items-center justify-center gap-8 text-center lg:w-4/5 lg:text-center">
@@ -16,5 +16,3 @@ const HeroSectionAbout = ({ heading, subheading, src }: HeroSectionAboutProps) =
     </div>
   )
 }
-
-export default HeroSectionAbout
