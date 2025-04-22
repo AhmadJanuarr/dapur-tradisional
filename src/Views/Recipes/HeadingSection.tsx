@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
-export default function HeadingSection({
+export const HeadingSection = ({
   heading,
   description,
   isShowButton,
@@ -11,7 +11,7 @@ export default function HeadingSection({
   description?: string
   isShowButton: boolean
   cta?: string
-}) {
+}) => {
   return (
     <section className="w-full pb-8 pt-14 lg:pb-5 lg:pt-20">
       <div className={`flex w-full ${isShowButton ? "justify-between" : "justify-center text-center"} `}>
