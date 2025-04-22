@@ -1,8 +1,8 @@
-import ProcessCard from "@/components/Card/ProcessCard"
-import HeadingSection from "./HeadingSection"
+import { ProcessCard } from "@/components/Card/ProcessCard"
+import { HeadingSection } from "./HeadingSection"
 import { DesignData } from "@/data/design.data"
 
-const DesignProcess = () => {
+export const DesignProcess = () => {
   return (
     <section className="py-10 pt-20">
       <HeadingSection
@@ -17,5 +17,3 @@ const DesignProcess = () => {
     </section>
   )
 }
-
-export default DesignProcess
