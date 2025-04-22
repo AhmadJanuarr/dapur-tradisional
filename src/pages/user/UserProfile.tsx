@@ -57,7 +57,9 @@ export const UserProfile = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      console.log(response)
+      const avatarUpdate = response.data.data.avatar
+      localStorage.setItem("user", JSON.stringify({ ...user, avatar: avatarUpdate }))
+      toast.success("Berhasil mengganti gambar profile")
     } catch (error: any) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data.message)
@@ -71,7 +73,7 @@ export const UserProfile = () => {
         <div className="group relative flex h-40 w-40 flex-col items-center justify-center py-8 ">
           <img
             src={preview}
-            className="h-40 w-40 rounded-full border-4 border-blue-400 object-cover shadow-lg transition-transform duration-300 hover:scale-105"
+            className="h-40 w-40 rounded-full border-4 border-[#FFEDDF] object-cover shadow-lg transition-transform duration-300 hover:scale-105"
             alt="user not found"
           />
           <HoverOverlay onClick={triggerFileInput} />
@@ -83,7 +85,9 @@ export const UserProfile = () => {
           <button className="subheading underline" onClick={triggerFileInput}>
             Edit
           </button>
-          <button onClick={() => handleUpdateImage()}>Simpan</button>
+          <button onClick={() => handleUpdateImage()} className="subheading underline">
+            Simpan
+          </button>
         </div>
         <div className="flex flex-col gap-4">
           <h5 className="text-semibold text-[16px] lg:text-[18px]">Nama lengkap</h5>
