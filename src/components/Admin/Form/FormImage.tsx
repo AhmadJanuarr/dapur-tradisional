@@ -1,8 +1,8 @@
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { FormImageProps } from "@/types/RecipeForm.types"
+import { RecipeFormImageProps } from "@/types/recipe.types"
 
-export const FormImage = ({ name, control, label, type }: FormImageProps) => {
+export const FormImage = ({ name, control, label, type }: RecipeFormImageProps) => {
   return (
     <FormField
       control={control}
