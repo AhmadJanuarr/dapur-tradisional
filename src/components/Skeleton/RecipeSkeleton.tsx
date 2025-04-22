@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-const RecipeSkeleton = ({ index }: { index: number }) => {
+export const RecipeSkeleton = ({ index }: { index: number }) => {
   return (
     <div className="flex w-full flex-col flex-wrap md:flex-row ">
       {Array(index)
@@ -20,5 +20,3 @@ const RecipeSkeleton = ({ index }: { index: number }) => {
     </div>
   )
 }
-
-export default RecipeSkeleton
