@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -9,27 +10,47 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { PasswordFields } from "@/components/User/PasswordFields"
 import { useAuth } from "@/context/AuthContext"
 import { useState } from "react"
+import { FaSpinner } from "react-icons/fa6"
 
 export const SettingProfile = () => {
-  const { user, updateEmail } = useAuth()
+  const { user, updateEmail, updatePassword } = useAuth()
   const [open, setOpen] = useState<boolean>(false)
-  const [email, setEmail] = useState(user.email)
+  const [email, setEmail] = useState(user?.email)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [password, setPassword] = useState({
+    currentPassword: "",
+    newPassword: "",
+  })
 
   const handleUpdateEmail = async () => {
-    await updateEmail(email)
+    if (email) updateEmail(email)
     setOpen(false)
   }
+
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    console.log("update password")
+    try {
+      setLoading(true)
+      e.preventDefault()
+      updatePassword(password.newPassword, password.currentPassword)
+    } catch (error: any) {
+      console.log(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
-    <div className="px-20 ">
+    <div className="px-20">
       <h1 className="heading font-raleway">Pengaturan akun</h1>
       <div className="flex flex-col gap-10 py-5">
         <div className="flex flex-col gap-4">
           <h5 className="text-semibold text-[16px] lg:text-[18px]">Email address</h5>
           <div className="subheading flex justify-between">
             <h5 className="text-gray-800 dark:text-slate-200">
-              Email address kamu adalah <span className="font-semibold">{user.email}</span>
+              Email address kamu adalah <span className="font-semibold">{user!.email}</span>
             </h5>
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
@@ -57,44 +78,27 @@ export const SettingProfile = () => {
         </div>
         <div className="flex flex-col gap-4">
           <h5 className="text-semibold text-[16px] lg:text-[18px]">Password</h5>
-          <div className="subheading flex justify-between">
-            <div className="flex gap-5">
-              <div className="flex flex-col gap-5">
-                <label htmlFor="password" className="text-gray-800 dark:text-slate-200">
-                  Password sekarang
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="*********"
-                  className="h-12 w-full rounded-lg border-2 border-gray-300 px-4 outline-none focus:border-blue-500 dark:text-black dark:placeholder:text-black"
-                />
-              </div>
-              <div className="flex flex-col gap-5">
-                <label htmlFor="new-password" className="text-gray-800 dark:text-slate-200">
-                  Password baru
-                </label>
-                <input
-                  type="password"
-                  id="new-password"
-                  placeholder="*********"
-                  className="h-12 w-full rounded-lg border-2 border-gray-300 px-4 outline-none focus:border-blue-500 dark:text-black dark:placeholder:text-black"
-                />
-              </div>
+          <form onSubmit={handleUpdatePassword}>
+            <PasswordFields password={password} setPassword={setPassword} />
+            <p>
+              Ups! Lupa kata sandi?{" "}
+              <a href="/forgot-password" className="font-semibold underline">
+                Reset your password
+              </a>
+            </p>
+            <div className="py-10">
+              <Button className="w-60 rounded-full px-4 py-5 font-semibold lg:py-6" type="submit" disabled={loading}>
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <FaSpinner className="animate-spin" />
+                    Tunggu sebentar
+                  </div>
+                ) : (
+                  "Simpan perubahan"
+                )}
+              </Button>
             </div>
-            <button className="cursor-pointer font-semibold underline">Tampilkan</button>
-          </div>
-          <p>
-            Ups! Lupa kata sandi?{" "}
-            <a href="/forgot-password" className="font-semibold underline">
-              Reset your password
-            </a>
-          </p>
-
-          <div className="py-10">
-            <Button className="w-60 rounded-full px-4 py-5 font-semibold lg:py-6">Simpan perubahan</Button>
-          </div>
-
+          </form>
           <div className="grid w-full gap-5">
             <p>Menghapus akun ?</p>
             <p>
