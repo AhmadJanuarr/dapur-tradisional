@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { MailPlus } from "lucide-react"
 
-export default function NewsLetter() {
+export const NewsLetter = () => {
   return (
     <section className="relative flex w-full flex-col items-center justify-start overflow-hidden rounded-xl bg-[#ffeddf] lg:mb-32 lg:h-[400px] lg:flex-row lg:rounded-[50px] lg:py-0 2xl:h-[480px]">
       <img
