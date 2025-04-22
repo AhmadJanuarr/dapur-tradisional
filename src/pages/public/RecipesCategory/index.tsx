@@ -1,11 +1,11 @@
 import { fetchDataApiRecipes } from "@/api/useFetchDataRecipe"
-import { Recipe } from "@/types/Recipe.types"
+import { RecipeData } from "@/types/recipe.types"
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom"
-import RecipeCard from "@/components/Card/RecipeCard"
-import RecipeSkeleton from "@/components/Skeleton/RecipeSkeleton"
-import HeadingSection from "@/Views/Recipes/HeadingSection"
-import ErrorRecipe from "@/pages/error/RecipeError"
+import { RecipeCard } from "@/components/Card/RecipeCard"
+import { RecipeSkeleton } from "@/components/Skeleton/RecipeSkeleton"
+import { HeadingSection } from "@/Views/Recipes/HeadingSection"
+import { ErrorRecipe } from "@/pages/error/RecipeError"
 
 export default function RecipesCategory() {
   const { slug } = useParams()
@@ -21,7 +21,7 @@ export default function RecipesCategory() {
     refetchOnMount: true,
   })
 
-  const food = data.filter((recipe: Recipe) => recipe.category === slug?.replace("-", "_"))
+  const food = data.filter((recipe: RecipeData) => recipe.category === slug?.replace("-", "_"))
   const handleClick = (title: string) => {
     navigate(`/resep/${title}`)
   }
@@ -41,7 +41,7 @@ export default function RecipesCategory() {
           <ErrorRecipe />
         ) : (
           <div className="grid grid-cols-4 gap-4">
-            {food.map((recipe: Recipe) => (
+            {food.map((recipe: RecipeData) => (
               <RecipeCard
                 key={recipe.id}
                 img={recipe.image}
