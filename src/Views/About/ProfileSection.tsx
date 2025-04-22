@@ -4,7 +4,7 @@ type ProfileProps = {
   src: string
 }
 
-const ProfileSection = ({ name, role, src }: ProfileProps) => {
+export const ProfileSection = ({ name, role, src }: ProfileProps) => {
   return (
     <section className="relative flex w-full">
       <div className="w-full flex-col items-center justify-center rounded-[30px] bg-[#FFEDDF] py-8 lg:py-20">
@@ -25,5 +25,3 @@ const ProfileSection = ({ name, role, src }: ProfileProps) => {
     </section>
   )
 }
-
-export default ProfileSection
