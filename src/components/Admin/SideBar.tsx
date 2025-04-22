@@ -22,19 +22,19 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { toast } from "sonner"
-import { LoadingFullScreen } from "../Loading"
+import { LoadingFullScreen } from "../Loading/LoadingFullScreen"
 import { useState } from "react"
 import { useTheme } from "@/hooks/useTheme"
 import { useAuth } from "@/context/AuthContext"
 
 const navItems = [
   { to: "/admin/dashboard", label: "Dashboards", icon: LayoutGrid },
-  { to: "/admin/recipes", label: "Resep", icon: BookText },
-  { to: "/admin/users", label: "Users", icon: User },
+  { to: "/admin/manage-resep", label: "Resep", icon: BookText },
+  { to: "/admin/user", label: "Users", icon: User },
 ]
 
 // Main Component
-const AppSideBar = () => {
+export const AppSideBar = () => {
   const { theme, toggleDarkMode } = useTheme()
   const { logout } = useAuth()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -107,5 +107,3 @@ const AppSideBar = () => {
     </Sidebar>
   )
 }
-
-export default AppSideBar
