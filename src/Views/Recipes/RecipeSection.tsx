@@ -1,21 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { fetchDataApiRecipes } from "@/api/useFetchDataRecipe"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/context/AuthContext"
 import { useFavorite } from "@/hooks/useFavorite"
-import { Recipe } from "@/types/Recipe.types"
+import { RecipeData } from "@/types/recipe.types"
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
-import ErrorRecipe from "@/pages/error/RecipeError"
-import InspirationCard from "@/components/Card/InspirationCard"
-import RecipeCard from "@/components/Card/RecipeCard"
-import RecipeSkeleton from "@/components/Skeleton/RecipeSkeleton"
-import HeadingSection from "./HeadingSection"
+import { InspirationCard } from "@/components/Card/InspirationCard"
+import { RecipeCard } from "@/components/Card/RecipeCard"
+import { HeadingSection } from "./HeadingSection"
+import { RecipeSkeleton } from "@/components/Skeleton/RecipeSkeleton"
+import { ErrorRecipe } from "@/pages/error/RecipeError"
 
-export default function RecipesSection() {
+export const RecipesSection = () => {
   const { user } = useAuth()
   const { handleClickFavorite } = useFavorite()
   const navigate = useNavigate()
+  console.log(user)
   const {
     data: recipes = [],
     isLoading,
@@ -29,9 +29,8 @@ export default function RecipesSection() {
     queryFn: fetchDataApiRecipes,
     placeholderData: (prevData) => prevData,
   })
-  const handleClickViewDetail = (title: string) => navigate(`/resep/${title}`)
-  console.log("Fetch recipes with ID:", user.id)
 
+  const handleClickViewDetail = (title: string) => navigate(`/resep/${title}`)
   return (
     <section>
       <HeadingSection
@@ -47,7 +46,7 @@ export default function RecipesSection() {
           <ErrorRecipe />
         ) : (
           <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
-            {recipes.slice(0, 3).map((recipe: Recipe) => (
+            {recipes.slice(0, 3).map((recipe: RecipeData) => (
               <InspirationCard
                 key={recipe.id}
                 img={recipe.image}
@@ -71,15 +70,15 @@ export default function RecipesSection() {
           <ErrorRecipe />
         ) : (
           <div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
-            {recipes.slice(0, 8).map((recipe: Recipe) => (
+            {recipes.slice(0, 8).map((recipe: RecipeData) => (
               <RecipeCard
                 key={recipe.id}
                 img={recipe.image}
                 title={recipe.title}
                 category={recipe.category}
+                isFavorite={recipe.isFavorite}
                 onClickViewDetail={() => handleClickViewDetail(recipe.title)}
                 onClickFavorite={() => handleClickFavorite(recipe.id)}
-                isFavorite={recipe.isFavorite}
               />
             ))}
           </div>
