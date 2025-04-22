@@ -11,12 +11,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { ApiResponse } from "@/types/Recipe.types"
+import { ApiResponse } from "@/types/recipe.types"
 import { toast } from "sonner"
 import { useEffect, useState } from "react"
-import ErrorRecipe from "@/pages/error/RecipeError"
+import { RecipeDetailtSkeleton } from "@/components/Skeleton/RecipeDetailtSkeleton"
+import { ErrorRecipe } from "@/pages/error/RecipeError"
 import axios from "axios"
-import RecipeDetailtSkeleton from "@/components/Skeleton/RecipeDetailtSkeleton"
 
 type NutritionInfoProps = {
   nutrition: string
@@ -146,7 +146,7 @@ export default function DetailRecipe() {
         </Button>
       </div>
       <div className="mt-6">
-        <h2 className="py-5 font-playfair text-xl font-semibold">Bahan - Bahan:</h2>
+        <h2 className="font-playfair py-5 text-xl font-semibold">Bahan - Bahan:</h2>
         <ul className="flex list-inside list-disc flex-col gap-3 ">
           {recipe.ingredients.map((ingredient: { id: number; name: string }) => (
             <li key={ingredient.id} className="subheading">
@@ -157,7 +157,7 @@ export default function DetailRecipe() {
       </div>
 
       <div className="mt-6">
-        <h2 className="py-5 font-playfair text-xl font-semibold">Langkah - Langkah:</h2>
+        <h2 className="font-playfair py-5 text-xl font-semibold">Langkah - Langkah:</h2>
         <ul className="flex flex-col gap-5">
           {recipe.steps.map((step: { id: number; description: string }, index: number) => (
             <div className="flex items-center gap-3" key={step.id}>
@@ -168,13 +168,13 @@ export default function DetailRecipe() {
         </ul>
       </div>
       <div className="my-6">
-        <h2 className="py-5 font-playfair text-xl font-semibold">Note & Tips</h2>
+        <h2 className="font-playfair py-5 text-xl font-semibold">Note & Tips</h2>
         <div className="rounded-md bg-sky-50">
           <p className="subheading p-5 text-sky-900">{recipe.tips}</p>
         </div>
       </div>
       <div className="my-6">
-        <h2 className="py-5 font-playfair text-xl font-semibold">Reviews</h2>
+        <h2 className="font-playfair py-5 text-xl font-semibold">Reviews</h2>
       </div>
     </div>
   )
