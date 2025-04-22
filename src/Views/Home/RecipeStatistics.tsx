@@ -6,7 +6,7 @@ interface StatisticsProps {
   description: string
 }
 
-const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
+export const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
   const statistics = [
     {
       icon: <Database className="text-[#f97316]" />,
@@ -70,5 +70,3 @@ const RecipeStatistics = ({ heading, img, description }: StatisticsProps) => {
     </section>
   )
 }
-
-export default RecipeStatistics
