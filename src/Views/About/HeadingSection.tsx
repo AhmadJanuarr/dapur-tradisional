@@ -4,7 +4,7 @@ type HeadingSectionProps = {
   description: string
 }
 
-const HeadingSection = ({ heading, subheading, description }: HeadingSectionProps) => {
+export const HeadingSection = ({ heading, subheading, description }: HeadingSectionProps) => {
   return (
     <div className="z-20 flex flex-col gap-5 py-8 dark:text-white lg:gap-8">
       <h1 className="text-xl tracking-widest lg:text-3xl">{heading.toUpperCase()}</h1>
@@ -17,5 +17,3 @@ const HeadingSection = ({ heading, subheading, description }: HeadingSectionProp
     </div>
   )
 }
-
-export default HeadingSection
