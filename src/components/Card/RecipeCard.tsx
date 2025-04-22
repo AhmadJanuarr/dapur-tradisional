@@ -2,15 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react"
 import { BookMarksButton } from "../Button/Bookmark"
-
-type RecipeCardProps = {
-  img: string
-  title: string
-  category: string
-  isFavorite: boolean
-  onClickViewDetail: () => void
-  onClickFavorite: () => void
-}
+import { RecipeCardProps } from "@/types/components.type"
 
 const RecipeImage = ({ img, title }: { img: string; title: string }) => (
   <div className="lg:h-52 2xl:h-72">
@@ -18,7 +10,14 @@ const RecipeImage = ({ img, title }: { img: string; title: string }) => (
   </div>
 )
 
-const RecipeCard = ({ img, title, category, onClickViewDetail, onClickFavorite, isFavorite }: RecipeCardProps) => {
+export const RecipeCard = ({
+  img,
+  title,
+  category,
+  isFavorite,
+  onClickViewDetail,
+  onClickFavorite,
+}: RecipeCardProps) => {
   return (
     <Card className="relative flex w-full flex-col rounded-xl border-none bg-slate-100 shadow-none dark:bg-darkBackground">
       <div className="relative overflow-hidden">
@@ -41,5 +40,3 @@ const RecipeCard = ({ img, title, category, onClickViewDetail, onClickFavorite, 
     </Card>
   )
 }
-
-export default RecipeCard
