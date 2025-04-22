@@ -2,8 +2,9 @@ import { Link } from "react-router-dom"
 import { Github, Mail } from "lucide-react"
 import { SocialLoginButton } from "@/components/SocialLogin"
 import { Divider } from "@/components/Divide/Divider"
+import { AuthOptionProps } from "@/types/components.type"
 
-export function AuthOption({ linkText, linkTo }: { linkText: string; linkTo: string }) {
+export const AuthOption = ({ linkText, linkTo }: AuthOptionProps) => {
   return (
     <div className="space-y-4">
       <Divider text="Atau masuk dengan" />
