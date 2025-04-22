@@ -14,29 +14,25 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog"
+import { RecipeData } from "@/types/recipe.types"
 
-interface Recipe {
-  title: string
-  id: number
-  image: string
-  description: string
-  category: string
-  difficulty: string
-}
-
-export default function RecipeList({ recipes = [] }: { recipes: Recipe[] }) {
+export const RecipeList = ({ recipes = [] }: { recipes: RecipeData[] }) => {
   const handleDelete = async (id: number) => {
     try {
       const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`)
       toast.success(response.data.message)
     } catch (error) {
-      console.error(error)
+      if (axios.isAxiosError(error) && error.response) {
+        console.error(error.response.data.message)
+      } else {
+        console.error("An unexpected error occurred", error)
+      }
     }
   }
 
   return (
     <TableBody>
-      {recipes.slice(0, 10).map(({ title, image, description, category, difficulty, id }: Recipe, index) => (
+      {recipes.slice(0, 10).map(({ title, image, description, category, difficulty, id }: RecipeData, index) => (
         <TableRow key={title} className="subheading">
           <TableCell className="text-center font-medium">{index + 1}</TableCell>
           <TableCell className="flex items-center gap-2">
