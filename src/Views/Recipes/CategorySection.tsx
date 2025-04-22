@@ -25,7 +25,7 @@ const CardCategory = ({ title, src, color, to }: { title: string; src: string; c
   )
 }
 
-const CategorySection = () => {
+export const CategorySection = () => {
   return (
     <section className="mt-2 w-full lg:mt-3">
       <div className="flex w-full flex-col justify-center gap-2 lg:flex-row ">
@@ -46,5 +46,3 @@ const CategorySection = () => {
     </section>
   )
 }
-
-export default CategorySection
