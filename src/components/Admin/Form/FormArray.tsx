@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { FormArrayProps } from "@/types/RecipeForm.types"
+import { RecipeFormArrayProps } from "@/types/recipe.types"
 import { PlusIcon, TrashIcon } from "lucide-react"
 
-export const FormArray = ({ title, fields, prefix, onAdd, onRemove, register }: FormArrayProps) => {
+export const FormArray = ({ title, fields, prefix, onAdd, onRemove, register }: RecipeFormArrayProps) => {
   return (
     <div className="flex flex-col space-y-4">
       <Label>{title}</Label>
@@ -13,7 +13,7 @@ export const FormArray = ({ title, fields, prefix, onAdd, onRemove, register }: 
           <Input
             type="text"
             placeholder={`${title} ${index + 1}`}
-            {...register(`${prefix}[${index}]` as `ingredients.${number}` | `steps.${number}`)}
+            {...register(`${prefix} [${index}]` as `ingredients.${number}` | `steps.${number}`)}
           />
           <Button variant="destructive" size="icon" onClick={() => onRemove(index)}>
             <TrashIcon />
