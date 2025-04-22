@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Dessert } from "lucide-react"
 import { Link } from "react-router-dom"
 
-const CallToAction = () => {
+export const CallToAction = () => {
   return (
     <section className="relative mx-auto mt-16 flex flex-col items-center justify-center overflow-hidden  bg-[#ffeddf] px-11 py-10 lg:mt-12 lg:h-[480px] lg:w-11/12 lg:flex-row lg:justify-start lg:rounded-3xl lg:px-20 lg:py-0 2xl:w-4/5">
       <div className="z-20 flex flex-col gap-8 lg:w-3/5">
@@ -29,5 +29,3 @@ const CallToAction = () => {
     </section>
   )
 }
-
-export default CallToAction
