@@ -1,8 +1,8 @@
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { CategoriesProps, FormSelectProps } from "@/types/RecipeForm.types"
+import { CategoriesProps, RecipeFormSelectProps } from "@/types/recipe.types"
 
-export const FormSelect = ({ name, placeholder, control, label, categories }: FormSelectProps) => {
+export const FormSelect = ({ name, placeholder, control, label, categories }: RecipeFormSelectProps) => {
   return (
     <FormField
       control={control}
