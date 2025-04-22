@@ -1,6 +1,5 @@
-import FormFieldContact from "@/components/FormField/FormFieldContact"
 import { FaDiscord, FaInstagram, FaTelegram, FaWhatsapp } from "react-icons/fa6"
-import NewsLetter from "../Home/NewsLetter"
+import { FormFieldContact } from "@/components/FormField/FormFieldContact"
 
 const ContactInfo = () => {
   return (
@@ -47,7 +46,7 @@ const RightContactCard = () => {
   )
 }
 
-const HeroSectionContact = ({ heading, subheading }: { heading: string; subheading: string }) => {
+export const HeroSectionContact = ({ heading, subheading }: { heading: string; subheading: string }) => {
   return (
     <section className="mt-24 flex w-full flex-col md:py-0 lg:mt-40">
       <div>
@@ -60,11 +59,6 @@ const HeroSectionContact = ({ heading, subheading }: { heading: string; subheadi
         <LeftFormCard />
         <RightContactCard />
       </div>
-      <div className="mt-20">
-        <NewsLetter />
-      </div>
     </section>
   )
 }
-
-export default HeroSectionContact
