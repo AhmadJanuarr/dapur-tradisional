@@ -5,10 +5,11 @@ import { LIST_MENU } from "@/data/datas"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
-import { LoadingFullScreen } from "@/components/Loading"
+import { LoadingFullScreen } from "@/components/Loading/LoadingFullScreen"
 import { useTheme } from "@/hooks/useTheme"
 import { useHeader } from "@/hooks/useHeader"
 import { useState } from "react"
+import { User as UserProps } from "@/types/auth.types"
 
 type NavLinkProps = {
   children: React.ReactNode
@@ -16,10 +17,14 @@ type NavLinkProps = {
   onClick?: () => void
 }
 type UserAlreadyLoggedProps = {
-  usernameUser?: string
+  user?: UserProps
   theme: string
-  handleAuth: (action: string) => void
+  isPopoverOpen?: boolean
+  setIsPopoverOpen?: React.Dispatch<React.SetStateAction<boolean>>
+  handlePopoverClose?: () => void
+  handleFavorite?: () => void
   toggleDarkMode: () => void
+  handleAuth: (action: string) => void
   handleUserProfile?: (target: string) => void | undefined
 }
 
@@ -49,17 +54,16 @@ const LogoHeader = () => {
 }
 
 const UserAlreadyLogged = ({
+  user,
+  theme,
+  isPopoverOpen,
+  setIsPopoverOpen,
+  handleFavorite,
   handleAuth,
   toggleDarkMode,
-  theme,
   handleUserProfile,
-  usernameUser,
+  handlePopoverClose,
 }: UserAlreadyLoggedProps) => {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
-
-  const handlePopoverClose = () => {
-    setIsPopoverOpen(false) // Menutup popover
-  }
   return (
     <div className="hidden w-1/3 items-center justify-end gap-5 md:flex">
       {theme === "dark" ? (
@@ -68,11 +72,11 @@ const UserAlreadyLogged = ({
         <Moon onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer" />
       )}
       <Separator orientation="vertical" className="h-5 bg-gray-800" />
-      <Bookmark className="h-5 w-5 cursor-pointer dark:text-white" />
+      <Bookmark className="h-5 w-5 cursor-pointer dark:text-white" onClick={() => handleFavorite?.()} />
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger>
           <Avatar>
-            <AvatarImage src="/elements/element-user.png" />
+            <AvatarImage src={user?.avatar || "/elements/element-user.png"} className="object-cover" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </PopoverTrigger>
@@ -83,17 +87,17 @@ const UserAlreadyLogged = ({
                 className="flex cursor-pointer items-center gap-5 hover:underline"
                 onClick={() => {
                   handleUserProfile?.("")
-                  handlePopoverClose()
+                  handlePopoverClose?.()
                 }}
               >
-                <img src="/elements/element-user.png" alt="user" className="h-12 w-12 rounded-full" />
-                <div className="subheading flex items-center gap-2 ">{usernameUser}</div>
+                <img src={user?.avatar || "/elements/element-user.png"} alt="user" className="h-12 w-12 rounded-full" />
+                <div className="subheading flex items-center gap-2 ">{user?.name}</div>
               </li>
               <li
                 className="flex cursor-pointer items-center gap-5 hover:underline"
                 onClick={() => {
                   handleUserProfile?.("")
-                  handlePopoverClose()
+                  handlePopoverClose?.()
                 }}
               >
                 <User className="h-5 w-5" />
@@ -103,7 +107,7 @@ const UserAlreadyLogged = ({
                 className="flex cursor-pointer items-center gap-5 hover:underline"
                 onClick={() => {
                   handleUserProfile?.("pengaturan-akun")
-                  handlePopoverClose()
+                  handlePopoverClose?.()
                 }}
               >
                 <Settings className="h-5 w-5" />
@@ -113,7 +117,7 @@ const UserAlreadyLogged = ({
               <li
                 onClick={() => {
                   handleAuth("keluar")
-                  handlePopoverClose()
+                  handlePopoverClose?.()
                 }}
                 className="flex cursor-pointer items-center gap-5 hover:underline"
               >
@@ -149,13 +153,21 @@ const UserNotLogged = ({ handleAuth, theme, toggleDarkMode }: UserNotLooggedProp
   </div>
 )
 
-export default function Header() {
+export const Header = () => {
   const { handleAuth, isHome, user, isScrollY, loading, open, setOpen } = useHeader()
   const { toggleDarkMode, theme } = useTheme()
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const navigate = useNavigate()
 
+  const handlePopoverClose = () => {
+    setIsPopoverOpen(false)
+  }
+
+  const handleFavorite = () => {
+    navigate(`/profile/${user?.name?.replace(" ", "-")}/favorit`)
+  }
   const handleUserProfile = (target: string) => {
-    const userName = user.name?.replace(" ", "-")
+    const userName = user?.name?.replace(" ", "-")
     if (userName) {
       navigate(`profile/${userName}/${target}`)
     }
@@ -175,13 +187,17 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-        {user.role === "USER" ? (
+        {user!.role === "USER" ? (
           <UserAlreadyLogged
+            user={user || undefined}
+            theme={theme}
+            isPopoverOpen={isPopoverOpen}
+            setIsPopoverOpen={setIsPopoverOpen}
             handleAuth={handleAuth}
             toggleDarkMode={toggleDarkMode}
-            theme={theme}
             handleUserProfile={handleUserProfile}
-            usernameUser={user.name}
+            handleFavorite={handleFavorite}
+            handlePopoverClose={handlePopoverClose}
           />
         ) : (
           <UserNotLogged handleAuth={handleAuth} theme={theme} toggleDarkMode={toggleDarkMode} />
@@ -209,12 +225,24 @@ export default function Header() {
       >
         <div className="rounded-b-xl border bg-white px-2 py-5">
           <ul className="flex w-full flex-col gap-5">
+            {user?.role === "USER" && (
+              <li
+                className="flex cursor-pointer items-center gap-5 hover:underline"
+                onClick={() => {
+                  handleUserProfile?.("")
+                  handlePopoverClose()
+                }}
+              >
+                <img src="/elements/element-user.png" alt="user" className="h-12 w-12 rounded-full" />
+                <div className="subheading flex items-center gap-2 ">{user?.name}</div>
+              </li>
+            )}
             {LIST_MENU.usefulLinks.map((item) => (
               <NavLink href={item.href} key={item.name} onClick={() => setOpen(false)}>
                 {item.name}
               </NavLink>
             ))}
-            {user.role === "USER" ? (
+            {user?.role === "USER" ? (
               <li onClick={() => handleAuth("keluar")} className="cursor-pointer hover:underline">
                 Keluar
               </li>
