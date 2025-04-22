@@ -13,7 +13,7 @@ interface SupportFaqSectionProps {
   subheading: string
 }
 
-const SupportFaq = ({ heading, subheading }: SupportFaqSectionProps) => {
+export const SupportFaq = ({ heading, subheading }: SupportFaqSectionProps) => {
   return (
     <section className="items-left mx-auto mt-24 flex flex-col justify-center gap-10 px-5 lg:w-11/12 lg:px-0 lg:py-14 2xl:w-4/5">
       <h1 className="text heading font-raleway text-black dark:text-white">{heading}</h1>
@@ -37,5 +37,3 @@ const SupportFaq = ({ heading, subheading }: SupportFaqSectionProps) => {
     </section>
   )
 }
-
-export default SupportFaq
