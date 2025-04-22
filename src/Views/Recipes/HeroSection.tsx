@@ -7,7 +7,7 @@ type HeroSectionProps = {
   image: string
 }
 
-const HeroSectionRecipe = ({ heading, subheading, image }: HeroSectionProps) => {
+export const HeroSectionRecipe = ({ heading, subheading, image }: HeroSectionProps) => {
   return (
     <section className="mt-10 flex w-full lg:mt-28">
       <div className="flex h-[500px] w-full flex-col-reverse gap-3 lg:flex-row ">
@@ -34,5 +34,3 @@ const HeroSectionRecipe = ({ heading, subheading, image }: HeroSectionProps) => 
     </section>
   )
 }
-
-export default HeroSectionRecipe
