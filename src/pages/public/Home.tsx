@@ -1,10 +1,10 @@
 import { Fragment } from "react/jsx-runtime"
-import HeroSectionHome from "@/Views/Home/HeroSection"
-import TraditionalCuisineBenefits from "@/Views/Home/TraditionalCuisineBenefits"
-import RecipeStatistics from "@/Views/Home/RecipeStatistics"
-import SupportFaq from "@/Views/Home/SupportFaq"
-import CallToAction from "@/Views/Home/CallToAction"
-import NewsLetter from "@/Views/Home/NewsLetter"
+import { HeroSectionHome } from "@/Views/Home/HeroSection"
+import { TraditionalCuisineBenefits } from "@/Views/Home/TraditionalCuisineBenefits"
+import { RecipeStatistics } from "@/Views/Home/RecipeStatistics"
+import { SupportFaq } from "@/Views/Home/SupportFaq"
+import { CallToAction } from "@/Views/Home/CallToAction"
+import { NewsLetter } from "@/Views/Home/NewsLetter"
 
 export default function HomePage() {
   return (
