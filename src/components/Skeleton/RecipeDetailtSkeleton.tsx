@@ -1,6 +1,6 @@
 import { Skeleton } from "../ui/skeleton"
 
-export default function RecipeDetailtSkeleton() {
+export const RecipeDetailtSkeleton = () => {
   return (
     <div className="mx-auto mt-28 flex flex-col flex-wrap md:w-[80%]">
       <Skeleton className="mb-2 h-[50px] w-full rounded-xl" />
