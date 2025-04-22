@@ -1,10 +1,6 @@
-type TestimonialCardProps = {
-  name: string
-  desc: string
-  date: string
-  stars: number
-}
-const TestimonialCard = ({ name, desc, date, stars }: TestimonialCardProps) => {
+import { TestimonialCardProps } from "@/types/components.type"
+
+export const TestimonialCard = ({ name, desc, date, stars }: TestimonialCardProps) => {
   return (
     <div className="subheading flex w-full flex-col justify-between gap-4 rounded-lg bg-[#F8F8F8] p-6 dark:bg-darkBackground lg:h-[280px]">
       <div className="flex items-center gap-1">
@@ -27,5 +23,3 @@ const TestimonialCard = ({ name, desc, date, stars }: TestimonialCardProps) => {
     </div>
   )
 }
-
-export default TestimonialCard
