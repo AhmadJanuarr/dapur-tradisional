@@ -1,6 +1,6 @@
-import { RecipeFormValues } from "@/types/RecipeForm.types"
-import { useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
+import { RecipeFormValues } from "@/types/recipe.types"
+import { useQueryClient } from "@tanstack/react-query"
 import { useFieldArray, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -35,6 +35,7 @@ export function useRecipeForm(setOpenForm: React.Dispatch<React.SetStateAction<b
   })
 
   const onSubmit = handleSubmit(async (values) => {
+    console.log(values.image)
     const formData = new FormData()
 
     formData.append("title", values.title)
@@ -51,7 +52,6 @@ export function useRecipeForm(setOpenForm: React.Dispatch<React.SetStateAction<b
     formData.append("fat", String(Number(values.fat) || 0))
 
     try {
-      console.log(APIUrl)
       await axios.post(`${APIUrl}/api/recipes`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
