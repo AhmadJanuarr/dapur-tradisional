@@ -8,14 +8,14 @@ import { FormColumn } from "./Form/FormColumn"
 import { Loader2 } from "lucide-react"
 import { useRecipeForm } from "@/api/useRecipeForm"
 
-export default function RecipeForm({
+export const RecipeForm = ({
   className,
   setOpenForm,
 }: {
   className?: string
   setOpenForm: React.Dispatch<React.SetStateAction<boolean>>
-}) {
-  const { form, ingredientsArray, stepsArray, onSubmit, register, control } = useRecipeForm(setOpenForm)
+}) => {
+  const { form, ingredientsArray, stepsArray, control, onSubmit, register } = useRecipeForm(setOpenForm)
   return (
     <Form {...form}>
       <form
