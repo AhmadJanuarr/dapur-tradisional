@@ -5,11 +5,11 @@ import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { Button } from "@/components/ui/button"
 import { useQueryClient } from "@tanstack/react-query"
+import { LoadingManageRecipes } from "@/components/Loading/LoadingManageRecipes"
+import { RecipeList } from "@/components/Admin/RecipeList"
+import { PaginationControl } from "@/components/Admin/PaginationControl"
+import { RecipeForm } from "@/components/Admin/RecipeForm"
 import axios from "axios"
-import RecipeList from "@/components/Admin/RecipeList"
-import PaginationControl from "@/components/Admin/PaginationControl"
-import RecipeForm from "@/components/Admin/RecipeForm"
-import LoadingManageRecipes from "@/components/Loading/LoadingManageRecipes"
 
 export default function ManageRecipes() {
   const [openForm, setOpenForm] = useState<boolean>(false)
@@ -55,7 +55,7 @@ export default function ManageRecipes() {
         </div>
         <Card className="my-10 w-full px-4">
           <div className="flex w-full justify-between py-5 text-sm leading-none text-muted-foreground">
-            <div className="flex items-center gap-5 font-semibold text-black">
+            <div className="flex items-center gap-5 font-semibold text-black dark:text-white">
               <BookPlus />
               Recipes list
             </div>
