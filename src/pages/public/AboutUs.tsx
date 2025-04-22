@@ -1,7 +1,7 @@
-import DesignProcess from "@/Views/About/DesignProcess"
-import HeroSectionAbout from "@/Views/About/HeroSection"
-import ProfileSection from "@/Views/About/ProfileSection"
-import TestimonialSection from "@/Views/About/TestimonialSection"
+import { DesignProcess } from "@/Views/About/DesignProcess"
+import { HeroSectionAbout } from "@/Views/About/HeroSection"
+import { ProfileSection } from "@/Views/About/ProfileSection"
+import { TestimonialSection } from "@/Views/About/TestimonialSection"
 import { Fragment } from "react/jsx-runtime"
 
 export default function AboutUsPage() {
