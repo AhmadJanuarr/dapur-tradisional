@@ -8,7 +8,7 @@ type HeroSectionProps = {
   to: string
   href: string
 }
-const HeroSectionHome = ({ description, callToAction, to }: HeroSectionProps) => {
+export const HeroSectionHome = ({ description, callToAction, to }: HeroSectionProps) => {
   return (
     <section className="relative flex w-full justify-center overflow-hidden pt-20 lg:min-h-screen">
       <img
@@ -38,8 +38,8 @@ const HeroSectionHome = ({ description, callToAction, to }: HeroSectionProps) =>
       />
 
       <div className="z-20 mt-20 flex items-center justify-center px-5 lg:mt-0 lg:w-11/12 lg:px-0 2xl:w-4/5">
-        <div className="flex flex-col gap-7 text-left text-black dark:text-white lg:w-[60%]">
-          <h1 className="font-raleway text-[2rem] font-normal leading-tight tracking-tight lg:text-[4rem]">
+        <div className="flex flex-col gap-7 text-left text-black dark:text-white lg:w-[50%]">
+          <h1 className="font-raleway text-[2rem] font-normal leading-tight tracking-tight lg:text-[5rem]">
             Masak dengan lebih <span className="text-[#F97316]">mudah & kreatif</span>.
           </h1>
           <p className="subheading lg:w-2/3">{description}</p>
@@ -52,12 +52,10 @@ const HeroSectionHome = ({ description, callToAction, to }: HeroSectionProps) =>
             </Link>
           </div>
         </div>
-        <div className="hidden  w-[40%] lg:block">
+        <div className="hidden w-[50%] lg:block">
           <img src="/elements/element-bg.png" alt="hero" className="w-full" />
         </div>
       </div>
     </section>
   )
 }
-
-export default HeroSectionHome
