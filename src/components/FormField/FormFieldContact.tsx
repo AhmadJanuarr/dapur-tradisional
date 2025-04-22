@@ -4,17 +4,12 @@ import { Textarea } from "../ui/textarea"
 
 type FieldProps = {
   label: string
-  type: string
+  type?: string
   placeholder?: string
 }
 
-type NameFieldItem = {
-  label: string
-  placeholder: string
-}
-
 type NameFieldProps = {
-  fields: NameFieldItem[]
+  fields: FieldProps[]
 }
 
 const FieldInput = ({ label, type, placeholder }: FieldProps) => {
@@ -46,7 +41,7 @@ const NameFieldInput = ({ fields }: NameFieldProps) => {
   )
 }
 
-const FormFieldContact = () => {
+export const FormFieldContact = () => {
   return (
     <form>
       <div className="subheading font-inter flex w-full flex-col gap-6">
@@ -72,5 +67,3 @@ const FormFieldContact = () => {
     </form>
   )
 }
-
-export default FormFieldContact
