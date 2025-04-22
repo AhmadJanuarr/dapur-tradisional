@@ -1,9 +1,9 @@
-import TetimonialsData from "@/data/testimonials.data"
-import HeadingSection from "./HeadingSection"
-import TestimonialCard from "@/components/Card/TestimonialCard"
+import { HeadingSection } from "./HeadingSection"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { TestimonialCard } from "@/components/Card/TestimonialCard"
+import TetimonialsData from "@/data/testimonials.data"
 
-const TestimonialSection = () => {
+export const TestimonialSection = () => {
   return (
     <section className="relative pt-14 lg:py-20">
       <HeadingSection
@@ -35,5 +35,3 @@ const TestimonialSection = () => {
     </section>
   )
 }
-
-export default TestimonialSection
