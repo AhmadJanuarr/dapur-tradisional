@@ -90,8 +90,15 @@ const UserAlreadyLogged = ({
                   handlePopoverClose?.()
                 }}
               >
-                <img src={user?.avatar || "/elements/element-user.png"} alt="user" className="h-12 w-12 rounded-full" />
-                <div className="subheading flex items-center gap-2 ">{user?.name}</div>
+                <img
+                  src={user?.avatar || "/elements/element-user.png"}
+                  alt="user"
+                  className="h-12 w-12 rounded-full object-cover"
+                />
+                <div className="subheading flex flex-col">
+                  <p className="font-semibold">{user?.name}</p>
+                  <p className="text-gray-500">{user?.email}</p>
+                </div>
               </li>
               <li
                 className="flex cursor-pointer items-center gap-5 hover:underline"
@@ -233,8 +240,11 @@ export const Header = () => {
                   handlePopoverClose()
                 }}
               >
-                <img src="/elements/element-user.png" alt="user" className="h-12 w-12 rounded-full" />
-                <div className="subheading flex items-center gap-2 ">{user?.name}</div>
+                <img src={user?.avatar || "/elements/element-user.png"} alt="user" className="h-12 w-12 rounded-full" />
+                <div className="subheading flex flex-col">
+                  <p className="font-semibold">{user?.name}</p>
+                  <p className="text-gray-500">{user?.email}</p>
+                </div>
               </li>
             )}
             {LIST_MENU.usefulLinks.map((item) => (
