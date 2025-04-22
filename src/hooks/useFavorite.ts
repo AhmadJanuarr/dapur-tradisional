@@ -1,4 +1,4 @@
-import { Recipe } from "@/types/Recipe.types"
+import { Recipe } from "@/types/recipe.types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
@@ -35,7 +35,7 @@ export function useFavorite() {
     },
     onSuccess: (_data, _recipeId, context) => {
       const isUnFavorite = context?.previousRecipes?.find((r) => r.id === context.recipeId)?.isFavorite
-      toast.success(isUnFavorite ? "menambahkan ke favorite : berhasil" : "menghapus dari favorite : berhasil")
+      toast.success(!isUnFavorite ? "menambahkan ke favorite : berhasil" : "menghapus dari favorite : berhasil")
     },
 
     onSettled: () => {
