@@ -3,10 +3,19 @@ import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react"
 import { BookMarksButton } from "../Button/Bookmark"
 import { RecipeCardProps } from "@/types/components.type"
+import { LazyLoadImage } from "react-lazy-load-image-component"
+import palceholderImage from "/elements/element-placeholder.jpg"
+import "react-lazy-load-image-component/src/effects/blur.css"
 
 const RecipeImage = ({ img, title }: { img: string; title: string }) => (
-  <div className="h-36 lg:h-52 2xl:h-72">
-    <img src={img} className="h-full w-full rounded-t-xl object-cover shadow-xl" alt={title} />
+  <div className="h-36 lg:h-40 2xl:h-48">
+    <LazyLoadImage
+      placeholderSrc={palceholderImage}
+      effect="blur"
+      src={img}
+      className="object-cover w-full h-full shadow-xl rounded-t-xl"
+      alt={title}
+    />
   </div>
 )
 
@@ -19,12 +28,12 @@ export const RecipeCard = ({
   onClickFavorite,
 }: RecipeCardProps) => {
   return (
-    <Card className="relative flex w-full flex-col rounded-xl border-none bg-slate-100 shadow-none dark:bg-darkBackground">
+    <Card className="relative flex flex-col w-full border-none shadow-none rounded-xl bg-slate-100 dark:bg-darkBackground">
       <div className="relative overflow-hidden">
         <RecipeImage img={img} title={title} />
         <div
           onClick={onClickFavorite}
-          className="absolute right-2 top-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white shadow"
+          className="absolute flex items-center justify-center w-10 h-10 bg-white rounded-full shadow cursor-pointer right-2 top-2"
         >
           <BookMarksButton isFavorite={isFavorite} />
         </div>
