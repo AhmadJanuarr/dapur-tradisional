@@ -49,12 +49,14 @@ export default function Authentication() {
           <LoadingFullScreen />
         ) : (
           <div className="flex w-full flex-col lg:items-center">
-            <Link to={"/"} className="flex gap-2 py-3 text-left lg:hidden">
+            <Link to={"/"} className="flex gap-2 pt-5 text-left lg:hidden">
               <ArrowLeft />
               Kembali
             </Link>
-            <HeadingAuth heading={headingText} description={description} />
-            <div className="w-full md:w-1/2">{formComponent()}</div>
+            <div className="w-full py-5 pb-10 lg:w-1/2 ">
+              <HeadingAuth heading={headingText} description={description} />
+              <div className="w-full md:w-full">{formComponent()}</div>
+            </div>
           </div>
         )}
       </div>
