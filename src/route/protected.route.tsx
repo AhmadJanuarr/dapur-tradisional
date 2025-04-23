@@ -15,7 +15,7 @@ export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) 
       return navigate("/auth/login")
     }
 
-    if (!allowedRoles.includes(user.role)) {
+    if (!allowedRoles.includes(user?.role || "")) {
       return navigate("/unauthorized")
     }
   }, [user, allowedRoles, children])
