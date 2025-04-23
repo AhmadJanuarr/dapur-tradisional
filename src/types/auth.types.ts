@@ -27,4 +27,5 @@ export type AuthContextProps = {
   updateName: (newName: string) => void
   updateEmail: (newEmail: string) => void
   updatePassword: (newPass: string, currentPass: string) => void
+  deleteUser: () => void
 }
