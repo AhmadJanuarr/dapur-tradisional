@@ -15,7 +15,6 @@ export const RecipesSection = () => {
   const { user } = useAuth()
   const { handleClickFavorite } = useFavorite()
   const navigate = useNavigate()
-  console.log(user)
   const {
     data: recipes = [],
     isLoading,
