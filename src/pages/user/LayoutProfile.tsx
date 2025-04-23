@@ -3,17 +3,28 @@ import { SidebarProfile } from "@/components/User/SidebarProfile"
 import { useAuth } from "@/context/AuthContext"
 import { useTheme } from "@/hooks/useTheme"
 import { ArrowLeft, Moon, Sun } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom"
 import { toast } from "sonner"
 
 export default function LayoutProfile() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [showContentOnly, setShowContentOnly] = useState<boolean>(false)
   const { theme, toggleDarkMode } = useTheme()
   const { logout, user } = useAuth()
   const { username } = useParams()
   const navigate = useNavigate()
   const pathname = useLocation().pathname
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setShowContentOnly(false)
+      }
+    }
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   const handleLogout = () => {
     setIsLoading(true)
@@ -25,16 +36,26 @@ export default function LayoutProfile() {
     }, 2000)
   }
 
-  const notShowLayout = pathname === `/profile/${user?.name?.replace(" ", "-")}/favorit`
+  const notShowLayoutFavoritePage = pathname === `/profile/${user?.name?.replace(" ", "-")}/favorit`
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="subheading flex min-h-screen flex-col">
       <div className="flex w-full flex-col justify-center">
         {isLoading && <LoadingFullScreen />}
         <div className="flex w-full items-center justify-between py-10">
-          <span className="flex cursor-pointer items-center gap-2 text-[#F97316]" onClick={() => navigate("/resep")}>
+          <button
+            className={`flex cursor-pointer items-center gap-2 text-[#F97316] ${notShowLayoutFavoritePage || showContentOnly ? "hidden" : "block"}`}
+            onClick={() => navigate("/")}
+          >
             <ArrowLeft />
             Kembali
-          </span>
+          </button>
+          <button
+            onClick={() => setShowContentOnly(false)}
+            className={`flex cursor-pointer items-center gap-2 text-[#F97316] lg:hidden ${notShowLayoutFavoritePage || !showContentOnly ? "hidden" : "block"}`}
+          >
+            <ArrowLeft />
+            Kembali ke menu
+          </button>
           <span className="rounded-full bg-darkBackground p-2 dark:bg-white">
             {theme === "dark" ? (
               <Sun onClick={toggleDarkMode} className="h-5 w-5 cursor-pointer text-darkBackground " />
@@ -43,13 +64,20 @@ export default function LayoutProfile() {
             )}
           </span>
         </div>
-        <div className={`grid w-full ${notShowLayout ? "grid-cols-1" : "lg:grid-cols-[20%,auto]"}`}>
-          {!notShowLayout && (
+        <div
+          className={`grid w-full ${notShowLayoutFavoritePage || showContentOnly ? "grid-cols-1" : "lg:grid-cols-[20%,auto]"}`}
+        >
+          {!notShowLayoutFavoritePage && !showContentOnly && (
             <div className="block lg:block">
-              <SidebarProfile username={username} onLogout={handleLogout} pathname={pathname} />
+              <SidebarProfile
+                username={username}
+                onLogout={handleLogout}
+                pathname={pathname}
+                onNavigateMobile={() => setShowContentOnly(true)}
+              />
             </div>
           )}
-          <div className={`p-5 ${notShowLayout ? "block" : "hidden lg:block"}`}>
+          <div className={`p-5 ${notShowLayoutFavoritePage || showContentOnly ? "block" : "hidden lg:block"}`}>
             <Outlet />
           </div>
         </div>
