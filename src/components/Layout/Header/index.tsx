@@ -230,7 +230,7 @@ export const Header = () => {
         className={`absolute left-0 -z-10  mx-auto w-full rounded-b-xl  
           shadow-lg transition-all duration-500 ${!open && "-translate-y-[30rem] opacity-0"}`}
       >
-        <div className="rounded-b-xl border bg-white px-2 py-5">
+        <div className="rounded-b-xl border bg-white px-2 py-5 dark:bg-[#1B1B1B]">
           <ul className="flex w-full flex-col gap-5">
             {user?.role === "USER" && (
               <li
@@ -253,13 +253,17 @@ export const Header = () => {
               </NavLink>
             ))}
             {user?.role === "USER" ? (
-              <li onClick={() => handleAuth("keluar")} className="cursor-pointer hover:underline">
+              <li onClick={() => handleAuth("keluar")} className="text-bold cursor-pointer hover:underline">
                 Keluar
               </li>
             ) : (
               <div className="flex flex-col gap-5">
                 <li>
-                  <Button className="w-full rounded-xl" variant="secondary" onClick={() => handleAuth("login")}>
+                  <Button
+                    className="w-full rounded-xl dark:bg-slate-100 dark:text-[#F97316]"
+                    variant="secondary"
+                    onClick={() => handleAuth("login")}
+                  >
                     Masuk
                   </Button>
                 </li>
@@ -275,7 +279,7 @@ export const Header = () => {
             <div
               className="absolute -z-20 block h-screen w-screen bg-gradient-to-t from-white to-black opacity-85 backdrop-blur-xl md:hidden"
               onClick={() => setOpen(false)}
-            ></div>
+            />
           )}
         </div>
       </div>
