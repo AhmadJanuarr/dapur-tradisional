@@ -1,22 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ComponentsDialogContent } from "@/components/Dialog/Dialog"
 import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Dialog, DialogTrigger } from "@/components/ui/dialog"
+
 import { PasswordFields } from "@/components/User/PasswordFields"
 import { useAuth } from "@/context/AuthContext"
 import { useState } from "react"
 import { FaSpinner } from "react-icons/fa6"
 
 export const SettingProfile = () => {
-  const { user, updateEmail, updatePassword } = useAuth()
+  const { user, updateEmail, updatePassword, deleteUser } = useAuth()
   const [open, setOpen] = useState<boolean>(false)
   const [email, setEmail] = useState(user?.email)
   const [loading, setLoading] = useState<boolean>(false)
@@ -42,8 +35,12 @@ export const SettingProfile = () => {
       setLoading(false)
     }
   }
+
+  const handleDeleteUser = () => {
+    deleteUser()
+  }
   return (
-    <div className="px-20">
+    <div className="subheading lg:px-20">
       <h1 className="heading font-raleway">Pengaturan akun</h1>
       <div className="flex flex-col gap-10 py-5">
         <div className="flex flex-col gap-4">
@@ -56,23 +53,14 @@ export const SettingProfile = () => {
               <DialogTrigger asChild>
                 <span className="cursor-pointer font-semibold underline">Edit</span>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Mengganti email</DialogTitle>
-                  <DialogDescription>Masukkan email kamu disini</DialogDescription>
-                </DialogHeader>
-                <div className="flex items-center space-x-2">
-                  <div className="grid flex-1 gap-2">
-                    <Label htmlFor="link" className="sr-only">
-                      Link
-                    </Label>
-                    <Input id="link" defaultValue={email} onChange={(e) => setEmail(e.target.value)} />
-                  </div>
-                  <Button type="submit" size="sm" className="px-3" onClick={() => handleUpdateEmail()}>
-                    <span>Simpan</span>
-                  </Button>
-                </div>
-              </DialogContent>
+              <ComponentsDialogContent
+                isDelete={false}
+                title="Mengganti email"
+                description="Masukkan email kamu disini"
+                value={email}
+                setValue={setEmail}
+                handleClick={handleUpdateEmail}
+              />
             </Dialog>
           </div>
         </div>
@@ -80,14 +68,18 @@ export const SettingProfile = () => {
           <h5 className="text-semibold text-[16px] lg:text-[18px]">Password</h5>
           <form onSubmit={handleUpdatePassword}>
             <PasswordFields password={password} setPassword={setPassword} />
-            <p>
+            <p className="pt-2">
               Ups! Lupa kata sandi?{" "}
               <a href="/forgot-password" className="font-semibold underline">
                 Reset your password
               </a>
             </p>
-            <div className="py-10">
-              <Button className="w-60 rounded-full px-4 py-5 font-semibold lg:py-6" type="submit" disabled={loading}>
+            <div className="py-4">
+              <Button
+                className="w-full rounded-md px-4 py-5 font-semibold lg:w-60 lg:rounded-full lg:py-6"
+                type="submit"
+                disabled={loading}
+              >
                 {loading ? (
                   <div className="flex items-center gap-2">
                     <FaSpinner className="animate-spin" />
@@ -105,7 +97,17 @@ export const SettingProfile = () => {
               Jika Anda melanjutkan penghapusan akun, semua informasi terkait akun Anda, termasuk data dapur, menu, dan
               riwayat pesanan akan dihapus secara permanen dan tidak dapat dipulihkan.
             </p>
-            <p className="cursor-pointer font-semibold text-red-800 hover:underline">saya ingin menghapus akun saya</p>
+            <Dialog>
+              <DialogTrigger asChild>
+                <span className="cursor-pointer font-semibold text-red-800 hover:underline">Hapus akun</span>
+              </DialogTrigger>
+              <ComponentsDialogContent
+                title="Menghapus akun"
+                description="Anda yakin ingin menghapus akun?"
+                isDelete={true}
+                handleClick={() => handleDeleteUser()}
+              />
+            </Dialog>
           </div>
         </div>
       </div>
