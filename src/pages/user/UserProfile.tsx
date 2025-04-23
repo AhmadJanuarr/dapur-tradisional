@@ -1,16 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ComponentsDialogContent } from "@/components/Dialog/Dialog"
 import { HoverOverlay } from "@/components/Hover/HoverOverlay"
-import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 import { useAuth } from "@/context/AuthContext"
 import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
 import { useRef, useState } from "react"
@@ -67,7 +58,7 @@ export const UserProfile = () => {
     }
   }
   return (
-    <div className="px-20">
+    <div className="subheading lg:px-20">
       <h1 className="heading font-raleway">Profile</h1>
       <div className="flex justify-center ">
         <div className="group relative flex h-40 w-40 flex-col items-center justify-center py-8 ">
@@ -97,23 +88,14 @@ export const UserProfile = () => {
               <DialogTrigger asChild>
                 <span className="cursor-pointer font-semibold underline">Edit</span>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Mengganti nama</DialogTitle>
-                  <DialogDescription>Masukkan nama lengkap kamu disini</DialogDescription>
-                </DialogHeader>
-                <div className="flex items-center space-x-2">
-                  <div className="grid flex-1 gap-2">
-                    <Label htmlFor="link" className="sr-only">
-                      Link
-                    </Label>
-                    <Input id="link" defaultValue={user?.name} onChange={(e) => setName(e.target.value)} />
-                  </div>
-                  <Button type="submit" size="sm" className="px-3" onClick={() => handleUpdateName()}>
-                    <span>Simpan</span>
-                  </Button>
-                </div>
-              </DialogContent>
+              <ComponentsDialogContent
+                description="Masukkan nama lengkap kamu disini"
+                title="Mengganti nama"
+                value={name}
+                isDelete={false}
+                setValue={setName}
+                handleClick={handleUpdateName}
+              />
             </Dialog>
           </div>
         </div>
