@@ -1,9 +1,9 @@
-import { Recipe } from "@/types/recipe.types"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "sonner"
-import { useNavigate } from "react-router-dom"
-import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
 import { useAuth } from "@/context/AuthContext"
+import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
+import { RecipeData } from "@/types/recipe.types"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 export function useFavorite() {
   const { user } = useAuth()
@@ -16,8 +16,8 @@ export function useFavorite() {
     //fungsi yang dijalankan sebelum fungsi utama (optimistic update)
     onMutate: async (recipeId) => {
       await queryClient.cancelQueries({ queryKey: ["recipes", user?.id] })
-      const previousRecipes = queryClient.getQueryData<Recipe[]>(["recipes", user?.id])
-      queryClient.setQueryData<Recipe[]>(
+      const previousRecipes = queryClient.getQueryData<RecipeData[]>(["recipes", user?.id])
+      queryClient.setQueryData<RecipeData[]>(
         ["recipes", user?.id],
         (old) => old?.map((r) => (r.id === recipeId ? { ...r, isFavorite: !r.isFavorite } : r)) ?? [],
       )
