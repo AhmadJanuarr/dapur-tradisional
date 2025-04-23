@@ -10,7 +10,6 @@ export type HeadingAuthOptionProps = {
 
 export type BookmarksButtonProps = {
   isFavorite?: boolean
-  onClickFavorite: () => void
 }
 
 export type InspirationCardProps = {
