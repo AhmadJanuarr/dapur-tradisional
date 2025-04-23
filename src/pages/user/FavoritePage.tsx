@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFetchDataRecipeFavorite } from "@/api/useFetchDataRecipeFavorite"
 import { BookMarksButton } from "@/components/Button/Bookmark"
 import { RecipeFavoriteNotFound } from "@/components/Recipe/RecipeFavoriteNotFound"
@@ -8,14 +7,17 @@ import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import { useAuth } from "@/context/AuthContext"
 import { useFavorite } from "@/hooks/useFavorite"
 import { RecipeData } from "@/types/recipe.types"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { ErrorRecipe } from "../error/RecipeError"
+import { LazyLoadImage } from "react-lazy-load-image-component"
+import "react-lazy-load-image-component/src/effects/blur.css"
 
 export default function FavoritePage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const { handleClickFavorite } = useFavorite()
   const {
     data: recipes,
@@ -25,39 +27,42 @@ export default function FavoritePage() {
     queryKey: ["favorite"],
     enabled: user !== undefined || true,
     staleTime: 0,
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
-    placeholderData: (prevData) => prevData,
     queryFn: useFetchDataRecipeFavorite().fetchData,
   })
 
+  const FetchingDataRecipeFavortie = async () => {
+    handleClickFavorite(recipes?.id || 0)
+    queryClient.invalidateQueries({ queryKey: ["favorite"] })
+  }
   const handleClickViewDetail = (title: string) => {
     navigate(`/resep/${title}`)
   }
 
-  if (isLoading) {
-    return <RecipeSkeleton index={8} />
-  }
+  if (isLoading) return <RecipeSkeleton index={8} />
+  if (error) return <ErrorRecipe />
+  if (recipes.length === 0) return <RecipeFavoriteNotFound />
 
-  if (error) {
-    return <ErrorRecipe />
-  }
   console.log(recipes)
   return (
     <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       {recipes ? (
         recipes.map((item: RecipeData) => (
           <Card
-            className="relative flex w-full flex-col rounded-xl border-none bg-slate-100 shadow-none dark:bg-darkBackground"
+            className="relative flex flex-col w-full border-none shadow-none rounded-xl bg-slate-100 dark:bg-darkBackground"
             key={item.id}
           >
             <div className="relative overflow-hidden">
-              <div className="lg:h-52 2xl:h-72">
-                <img src={item.image} className="h-full w-full rounded-t-xl object-cover shadow-xl" alt={item.title} />
+              <div className="h-36 lg:h-40 2xl:h-48">
+                <LazyLoadImage
+                  src={item.image}
+                  alt={item.title}
+                  effect="blur"
+                  className="object-cover w-full h-full shadow-xl rounded-t-xl"
+                />
               </div>
               <div
-                onClick={() => handleClickFavorite(item.id)}
-                className="absolute right-2 top-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white shadow"
+                onClick={FetchingDataRecipeFavortie}
+                className="absolute flex items-center justify-center w-10 h-10 bg-white rounded-full shadow cursor-pointer right-2 top-2"
               >
                 <BookMarksButton isFavorite={item.isFavorite} />
               </div>
