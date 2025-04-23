@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFetchDataRecipeFavorite } from "@/api/useFetchDataRecipeFavorite"
 import { BookMarksButton } from "@/components/Button/Bookmark"
+import { RecipeFavoriteNotFound } from "@/components/Recipe/RecipeFavoriteNotFound"
 import { RecipeSkeleton } from "@/components/Skeleton/RecipeSkeleton"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import { useAuth } from "@/context/AuthContext"
 import { useFavorite } from "@/hooks/useFavorite"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { RecipeData } from "@/types/recipe.types"
+import { useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { ErrorRecipe } from "../error/RecipeError"
-import { RecipeFavoriteNotFound } from "@/components/Recipe/RecipeFavoriteNotFound"
-import { RecipeData } from "@/types/recipe.types"
 
 export default function FavoritePage() {
   const { user } = useAuth()
