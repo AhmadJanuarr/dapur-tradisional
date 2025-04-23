@@ -16,6 +16,7 @@ type SidebarProfileProps = {
   username?: string
   pathname?: string
   onLogout: () => void
+  onNavigateMobile?: () => void
 }
 
 const navItems = [
@@ -24,10 +25,10 @@ const navItems = [
   { label: "Notifikasi", path: "notifikasi", icon: <Bell className="size-5" /> },
 ]
 
-export function SidebarProfile({ username, onLogout, pathname }: SidebarProfileProps) {
+export function SidebarProfile({ username, onLogout, pathname, onNavigateMobile }: SidebarProfileProps) {
   const basePath = `/profile/${username}/`
   const isActive = (target: string) => pathname === `${basePath}${target ? `${target}` : ""}`
-  const activeClass = " bg-[#FFEDDF] font-bold text-gray-800"
+  const activeClass = "bg-[#FFEDDF] font-bold text-gray-800"
   const baseClass = "cursor-pointer px-4 py-2 transition-all duration-200 flex items-center gap-5 subheading"
 
   return (
@@ -36,13 +37,22 @@ export function SidebarProfile({ username, onLogout, pathname }: SidebarProfileP
       <nav className="flex h-full w-full flex-col items-start justify-start gap-4 py-10">
         <ul className="flex w-full flex-col gap-4">
           {navItems.map(({ label, path, icon }) => (
-            <Link key={path} to={`${basePath}${path ? `${path}` : ""}`}>
+            <Link
+              key={path}
+              to={`${basePath}${path ? `${path}` : ""}`}
+              onClick={() => {
+                if (window.innerWidth < 1024) {
+                  onNavigateMobile?.()
+                }
+              }}
+            >
               <li className={`${baseClass} ${isActive(path) ? activeClass : ""}`}>
                 {icon}
                 {label}
               </li>
             </Link>
           ))}
+
           <li>
             <AlertDialog>
               <AlertDialogTrigger asChild>
