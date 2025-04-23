@@ -1,6 +1,5 @@
 import { InspirationCardProps } from "@/types/components.type"
-import { BookmarkIcon } from "@heroicons/react/24/outline"
-import { BookmarkIcon as BookmarkIconSolid } from "@heroicons/react/24/solid"
+import { BookMarksButton } from "../Button/Bookmark"
 
 export const InspirationCard = ({
   img,
@@ -30,11 +29,7 @@ export const InspirationCard = ({
             level : <span className="text-[#f97316]">{difficulty}</span>
           </p>
           <div className="cursor-pointer" onClick={onClickFavorite}>
-            {!isFavorite ? (
-              <BookmarkIcon className="h-6 w-6 text-[#f97316]" />
-            ) : (
-              <BookmarkIconSolid className="h-6 w-6 text-[#f97316]" />
-            )}
+            <BookMarksButton isFavorite={isFavorite} />
           </div>
         </div>
       </div>
