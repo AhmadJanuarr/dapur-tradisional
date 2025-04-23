@@ -1,5 +1,8 @@
 import { InspirationCardProps } from "@/types/components.type"
 import { BookMarksButton } from "../Button/Bookmark"
+import { LazyLoadImage } from "react-lazy-load-image-component"
+import palceholderImage from "/elements/element-placeholder.jpg"
+import "react-lazy-load-image-component/src/effects/blur.css"
 
 export const InspirationCard = ({
   img,
@@ -13,14 +16,16 @@ export const InspirationCard = ({
 }: InspirationCardProps) => {
   return (
     <div className="w-full">
-      <div className="w-full cursor-pointer overflow-hidden rounded-t-lg lg:h-48 2xl:h-64" onClick={onClickViewDetail}>
-        <img
+      <div className="w-full overflow-hidden rounded-t-lg cursor-pointer lg:h-48 2xl:h-64" onClick={onClickViewDetail}>
+        <LazyLoadImage
+          placeholderSrc={palceholderImage}
           src={img}
           alt={title}
           className="transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:brightness-75 "
+          effect="blur"
         />
       </div>
-      <div className="rounded-b-lg border-x-2 border-b-2 border-slate-100 px-3 py-3 dark:bg-darkBackground">
+      <div className="px-3 py-3 border-b-2 rounded-b-lg border-x-2 border-slate-100 dark:bg-darkBackground">
         <p className="text-right text-[#f97316]">{category.replace("_", " ")}</p>
         <h3 className="font-semibold">{title}</h3>
         <p className="py-2 text-gray-800 dark:text-slate-200">{description.slice(0, 100).concat("...")}</p>
