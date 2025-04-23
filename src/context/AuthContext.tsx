@@ -160,7 +160,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const updateEmail = async (newEmail: string) => {
     const accessToken = localStorage.getItem("accessToken")
     const user = localStorage.getItem("user")
-
     if (accessToken) {
       try {
         const data = JSON.parse(user!)
@@ -194,9 +193,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
     }
   }
+
+  const deleteUser = async () => {
+    const accessToken = localStorage.getItem("accessToken")
+    if (accessToken) {
+      try {
+        await AxiosWithAuth.delete(`${APIUrl}/api/auth/profile/delete-user`)
+        toast.success("User berhasil dihapus")
+        logout()
+      } catch (error: any) {
+        toast.error(error.response.data.message || "Gagal menghapus user")
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user, state, updatePassword, updateEmail, updateName, login, signup, logout, dispatch }}
+      value={{ user, state, deleteUser, updatePassword, updateEmail, updateName, login, signup, logout, dispatch }}
     >
       {children}
     </AuthContext.Provider>
