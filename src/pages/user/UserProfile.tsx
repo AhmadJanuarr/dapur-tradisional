@@ -54,8 +54,8 @@ export const UserProfile = () => {
     } catch (error: any) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data.message)
+        toast.error(error.response.data.message)
       }
-      toast.error("Terjadi kesalahan saat mengganti gambar profile")
     }
   }
   return (
