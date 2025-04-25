@@ -12,6 +12,7 @@ export default function RecipesPage() {
         heading="Dapur tradisional - resep makanan khas daerah"
         subheading="Temukan resep makanan khas daerah Indonesia yang lezat dan mudah dibuat"
         image="/img/bg-recipe.png"
+        placeholderImage="/elements/element-placeholder-recipe.jpg"
       />
       <CategorySection />
       <RecipesSection />
