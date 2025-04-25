@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const pathname = useLocation().pathname
   const navigate = useNavigate()
   useEffect(() => {
-    console.log(user)
     const accessToken = localStorage.getItem("accessToken")
     const isAdminRoute = pathname.startsWith("/admin")
 
