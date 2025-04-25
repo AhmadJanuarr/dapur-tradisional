@@ -1,16 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentsDialogContent } from "@/components/Dialog/Dialog"
 import { HoverOverlay } from "@/components/Hover/HoverOverlay"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 import { useAuth } from "@/context/AuthContext"
 import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
+import axios from "axios"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
-import axios from "axios"
 
 export const UserProfile = () => {
   const { user, updateName } = useAuth()
-  const [preview, setPreview] = useState<string>(user?.avatar || "/elements/element-user.png")
+  const [preview, setPreview] = useState<string>(
+    user?.avatar && user.avatar.trim() !== "" ? user.avatar : "/elements/element-user.png",
+  )
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [name, setName] = useState(user?.name)
   const [open, setOpen] = useState<boolean>(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -41,6 +45,7 @@ export const UserProfile = () => {
     if (!file) return toast.error("Pilih gambar anda terlebih dahulu")
     const formData = new FormData()
     formData.append("avatar", file)
+    setIsLoading(true)
 
     try {
       const response = await AxiosWithAuth.put(`${APIURL}/api/auth/profile/upload-avatar`, formData, {
@@ -50,6 +55,7 @@ export const UserProfile = () => {
       })
       const avatarUpdate = response.data.data.avatar
       localStorage.setItem("user", JSON.stringify({ ...user, avatar: avatarUpdate }))
+      setIsLoading(false)
       toast.success("Berhasil mengganti gambar profile")
     } catch (error: any) {
       if (axios.isAxiosError(error) && error.response) {
@@ -58,17 +64,17 @@ export const UserProfile = () => {
       }
     }
   }
+  console.log(isLoading)
   return (
     <div className="subheading lg:px-20">
       <h1 className="heading font-raleway">Profile</h1>
       <div className="flex justify-center ">
         <div className="group relative flex h-40 w-40 flex-col items-center justify-center py-8 ">
-          <img
-            src={preview}
-            className="h-40 w-40 rounded-full border-4 border-[#FFEDDF] object-cover shadow-lg transition-transform duration-300 hover:scale-105"
-            alt="user not found"
-          />
-          <HoverOverlay onClick={triggerFileInput} />
+          <Avatar className="h-40 w-40">
+            <AvatarImage src={preview} className="object-cover" />
+            <AvatarFallback>CN</AvatarFallback>
+            <HoverOverlay onClick={triggerFileInput} isLoading={isLoading} />
+          </Avatar>
           <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
         </div>
       </div>
