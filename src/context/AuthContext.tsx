@@ -22,8 +22,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const APIUrl = import.meta.env.VITE_API_URL
   const pathname = useLocation().pathname
   const navigate = useNavigate()
-
   useEffect(() => {
+    console.log(user)
     const accessToken = localStorage.getItem("accessToken")
     const isAdminRoute = pathname.startsWith("/admin")
 
