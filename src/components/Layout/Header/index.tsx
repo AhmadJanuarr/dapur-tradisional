@@ -76,7 +76,10 @@ const UserAlreadyLogged = ({
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger>
           <Avatar>
-            <AvatarImage src={user?.avatar || "/elements/element-user.png"} className="object-cover" />
+            <AvatarImage
+              src={user?.avatar === " " ? "/elements/element-user.png" : user?.avatar}
+              className="object-cover"
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </PopoverTrigger>
@@ -90,11 +93,13 @@ const UserAlreadyLogged = ({
                   handlePopoverClose?.()
                 }}
               >
-                <img
-                  src={user?.avatar || "/elements/element-user.png"}
-                  alt="user"
-                  className="h-12 w-12 rounded-full object-cover"
-                />
+                <Avatar>
+                  <AvatarImage
+                    src={user?.avatar === " " ? "/elements/element-user.png" : user?.avatar}
+                    className="object-cover"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
                 <div className="subheading flex flex-col">
                   <p className="font-semibold">{user?.name}</p>
                   <p className="text-gray-500">{user?.email}</p>
@@ -240,7 +245,14 @@ export const Header = () => {
                   handlePopoverClose()
                 }}
               >
-                <img src={user?.avatar || "/elements/element-user.png"} alt="user" className="h-12 w-12 rounded-full" />
+                <Avatar>
+                  <AvatarImage
+                    src={user?.avatar === " " ? "/elements/element-user.png" : user?.avatar}
+                    className="object-cover"
+                    alt="avatar"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
                 <div className="subheading flex flex-col">
                   <p className="font-semibold">{user?.name}</p>
                   <p className="text-gray-500">{user?.email}</p>
