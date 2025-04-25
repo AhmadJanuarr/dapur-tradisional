@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component"
+
 type HeroSectionAboutProps = {
   heading: string
   subheading: string
@@ -10,8 +12,18 @@ export const HeroSectionAbout = ({ heading, subheading, src }: HeroSectionAboutP
         <h1 className="heading font-raleway lg:w-4/5">{heading}</h1>
         <p className="subheading text-gray-800 dark:text-white lg:w-4/5">{subheading}</p>
       </div>
-      <div className="mt-10 lg:py-10">
-        <img src={src} alt="bg-about" className=" h-[215px] w-full rounded-xl object-cover lg:h-[500px]" />
+      <div className="relative mt-10 lg:py-10">
+        <div className="w-full ">
+          <LazyLoadImage
+            src={src}
+            alt="bg-about"
+            effect="blur"
+            wrapperProps={{
+              style: { transitionDelay: "1s" },
+            }}
+            className=" h-[215px] w-full rounded-xl object-cover lg:h-[500px]"
+          />
+        </div>
       </div>
     </div>
   )
