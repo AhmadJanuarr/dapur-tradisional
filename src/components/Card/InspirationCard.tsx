@@ -16,16 +16,19 @@ export const InspirationCard = ({
 }: InspirationCardProps) => {
   return (
     <div className="w-full">
-      <div className="w-full overflow-hidden rounded-t-lg cursor-pointer lg:h-48 2xl:h-64" onClick={onClickViewDetail}>
+      <div className="w-full cursor-pointer overflow-hidden rounded-t-lg lg:h-48 2xl:h-64" onClick={onClickViewDetail}>
         <LazyLoadImage
           placeholderSrc={palceholderImage}
           src={img}
           alt={title}
+          wrapperProps={{
+            style: { transitionDelay: "1s" },
+          }}
           className="transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:brightness-75 "
           effect="blur"
         />
       </div>
-      <div className="px-3 py-3 border-b-2 rounded-b-lg border-x-2 border-slate-100 dark:bg-darkBackground">
+      <div className="rounded-b-lg border-x-2 border-b-2 border-slate-100 px-3 py-3 dark:bg-darkBackground">
         <p className="text-right text-[#f97316]">{category.replace("_", " ")}</p>
         <h3 className="font-semibold">{title}</h3>
         <p className="py-2 text-gray-800 dark:text-slate-200">{description.slice(0, 100).concat("...")}</p>
