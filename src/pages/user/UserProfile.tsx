@@ -11,9 +11,8 @@ import { toast } from "sonner"
 
 export const UserProfile = () => {
   const { user, updateName } = useAuth()
-  const [preview, setPreview] = useState<string>(
-    user?.avatar && user.avatar.trim() !== "" ? user.avatar : "/elements/element-user.png",
-  )
+  console.log(user)
+  const [preview, setPreview] = useState<string>(user?.avatar || "/elements/element-user.png")
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [name, setName] = useState(user?.name)
   const [open, setOpen] = useState<boolean>(false)
@@ -64,7 +63,7 @@ export const UserProfile = () => {
       }
     }
   }
-  console.log(isLoading)
+  console.log(preview)
   return (
     <div className="subheading lg:px-20">
       <h1 className="heading font-raleway">Profile</h1>
@@ -83,7 +82,7 @@ export const UserProfile = () => {
           <button className="subheading underline" onClick={triggerFileInput}>
             Edit
           </button>
-          <button onClick={() => handleUpdateImage()} className="subheading underline">
+          <button onClick={() => handleUpdateImage()} className="subheading underline" disabled={isLoading}>
             Simpan
           </button>
         </div>
