@@ -30,8 +30,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/tentang-kami" element={<AboutUsPage />} />
-              <Route path="/kontak" element={<ContactPage />} />
-              {/* Halaman Authentication (Login & Signup) */}
+              <Route path="/kontak" element={<ContactPage />} />   {/* Halaman Authentication (Login & Signup) */}
               <Route path="/auth/login" element={<Authentication />} />
               <Route path="/auth/register" element={<Authentication />} />
 
