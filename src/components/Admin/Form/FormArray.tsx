@@ -13,7 +13,7 @@ export const FormArray = ({ title, fields, prefix, onAdd, onRemove, register }: 
           <Input
             type="text"
             placeholder={`${title} ${index + 1}`}
-            {...register(`${prefix} [${index}]` as `ingredients.${number}` | `steps.${number}`)}
+            {...register(prefix === "ingredients" ? `${prefix}.${index}.name` : `${prefix}.${index}.description`)}
           />
           <Button variant="destructive" size="icon" onClick={() => onRemove(index)}>
             <TrashIcon />
