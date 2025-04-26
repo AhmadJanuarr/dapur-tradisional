@@ -15,6 +15,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog"
 import { RecipeData } from "@/types/recipe.types"
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 export const RecipeList = ({ recipes = [] }: { recipes: RecipeData[] }) => {
   const handleDelete = async (id: number) => {
@@ -24,6 +25,7 @@ export const RecipeList = ({ recipes = [] }: { recipes: RecipeData[] }) => {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data.message)
+        toast.error(error.response.data.message)
       } else {
         console.error("An unexpected error occurred", error)
       }
@@ -36,7 +38,15 @@ export const RecipeList = ({ recipes = [] }: { recipes: RecipeData[] }) => {
         <TableRow key={title} className="subheading">
           <TableCell className="text-center font-medium">{index + 1}</TableCell>
           <TableCell className="flex items-center gap-2">
-            <img src={image} width={100} alt="image" loading="lazy" className="rounded-sm" />
+            <LazyLoadImage
+              src={image}
+              width={100}
+              alt="image"
+              effect="blur"
+              loading="lazy"
+              wrapperClassName="rounded-sm"
+              style={{ transitionDelay: "1s" }}
+            />
             {title}
           </TableCell>
           <TableCell>{description.slice(0, 100)}...</TableCell>
