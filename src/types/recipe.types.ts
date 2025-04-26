@@ -16,8 +16,8 @@ export type RecipeData = {
     fat: number
     carbs: number
   }
-  ingredients: { id: number; name: string }[]
-  steps: { id: number; description: string }[]
+  ingredients: { name: string }[]
+  steps: { description: string }[]
   tips: string
 }
 export type ApiResponse = {
@@ -54,7 +54,7 @@ export interface RecipeFormImageProps {
 
 export interface RecipeFormArrayProps {
   title: string
-  prefix: string
+  prefix: "ingredients" | "steps"
   fields: FieldArrayWithId<any, string>[]
   onAdd: (e: React.BaseSyntheticEvent) => void
   onRemove: (index: number) => void
@@ -65,8 +65,8 @@ export interface RecipeFormValues {
   description: string
   image: string
   category: string
-  ingredients: { id: number; name: string }[]
-  steps: { id: number; description: string }[]
+  ingredients: { name: string }[]
+  steps: { description: string }[]
   calories: number | null
   protein: number | null
   carbs: number | null
