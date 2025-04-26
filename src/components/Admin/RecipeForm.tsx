@@ -79,7 +79,7 @@ export const RecipeForm = ({
             prefix="ingredients"
             onAdd={(e) => {
               e.preventDefault()
-              ingredientsArray.append({ id: Math.random(), name: "" })
+              ingredientsArray.append({ name: " " })
             }}
             onRemove={ingredientsArray.remove}
             register={register}
@@ -90,7 +90,7 @@ export const RecipeForm = ({
             prefix="steps"
             onAdd={(e) => {
               e.preventDefault()
-              stepsArray.append({ id: Math.random(), name: "" })
+              stepsArray.append({ description: " " })
             }}
             onRemove={stepsArray.remove}
             register={register}
