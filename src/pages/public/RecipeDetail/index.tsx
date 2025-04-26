@@ -21,7 +21,7 @@ type NutritionInfoProps = {
   unit: string
 }
 const NutritionInfo = ({ nutrition, value, unit }: NutritionInfoProps) => (
-  <div className="flex flex-col flex-1 gap-4 subheading">
+  <div className="subheading flex flex-1 flex-col gap-4">
     <p className="font-semibold">{nutrition}</p>
     <p>
       {value} {unit}
@@ -79,12 +79,12 @@ export default function DetailRecipe() {
       <div className="pb-4 md:pb-8">
         <BreadcrumbWithCustomSeparator title={recipe.title} />
       </div>
-      <h1 className="py-2 font-bold heading">{recipe.title}</h1>
-      <p className="pb-2 subheading">{recipe.description}</p>
+      <h1 className="heading py-2 font-bold">{recipe.title}</h1>
+      <p className="subheading pb-2">{recipe.description}</p>
       <div className="flex flex-wrap items-center gap-5 py-5 md:flex-row">
         <div className="flex w-full gap-2 rounded-md md:w-auto">
           <Button
-            className="font-semibold rounded-md dark:bg-slate-100"
+            className="rounded-md font-semibold dark:bg-slate-100"
             variant={`${recipe.isFavorite ? "default" : "secondary"}`}
             onClick={onClickFavorite}
           >
@@ -92,12 +92,12 @@ export default function DetailRecipe() {
             <p className="subheading dark:text-black">{recipe.isFavorite ? "Hapus favorit" : "Tambah ke favorit"}</p>
           </Button>
         </div>
-        <div className="flex gap-2 subheading">
-          <BookIcon className="w-5 h-5 text-gray-900" />
+        <div className="subheading flex gap-2">
+          <BookIcon className="h-5 w-5 text-gray-900" />
           <p>{recipe.category.replace("_", " ")}</p>
         </div>
         <div className={`gap subheading flex gap-2 text-center`}>
-          <Scale className="w-5 h-5" />
+          <Scale className="h-5 w-5" />
           <p>{recipe.difficulty}</p>
         </div>
       </div>
@@ -105,13 +105,13 @@ export default function DetailRecipe() {
         <img src={recipe.image} alt={recipe.title} className="w-full rounded-xl md:h-[800px]" />
       </figure>
 
-      <div className="flex gap-5 p-5 mt-5 rounded-md bg-slate-100">
+      <div className="mt-5 flex gap-5 rounded-md bg-slate-100 p-5">
         <NutritionInfo nutrition="Kalori" value={recipe.nutrition.calories} unit="kcal" />
         <NutritionInfo nutrition="Protein" value={recipe.nutrition.protein} unit="g" />
         <NutritionInfo nutrition="Lemak" value={recipe.nutrition.fat} unit="g" />
         <NutritionInfo nutrition="Karbohidrat" value={recipe.nutrition.carbs} unit="g" />
       </div>
-      <div className="flex gap-5 mt-6 ">
+      <div className="mt-6 flex gap-5 ">
         <Button className="rounded-md">
           <Printer />
           <p className="subheading"> Print Resep</p>
@@ -122,10 +122,10 @@ export default function DetailRecipe() {
         </Button>
       </div>
       <div className="mt-6">
-        <h2 className="py-5 text-xl font-semibold font-playfair">Bahan - Bahan:</h2>
-        <ul className="flex flex-col gap-3 list-disc list-inside ">
-          {recipe.ingredients.map((ingredient: { id: number; name: string }) => (
-            <li key={ingredient.id} className="subheading">
+        <h2 className="font-playfair py-5 text-xl font-semibold">Bahan - Bahan:</h2>
+        <ul className="flex list-inside list-disc flex-col gap-3 ">
+          {recipe.ingredients.map((ingredient: { name: string }, index: number) => (
+            <li key={index} className="subheading">
               {ingredient.name}
             </li>
           ))}
@@ -133,24 +133,24 @@ export default function DetailRecipe() {
       </div>
 
       <div className="mt-6">
-        <h2 className="py-5 text-xl font-semibold font-playfair">Langkah - Langkah:</h2>
+        <h2 className="font-playfair py-5 text-xl font-semibold">Langkah - Langkah:</h2>
         <ul className="flex flex-col gap-5">
-          {recipe.steps.map((step: { id: number; description: string }, index: number) => (
-            <div className="flex items-center gap-3" key={step.id}>
-              <span className="flex justify-center px-3 py-1 text-white bg-black rounded-full">{index + 1}</span>
+          {recipe.steps.map((step: { description: string }, index: number) => (
+            <div className="flex items-center gap-3" key={index}>
+              <span className="flex justify-center rounded-full bg-black px-3 py-1 text-white">{index + 1}</span>
               <li className="subheading">{step.description}</li>
             </div>
           ))}
         </ul>
       </div>
       <div className="my-6">
-        <h2 className="py-5 text-xl font-semibold font-playfair">Note & Tips</h2>
+        <h2 className="font-playfair py-5 text-xl font-semibold">Note & Tips</h2>
         <div className="rounded-md bg-sky-50">
-          <p className="p-5 subheading text-sky-900">{recipe.tips}</p>
+          <p className="subheading p-5 text-sky-900">{recipe.tips}</p>
         </div>
       </div>
       <div className="my-6">
-        <h2 className="py-5 text-xl font-semibold font-playfair">Reviews</h2>
+        <h2 className="font-playfair py-5 text-xl font-semibold">Reviews</h2>
       </div>
     </div>
   )
