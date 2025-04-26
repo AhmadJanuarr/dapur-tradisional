@@ -35,7 +35,7 @@ export function useRecipeForm(setOpenForm: React.Dispatch<React.SetStateAction<b
   })
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log(values.image)
+    console.log(values)
     const formData = new FormData()
 
     formData.append("title", values.title)
@@ -59,9 +59,8 @@ export function useRecipeForm(setOpenForm: React.Dispatch<React.SetStateAction<b
       queryClient.invalidateQueries({ queryKey: ["recipes"] })
       reset()
     } catch (error) {
-      const axiosError = error as AxiosError
-      console.log(axiosError.response)
-      toast.error("Terjadi kesalahan coba lagi")
+      const axiosError = error as AxiosError<{ message: string }>
+      toast.error(axiosError.response?.data.message || "An error occurred")
     } finally {
       setOpenForm(false)
     }
