@@ -1,25 +1,27 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { NotificationPage } from "./pages/user/NotificationPage"
+import { SettingProfilePage } from "./pages/user/SettingProfilePage"
+import { UserProfilePage } from "./pages/user/UserProfilePage"
 import { ProtectedRoute } from "./route/protected.route"
-import { UserProfile } from "./pages/user/UserProfile"
-import { SettingProfile } from "./pages/user/SettingProfile"
-import { Notification } from "./pages/user/Notification"
 import { AuthProvider } from "./context/AuthContext"
+import { AddRecipePage } from "./pages/user/AddRecipePage"
 import AppLayout from "./components/Layout/App"
 import AdminPanel from "./pages/admin/AdminPanel"
-import Authentication from "./pages/auth/Authentication"
+import DashboardPage from "./pages/admin/DashboardPage"
+import ManageRecipesPage from "./pages/admin/ManageRecipesPage"
+import AuthenticationPage from "./pages/auth/Authentication"
 import NotFoundPage from "./pages/error/404"
 import UnauthorizedPage from "./pages/error/unauthorized"
-import AboutUsPage from "./pages/public/AboutUs"
-import ContactPage from "./pages/public/Contact"
-import HomePage from "./pages/public/Home"
-import DetailRecipe from "./pages/public/RecipeDetail"
-import Recipes from "./pages/public/Recipes"
-import RecipesCategory from "./pages/public/RecipesCategory"
-import LayoutProfile from "./pages/user/LayoutProfile"
+import AboutUsPage from "./pages/public/AboutUsPage"
+import ContactPage from "./pages/public/ContactPage"
+import HomePage from "./pages/public/HomePage"
+import DetailRecipePage from "./pages/public/RecipeDetail/RecipeDetailPage"
+import RecipesCategoryPage from "./pages/public/RecipesCategory/RecipeCategoryPage"
+import RecipeSearchPage from "./pages/public/RecipeSearch/RecipeSearchPage"
+import RecipesPage from "./pages/public/RecipesPage"
 import FavoritePage from "./pages/user/FavoritePage"
-import DashboardPage from "./pages/admin/DashboardPage"
-import ManageRecipes from "./pages/admin/ManageRecipes"
+import LayoutProfilePage from "./pages/user/LayoutProfilePage"
 
 export default function App() {
   return (
@@ -30,26 +32,26 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/tentang-kami" element={<AboutUsPage />} />
-              <Route path="/kontak" element={<ContactPage />} />   {/* Halaman Authentication (Login & Signup) */}
-              <Route path="/auth/login" element={<Authentication />} />
-              <Route path="/auth/register" element={<Authentication />} />
-
+              <Route path="/kontak" element={<ContactPage />} /> {/* Halaman Authentication (Login & Signup) */}
+              <Route path="/auth/login" element={<AuthenticationPage />} />
+              <Route path="/auth/register" element={<AuthenticationPage />} />
               {/* Halaman profile user */}
               <Route
                 path="/profile/:username"
                 element={
                   <ProtectedRoute allowedRoles={["USER"]}>
-                    <LayoutProfile />
+                    <LayoutProfilePage />
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<UserProfile />} />
-                <Route path="pengaturan-akun" element={<SettingProfile />} />
-                <Route path="notifikasi" element={<Notification />} />
+                <Route index element={<UserProfilePage />} />
+                <Route path="pengaturan-akun" element={<SettingProfilePage />} />
+                <Route path="notifikasi" element={<NotificationPage />} />
                 <Route path="favorit" element={<FavoritePage />} />
+                <Route path="tambahkan-resep" element={<AddRecipePage />} />
               </Route>
-
               {/* Halaman Admin */}
+              <Route path="/resep/cari-resep" element={<RecipeSearchPage />} />
               <Route
                 path="/admin/"
                 element={
@@ -60,14 +62,12 @@ export default function App() {
               >
                 <Route index element={<AdminPanel />} />
                 <Route path="dashboard" element={<DashboardPage />} />
-                <Route path="manage-resep" element={<ManageRecipes />} />
+                <Route path="manage-resep" element={<ManageRecipesPage />} />
               </Route>
-
               {/* Halaman resep */}
-              <Route path="/resep" element={<Recipes />} />
-              <Route path="/resep/:slug" element={<DetailRecipe />} />
-              <Route path="/resep/kategori/:slug" element={<RecipesCategory />} />
-
+              <Route path="/resep" element={<RecipesPage />} />
+              <Route path="/resep/:slug" element={<DetailRecipePage />} />
+              <Route path="/resep/kategori/:slug" element={<RecipesCategoryPage />} />
               {/* Halaman 404 */}
               <Route path="/unauthorized" element={<UnauthorizedPage />} />
               <Route path="*" element={<NotFoundPage />} />
