@@ -7,7 +7,7 @@ import { useAuth } from "@/context/AuthContext"
 import { LoginForm } from "@/components/Auth/Login/LoginForm"
 import { SignupForm } from "@/components/Auth/Signup/SignupForm"
 
-export default function Authentication() {
+export default function AuthenticationPage() {
   const { theme, toggleDarkMode } = useTheme()
   const { state } = useAuth()
   const pathname = useLocation().pathname
