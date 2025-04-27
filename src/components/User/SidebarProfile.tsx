@@ -9,7 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Bell, LogOut, Settings, User } from "lucide-react"
+import { Bell, BookPlus, LogOut, Settings, User } from "lucide-react"
 import { Link } from "react-router-dom"
 
 type SidebarProfileProps = {
@@ -21,6 +21,7 @@ type SidebarProfileProps = {
 
 const navItems = [
   { label: "Profil saya", path: "", icon: <User className="size-5" /> },
+  { label: "Tambahkan resep", path: "tambahkan-resep", icon: <BookPlus className="size-5" /> },
   { label: "Pengaturan akun", path: "pengaturan-akun", icon: <Settings className="size-5" /> },
   { label: "Notifikasi", path: "notifikasi", icon: <Bell className="size-5" /> },
 ]
