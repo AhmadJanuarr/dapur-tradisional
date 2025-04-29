@@ -1,6 +1,5 @@
 import { fetchDataApiRecipes } from "@/api/useFetchDataRecipe"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@/context/AuthContext"
 import { useFavorite } from "@/hooks/useFavorite"
 import { RecipeData } from "@/types/recipe.types"
 import { useQuery } from "@tanstack/react-query"
@@ -10,6 +9,7 @@ import { RecipeCard } from "@/components/Card/RecipeCard"
 import { HeadingSection } from "./HeadingSection"
 import { RecipeSkeleton } from "@/components/Skeleton/RecipeSkeleton"
 import { ErrorRecipe } from "@/pages/error/RecipeError"
+import { useAuth } from "@/context/auth/useAuth"
 
 export const RecipesSection = () => {
   const { user } = useAuth()
@@ -54,7 +54,7 @@ export const RecipesSection = () => {
                 description={recipe.description}
                 difficulty={recipe.difficulty}
                 isFavorite={recipe.isFavorite}
-                onClickViewDetail={() => handleClickViewDetail(recipe.title)}
+                onClickViewDetail={() => handleClickViewDetail(recipe.title.replace(" ", "-"))}
                 onClickFavorite={() => handleClickFavorite(recipe.id)}
               />
             ))}
@@ -76,7 +76,7 @@ export const RecipesSection = () => {
                 title={recipe.title}
                 category={recipe.category}
                 isFavorite={recipe.isFavorite}
-                onClickViewDetail={() => handleClickViewDetail(recipe.title)}
+                onClickViewDetail={() => handleClickViewDetail(recipe.title.replace(" ", "-"))}
                 onClickFavorite={() => handleClickFavorite(recipe.id)}
               />
             ))}
