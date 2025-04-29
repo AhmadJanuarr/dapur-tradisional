@@ -55,21 +55,22 @@ export default function DetailRecipePage() {
   const { handleClickFavorite } = useFavorite()
   const { slug } = useParams()
   const queryClient = useQueryClient()
-
+  const slugModified = slug?.replace(/-/g, " ")
   const {
     data: recipe,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["recipe", slug],
+    queryKey: ["recipe", slugModified],
     staleTime: 0,
-    queryFn: () => fetchDataApiRecipeById(slug),
+    queryFn: () => fetchDataApiRecipeById(slugModified),
   })
 
   const onClickFavorite = async () => {
     handleClickFavorite(recipe?.id || 0)
-    queryClient.invalidateQueries({ queryKey: ["recipe", slug] })
+    queryClient.invalidateQueries({ queryKey: ["recipe", slugModified] })
   }
+
   if (error) return <ErrorRecipe />
   if (isLoading) return <RecipeDetailtSkeleton />
   if (!recipe) return []
@@ -80,7 +81,7 @@ export default function DetailRecipePage() {
         <BreadcrumbWithCustomSeparator title={recipe.title} />
       </div>
       <h1 className="heading py-4 font-bold">{recipe.title}</h1>
-      <p className="subheading pb-2">{recipe.description}</p>
+      <p className="subheading pb-2 text-justify">{recipe.description}</p>
       <div className="flex flex-wrap items-center gap-5 py-5 md:flex-row">
         <div className="flex w-full gap-2 rounded-md md:w-auto">
           <Button
@@ -93,17 +94,21 @@ export default function DetailRecipePage() {
           </Button>
         </div>
         <div className="subheading flex gap-2">
-          <BookIcon className="h-5 w-5 text-gray-900" />
+          <BookIcon className="h-5 w-5 text-gray-900 dark:text-white" />
           <p>{recipe.category.replace("_", " ")}</p>
         </div>
         <div className={`gap subheading flex gap-2 text-center`}>
-          <Scale className="h-5 w-5" />
+          <Scale className="h-5 w-5 text-gray-900 dark:text-white" />
           <p>{recipe.difficulty}</p>
         </div>
       </div>
-      z
-      <figure>
-        <img src={recipe.image} alt={recipe.title} className="w-full rounded-xl md:h-[800px]" />
+
+      <figure className="overflow-hidden rounded-xl border md:h-[800px]">
+        <img
+          src={recipe.image}
+          alt={recipe.title}
+          className="h-full w-full rounded-xl transition-all duration-300 hover:scale-105"
+        />
       </figure>
       <div className="mt-5 flex gap-5 rounded-md bg-slate-100 p-5 dark:text-black">
         <NutritionInfo nutrition="Kalori" value={recipe.nutrition.calories} unit="kcal" />
@@ -114,7 +119,7 @@ export default function DetailRecipePage() {
       <div className="mt-6 flex gap-5 ">
         <Button className="rounded-md">
           <Printer />
-          <p className="subheading"> Print Resep</p>
+          <p className="subheading">Print Resep</p>
         </Button>
         <Button variant="secondary" className="rounded-md">
           <Share2 />
