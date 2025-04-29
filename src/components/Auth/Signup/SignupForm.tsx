@@ -7,7 +7,7 @@ import { formSchemaRegister } from "@/schemas/FormSchema"
 import { Form } from "@/components/ui/form"
 import { FormFieldWrapper } from "@/components/FormField/FormFieldWrapper"
 import { AuthOption } from "../AuthOption"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/context/auth/useAuth"
 
 export function SignupForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
