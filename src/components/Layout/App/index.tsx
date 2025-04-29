@@ -1,17 +1,19 @@
-import { useAuth } from "@/context/AuthContext"
 import { useLocation } from "react-router-dom"
 import { Toaster } from "@/components/ui/sonner"
 import { Footer } from "../Footer"
 import { Header } from "../Header"
-import React from "react"
+import { useAuth } from "@/context/auth/useAuth"
+import { ReactNode } from "react"
+import { useFeature } from "@/context/features/useFeature"
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default function AppLayout({ children }: { children: ReactNode }) {
+  const { user } = useAuth()
+  const { isBlocking } = useFeature()
   const location = useLocation()
   const pathname = location.pathname
-  const { user } = useAuth()
   const routes = {
     availablePaths: ["/", "/tentang-kami", "/kontak", "/resep", "/profile"],
-    isAdminRoute: location.pathname.startsWith("/admin"),
+    isAdminRoute: pathname.startsWith("/admin"),
     isFullWidthRoute: ["/auth/login", "/auth/register"].includes(location.pathname),
     isHome: pathname === "/",
   }
@@ -26,7 +28,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       : "2xl:w-4/5 lg:w-11/12 w-full px-5 lg:px-0"
 
   return (
-    <div className="flex w-full flex-col items-center justify-center font-mona tracking-wide">
+    <div className={`flex w-full flex-col items-center justify-center font-mona tracking-wide`}>
+      {isBlocking && <div className="pointer-events-auto fixed inset-0 z-50 cursor-wait bg-transparent" />}
       <div className="relative w-full">
         {showHeaderFooter && <Header />}
         <Toaster richColors />
