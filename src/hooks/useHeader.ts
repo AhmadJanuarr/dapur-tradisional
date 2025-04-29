@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
-import { useAuth } from "@/context/AuthContext"
 import { useLocation, useNavigate } from "react-router-dom"
+import { useAuth } from "@/context/auth/useAuth"
 
 export function useHeader() {
   const [open, setOpen] = useState<boolean>(false)
