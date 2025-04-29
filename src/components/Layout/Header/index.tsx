@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Bookmark, LogOut, Menu, Moon, Settings, Sun, User, X } from "lucide-react"
 import { LIST_MENU } from "@/data/datas"
@@ -6,10 +6,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
 import { LoadingFullScreen } from "@/components/Loading/LoadingFullScreen"
-import { useTheme } from "@/hooks/useTheme"
 import { useHeader } from "@/hooks/useHeader"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { User as UserProps } from "@/types/auth.types"
+import { useTheme } from "@/context/themes/useTheme"
+import { useFeature } from "@/context/features/useFeature"
+import { toast } from "sonner"
 
 type NavLinkProps = {
   children: React.ReactNode
@@ -168,15 +170,33 @@ const UserNotLogged = ({ handleAuth, theme, toggleDarkMode }: UserNotLooggedProp
 export const Header = () => {
   const { handleAuth, isHome, user, isScrollY, loading, open, setOpen } = useHeader()
   const { toggleDarkMode, theme } = useTheme()
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+  const { keywordRef } = useFeature()
+  const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false)
+  const [isBoxOpen, setIsBoxOpen] = useState<boolean>(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  const boxRef = useRef<HTMLDivElement>(null)
 
-  const handlePopoverClose = () => {
-    setIsPopoverOpen(false)
-  }
+  const recipeRemoveNavlist = location.pathname.includes("resep/cari-resep")
+  const handlePopoverClose = () => setIsPopoverOpen(false)
+  const handleFavorite = () => navigate(`/profile/${user?.name?.replace(" ", "-")}/favorit`)
 
-  const handleFavorite = () => {
-    navigate(`/profile/${user?.name?.replace(" ", "-")}/favorit`)
+  const handleRecipeSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const KeywordValue = keywordRef.current?.value
+    const editKeywordValue = KeywordValue?.trim().replace(" ", "-")
+    console.log({ editKeywordValue })
+    if (!editKeywordValue) {
+      toast.warning("Masukkan kata kunci pencarian resep")
+    }
+    try {
+      navigate(`/resep/cari-resep?pencarian=${editKeywordValue}`)
+    } catch (error) {
+      console.log(error)
+      toast.error("Terjadi kesalahan pencarian resep")
+    } finally {
+      setIsBoxOpen(false)
+    }
   }
   const handleUserProfile = (target: string) => {
     const userName = user?.name?.replace(" ", "-")
@@ -184,20 +204,75 @@ export const Header = () => {
       navigate(`profile/${userName}/${target}`)
     }
   }
+
+  useEffect(() => {
+    function onClickOutside(event: MouseEvent) {
+      if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
+        setIsBoxOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", onClickOutside)
+    return () => document.removeEventListener("mousedown", onClickOutside)
+  })
   return (
     <header className={`fixed left-0 top-0 z-30 w-full`}>
       <div
         className={`flex w-full justify-between px-5 py-5 text-black transition-all duration-200 ${isScrollY && isHome ? "bg-white shadow-xl dark:bg-neutral-800 dark:text-white" : isHome ? "bg-transparent" : "bg-white dark:bg-neutral-800 dark:text-white"}`}
       >
         <LogoHeader />
-        <nav className="hidden w-1/3 justify-center md:flex">
-          <ul className="flex items-center justify-center gap-8">
-            {LIST_MENU.usefulLinks.map((item) => (
-              <NavLink href={item.href} key={item.name}>
-                {item.name}
-              </NavLink>
-            ))}
-          </ul>
+        <nav className="hidden w-1/3 items-center justify-center md:flex">
+          {recipeRemoveNavlist ? (
+            <div className="relative hidden w-full flex-col lg:flex" ref={boxRef}>
+              <form className="subheading flex w-full gap-3" onSubmit={handleRecipeSearch}>
+                <input
+                  type="search"
+                  placeholder="Cari Resep"
+                  aria-label="Search recipes"
+                  className="w-full rounded-md border px-4 placeholder:text-[#656565]"
+                  ref={keywordRef}
+                  onClick={() => setIsBoxOpen(true)}
+                />
+                <Button className="rounded-md" type="submit">
+                  Pencarian
+                </Button>
+                {isBoxOpen && (
+                  <div className="absolute left-0 right-0 top-0 z-20 mt-12 rounded-md border bg-white p-4 shadow-xl">
+                    <div className="flex flex-col">
+                      <div className="flex justify-between">
+                        <h1 className="font-semibold">Pencarian sebelumnya</h1>
+                        <span className="cursor-pointer text-slate-500">clear</span>
+                      </div>
+                      <div className="py-2">
+                        <Button variant="outline" className="borer-2 rounded-md bg-transparent">
+                          Ayam penyet
+                        </Button>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <h1 className="py-2 font-semibold">Filter</h1>
+                        <span className="cursor-pointer text-slate-500">clear</span>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        {["Makanan ringan", "Makanan berat", "Kue tradisional"].map((item) => (
+                          <label key={item} className="flex items-center gap-2">
+                            <input type="checkbox" id={item.toLowerCase().replace(/\s+/g, "-")} />
+                            {item}
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </form>
+            </div>
+          ) : (
+            <ul className="flex gap-8">
+              {LIST_MENU.usefulLinks.map((item) => (
+                <NavLink href={item.href} key={item.name}>
+                  {item.name}
+                </NavLink>
+              ))}
+            </ul>
+          )}
         </nav>
         {user!.role === "USER" ? (
           <UserAlreadyLogged
