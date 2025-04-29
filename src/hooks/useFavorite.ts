@@ -1,4 +1,4 @@
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/context/auth/useAuth"
 import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
 import { RecipeData } from "@/types/recipe.types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
