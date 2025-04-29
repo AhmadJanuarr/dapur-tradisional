@@ -1,11 +1,11 @@
 import { Link, useLocation } from "react-router-dom"
 import { HeadingAuth } from "@/components/Auth/HeadingAuth"
 import { ArrowLeft, Moon, Sun } from "lucide-react"
-import { useTheme } from "@/hooks/useTheme"
 import { LoadingFullScreen } from "@/components/Loading/LoadingFullScreen"
-import { useAuth } from "@/context/AuthContext"
 import { LoginForm } from "@/components/Auth/Login/LoginForm"
 import { SignupForm } from "@/components/Auth/Signup/SignupForm"
+import { useTheme } from "@/context/themes/useTheme"
+import { useAuth } from "@/context/auth/useAuth"
 
 export default function AuthenticationPage() {
   const { theme, toggleDarkMode } = useTheme()
