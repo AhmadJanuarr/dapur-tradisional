@@ -1,4 +1,4 @@
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/context/auth/useAuth"
 import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
