@@ -24,8 +24,8 @@ import {
 import { toast } from "sonner"
 import { LoadingFullScreen } from "../Loading/LoadingFullScreen"
 import { useState } from "react"
-import { useTheme } from "@/hooks/useTheme"
-import { useAuth } from "@/context/AuthContext"
+import { useTheme } from "@/context/themes/useTheme"
+import { useAuth } from "@/context/auth/useAuth"
 
 const navItems = [
   { to: "/admin/dashboard", label: "Dashboards", icon: LayoutGrid },
