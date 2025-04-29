@@ -24,7 +24,7 @@ export const InspirationCard = ({
           wrapperProps={{
             style: { transitionDelay: "1s" },
           }}
-          className="transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:brightness-75 "
+          className="ease-in-out hover:scale-105 hover:shadow-lg hover:brightness-75"
           effect="blur"
         />
       </div>
