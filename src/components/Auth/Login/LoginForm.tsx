@@ -7,7 +7,7 @@ import { FormFieldWrapper } from "@/components/FormField/FormFieldWrapper"
 import { Button } from "@/components/ui/button"
 import { AuthOption } from "@/components/Auth/AuthOption"
 import { useState } from "react"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/context/auth/useAuth"
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
