@@ -84,7 +84,7 @@ export default function ManageRecipesPage() {
                 </TableHeader>
                 <RecipeList recipes={records} />
               </Table>
-              <div className="w-full ">{isLoading && <LoadingManageRecipes />}</div>
+              <div className="w-full ">{isLoading && <LoadingManageRecipes title="Tunggu sedang memuat resep" />}</div>
               <PaginationControl
                 numbers={number}
                 current={current}
