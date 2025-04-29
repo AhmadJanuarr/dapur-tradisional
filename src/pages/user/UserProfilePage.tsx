@@ -3,17 +3,17 @@ import { ComponentsDialogContent } from "@/components/Dialog/Dialog"
 import { HoverOverlay } from "@/components/Hover/HoverOverlay"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
-import { useAuth } from "@/context/AuthContext"
 import { AxiosWithAuth } from "@/lib/AxiosWithAuth"
-import axios from "axios"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
+import { useAuth } from "@/context/auth/useAuth"
+import { useFeature } from "@/context/features/useFeature"
+import axios from "axios"
 
 export const UserProfilePage = () => {
   const { user, updateName } = useAuth()
-  console.log(user)
+  const { isBlocking, setIsBlocking } = useFeature()
   const [preview, setPreview] = useState<string>(user?.avatar || "/elements/element-user.png")
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [name, setName] = useState(user?.name)
   const [open, setOpen] = useState<boolean>(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -44,7 +44,7 @@ export const UserProfilePage = () => {
     if (!file) return toast.error("Pilih gambar anda terlebih dahulu")
     const formData = new FormData()
     formData.append("avatar", file)
-    setIsLoading(true)
+    setIsBlocking(true)
 
     try {
       const response = await AxiosWithAuth.put(`${APIURL}/api/auth/profile/upload-avatar`, formData, {
@@ -54,16 +54,16 @@ export const UserProfilePage = () => {
       })
       const avatarUpdate = response.data.data.avatar
       localStorage.setItem("user", JSON.stringify({ ...user, avatar: avatarUpdate }))
-      setIsLoading(false)
       toast.success("Berhasil mengganti gambar profile")
     } catch (error: any) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data.message)
         toast.error(error.response.data.message)
       }
+    } finally {
+      setIsBlocking(false)
     }
   }
-  console.log(preview)
   return (
     <div className="subheading lg:px-20">
       <h1 className="heading font-raleway">Profile</h1>
@@ -72,7 +72,7 @@ export const UserProfilePage = () => {
           <Avatar className="h-40 w-40">
             <AvatarImage src={preview} className="object-cover" />
             <AvatarFallback>CN</AvatarFallback>
-            <HoverOverlay onClick={triggerFileInput} isLoading={isLoading} />
+            <HoverOverlay onClick={triggerFileInput} isLoading={isBlocking} />
           </Avatar>
           <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
         </div>
@@ -82,7 +82,7 @@ export const UserProfilePage = () => {
           <button className="subheading underline" onClick={triggerFileInput}>
             Edit
           </button>
-          <button onClick={() => handleUpdateImage()} className="subheading underline" disabled={isLoading}>
+          <button onClick={() => handleUpdateImage()} className="subheading underline">
             Simpan
           </button>
         </div>
@@ -92,7 +92,7 @@ export const UserProfilePage = () => {
             <h5 className="text-gray-800 dark:text-slate-200">{name}</h5>
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <span className="cursor-pointer font-semibold underline">Edit</span>
+                <button className="cursor-pointer font-semibold underline">Edit</button>
               </DialogTrigger>
               <ComponentsDialogContent
                 description="Masukkan nama lengkap kamu disini"
