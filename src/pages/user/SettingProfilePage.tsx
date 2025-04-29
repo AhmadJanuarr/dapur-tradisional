@@ -3,9 +3,10 @@ import { ComponentsDialogContent } from "@/components/Dialog/Dialog"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 import { PasswordFields } from "@/components/User/PasswordFields"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/context/auth/useAuth"
 import { useState } from "react"
 import { FaSpinner } from "react-icons/fa6"
+import { toast } from "sonner"
 
 export const SettingProfilePage = () => {
   const { user, updateEmail, updatePassword, deleteUser } = useAuth()
@@ -23,10 +24,10 @@ export const SettingProfilePage = () => {
   }
 
   const handleUpdatePassword = async (e: React.FormEvent) => {
-    console.log("update password")
     try {
       setLoading(true)
       e.preventDefault()
+      toast.success("Password berhasil diperbarui")
       updatePassword(password.newPassword, password.currentPassword)
     } catch (error: any) {
       console.log(error.message)
