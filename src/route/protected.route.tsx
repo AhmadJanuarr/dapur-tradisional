@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/context/auth/useAuth"
 
 interface ProtectedRouteProps extends React.PropsWithChildren {
   allowedRoles: string[]
