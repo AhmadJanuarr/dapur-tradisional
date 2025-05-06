@@ -1,5 +1,5 @@
-import { FaDiscord, FaInstagram, FaTelegram, FaWhatsapp } from "react-icons/fa6"
 import { FormFieldContact } from "@/components/FormField/FormFieldContact"
+import { FaDiscord, FaInstagram, FaTelegram, FaWhatsapp } from "react-icons/fa6"
 
 const ContactInfo = () => {
   return (
