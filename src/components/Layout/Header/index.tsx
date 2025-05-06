@@ -228,7 +228,7 @@ export const Header = () => {
                   type="search"
                   placeholder="Cari Resep"
                   aria-label="Search recipes"
-                  className="w-full rounded-md border px-4 placeholder:text-[#656565]"
+                  className="subheading w-full rounded-md border px-4 font-mona placeholder:text-[#656565]"
                   ref={keywordRef}
                   onClick={() => setIsBoxOpen(true)}
                 />
@@ -236,7 +236,7 @@ export const Header = () => {
                   Pencarian
                 </Button>
                 {isBoxOpen && (
-                  <div className="absolute left-0 right-0 top-0 z-20 mt-12 rounded-md border bg-white p-4 shadow-xl">
+                  <div className="absolute left-0 right-0 top-0 z-20 mt-12 rounded-md border bg-white p-4 shadow-xl dark:bg-zinc-800">
                     <div className="flex flex-col">
                       <div className="flex justify-between">
                         <h1 className="font-semibold">Pencarian sebelumnya</h1>
