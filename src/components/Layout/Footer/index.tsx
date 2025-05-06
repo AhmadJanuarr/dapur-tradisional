@@ -20,6 +20,13 @@ const RenderLinks = ({ title, items }: { title: string; items: MenuItem[] }) => 
 )
 
 export const Footer = () => {
+  const handleSocialMediaIcon = (name: string) => {
+    if (name === "facebook")
+      return window.open("https://www.facebook.com/profile.php?id=61564521532109&locale=id_ID", "_blank")
+    if (name === "instagram") return window.open("https://www.instagram.com/madds.dev/", "_blank")
+    if (name === "linkedin") return window.open("https://www.linkedin.com/in/ahmad-januar-a96515221/", "_blank")
+  }
+
   return (
     <footer className="relative flex w-full flex-col justify-center overflow-hidden px-5 py-10 pt-20 text-black dark:bg-[#262626] dark:text-white">
       <img
@@ -49,9 +56,18 @@ export const Footer = () => {
         <div className="flex w-full flex-col-reverse justify-between gap-5 pb-5 text-center lg:flex-row">
           <p className="subheading text-[#656565]">Copyright © 2024 Dapur Tradisional</p>
           <div className="flex justify-center gap-4">
-            <FaFacebook className="size-5 text-[#656565] hover:text-[#F97316]" />
-            <FaInstagram className="size-5 text-[#656565] hover:text-[#F97316]" />
-            <FaLinkedin className="size-5 text-[#656565] hover:text-[#F97316]" />
+            <FaFacebook
+              className="size-5 text-[#656565] hover:text-[#F97316]"
+              onClick={() => handleSocialMediaIcon("facebook")}
+            />
+            <FaInstagram
+              className="size-5 text-[#656565] hover:text-[#F97316]"
+              onClick={() => handleSocialMediaIcon("instagram")}
+            />
+            <FaLinkedin
+              className="size-5 text-[#656565] hover:text-[#F97316]"
+              onClick={() => handleSocialMediaIcon("linkedin")}
+            />
           </div>
         </div>
       </div>
