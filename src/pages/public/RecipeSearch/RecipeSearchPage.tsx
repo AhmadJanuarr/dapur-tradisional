@@ -75,7 +75,7 @@ export default function RecipeSearchPage() {
       {isLoading ? (
         <LoadingManageRecipes title="Tunggu sebentar sedang mencari resep" />
       ) : (
-        <section className="mx-auto mb-10 mt-28 flex flex-col gap-5">
+        <section className="mx-auto mb-10 mt-28 flex min-h-screen flex-col gap-5">
           {isMobile && (
             <div className="relative flex" ref={boxRef}>
               <div className="flex w-full items-center gap-3">
