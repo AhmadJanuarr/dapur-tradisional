@@ -51,6 +51,7 @@ export const FormFieldContact = () => {
         toast.error(error.response.data.message)
       } else {
         console.error("An unexpected error occurred", error)
+        toast.error("Terjadi kesalahan saat mengirim pesan")
       }
       setIsLoading(false)
     }
