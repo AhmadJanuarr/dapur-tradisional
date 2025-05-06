@@ -22,7 +22,6 @@ export const HeroSectionRecipe = ({ heading, subheading, image, placeholderImage
     e.preventDefault()
     const KeywordValue = keywordRef.current?.value
     const editKeywordValue = KeywordValue?.trim().replace(" ", "-")
-    console.log({ editKeywordValue })
     if (!editKeywordValue) {
       toast.warning("Masukkan kata kunci pencarian resep")
     }
@@ -50,7 +49,7 @@ export const HeroSectionRecipe = ({ heading, subheading, image, placeholderImage
     <section className="mt-24 flex w-full lg:mt-28">
       <div className="flex h-[500px] w-full flex-col-reverse gap-2 lg:flex-row">
         <div className="flex w-full flex-col justify-end rounded-xl bg-[#ffeddf] px-4 py-4 text-black md:py-10 lg:w-[40%] lg:gap-5 lg:px-6">
-          <img src="/logo/logo-t.png" alt="logo website" className="mx-auto w-28 lg:w-40" />
+          <img src="/logo/logo-t.png" alt="logo website" className="mx-auto w-28 lg:w-24 2xl:w-40" />
           <h1 className="heading font-raleway leading-tight">{heading}</h1>
           <p className="subheading py-3 text-gray-800">{subheading}</p>
           <div className="relative" ref={boxRef}>
@@ -67,7 +66,7 @@ export const HeroSectionRecipe = ({ heading, subheading, image, placeholderImage
                 Pencarian
               </Button>
               {isBoxOpen && (
-                <div className="absolute left-0 right-0 top-0 z-20 mt-12 rounded-md border bg-white p-4 shadow-xl">
+                <div className="absolute left-0 right-0 top-0 z-20 mt-12 rounded-md border bg-white p-4 text-black shadow-xl dark:bg-zinc-800 dark:text-white">
                   <div className="flex flex-col">
                     <div className="flex justify-between">
                       <h1 className="font-semibold">Pencarian sebelumnya</h1>
