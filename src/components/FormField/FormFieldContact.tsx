@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form"
 import { ContactFormSchema } from "@/schemas/ContactSchema"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useFeature } from "@/context/features/useFeature"
 
 type FieldProps = {
   label: string
@@ -40,6 +41,7 @@ const FieldInput = React.forwardRef<HTMLInputElement, FieldProps>(
 )
 
 export const FormFieldContact = () => {
+  const { setIsBlocking } = useFeature()
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -51,6 +53,7 @@ export const FormFieldContact = () => {
   })
   const onSubmit = async (data: ContactFormData) => {
     setIsLoading(true)
+    setIsBlocking(true)
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/api/email/send`, data)
       toast.success("Pesan berhasil dikirim")
@@ -64,13 +67,14 @@ export const FormFieldContact = () => {
         toast.error("Terjadi kesalahan saat mengirim pesan")
       }
     } finally {
+      setIsBlocking(false)
       setIsLoading(false)
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="subheading font-inter flex w-full flex-col gap-6">
+      <div className="flex flex-col w-full gap-6 subheading font-inter">
         <FieldInput
           label="Nama anda"
           placeholder="Nama lengkap Anda"
@@ -100,12 +104,12 @@ export const FormFieldContact = () => {
             id="message"
             placeholder="Masukkan pesan Anda"
             rows={5}
-            className="font-inter rounded-md px-6 py-5 text-gray-500 dark:border-white dark:text-white dark:placeholder:text-white"
+            className="px-6 py-5 text-gray-500 rounded-md font-inter dark:border-white dark:text-white dark:placeholder:text-white"
             {...register("message")}
           />
           {errors.message && <p className="text-sm text-red-500">{errors.message.message}</p>}
         </div>
-        <Button type="submit" variant="default" className="rounded-md py-5 font-semibold" disabled={isLoading}>
+        <Button type="submit" variant="default" className="py-5 font-semibold rounded-md" disabled={isLoading}>
           {isLoading ? "Anda sedang mengirim" : "Kirim"}
         </Button>
       </div>
